@@ -1,0 +1,110 @@
+<div id="bdSidebar"
+     class="d-flex flex-column
+                    flex-shrink-0
+                    p-3 pe-5 bg-info
+                    text-white offcanvas-md offcanvas-start">
+  <a href="#"
+     class="navbar-brand">
+  </a>
+
+  <span class="ms-3">GFG Portal</span>
+
+  <hr>
+  <ul class="mynav nav nav-pills flex-column mb-auto">
+    <li class="nav-item mb-1">
+      <a href="#"  routerLink="/app/dashboard">
+        <i class="fa-solid fa-gauge-high"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
+         data-bs-target="#employe" aria-expanded="false" aria-controls="multi-two">
+        <i class="fa-solid fa-user-tie"></i>
+        <span>Employe</span>
+      </a>
+      <ul id="employe" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+          <a href="#" routerLink="/app/employe" class="sidebar-link">employe</a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">commission</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" routerLink="/app/departement" class="sidebar-link">
+        <i class="fa-solid fa-building"></i>
+        <span>Departement</span>
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
+         data-bs-target="#conge" aria-expanded="false" aria-controls="multi-two">
+        <i class="fa-solid fa-car"></i>
+        <span>Conge</span>
+      </a>
+      <ul id="conge" class="sidebar-dropdown list-unstyled collapse">
+        <li class="nav-item">
+          <a href="#" class="nav-link">conge</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">absence</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" class="nav-link">
+        <i class="fa-solid fa-comments"></i>
+        <span>Reunion</span>
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" class="nav-link">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Demandes</span>
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" class="sidebar-link">
+        <i class="fa-solid fa-comments"></i>
+        <span>Reunion</span>
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="#" class="nav-link">
+        <i class="fa-solid fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
+         data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
+        <i class="fa-solid fa-clock"></i>
+        <span>Presence</span>
+      </a>
+      <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">horaire</a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">presence</a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="lni lni-cog"></i>
+        <span>Configuration</span>
+      </a>
+    </li>
+    <hr>
+    <li class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="lni lni-exit"></i>
+        <span>Logout</span>
+      </a>
+    </li>
+  </ul>
+
+</div>

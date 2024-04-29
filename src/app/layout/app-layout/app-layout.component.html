@@ -1,0 +1,19 @@
+<div class="container-fluid p-0 d-flex h-100">
+  <app-sidebar></app-sidebar>
+
+  <div class="bg-light flex-fill">
+    <div class="p-2 d-md-none d-flex text-white bg-info">
+      <a href="#" class="text-white"
+         data-bs-toggle="offcanvas"
+         data-bs-target="#bdSidebar">
+        <i class="fa-solid fa-bars"></i>
+      </a>
+      <span class="ms-3">GFG Portal</span>
+    </div>
+    <div class="p-4">
+    <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
