@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeService{
+export class EmployeUserService {
   private _item: EmployeDto | undefined;
   private _items: Array<EmployeDto> | undefined;
   private url = 'http://localhost:8037/api/v1/admin/employe';

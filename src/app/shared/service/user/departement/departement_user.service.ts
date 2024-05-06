@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class DepartementService {
+export class Departement_userService {
   private _item: DepartementDto | undefined;
   private _items: Array<DepartementDto> | undefined;
   private url = 'http://localhost:8037/api/v1/admin/departement';

@@ -1,22 +1,32 @@
 import {Routes} from '@angular/router';
 
-import {LoginAdminComponent} from "./module/admin/login-admin/login-admin.component";
 import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
-import {EmployeListComponent} from "./module/admin/view/employe/employe/list/employe-list.component";
-import {AdminDashboardComponent} from "./module/admin/view/admin-dashboard/admin-dashboard.component";
-import {DepartementListComponent} from "./module/admin/view/departement/list/departement-list.component";
+import {LoginComponent} from "./components/login/login.component";
+import {PasswordResetRequestComponent} from "./components/security/password-reset-request/password-reset-request.component";
+import {PasswordChangeComponent} from "./components/security/password-change/password-change.component";
+import {EmployeListComponent} from "./components/user/view/employe/employe/list/employe-list.component";
+import {DepartementListComponent} from "./components/user/view/departement/list/departement-list.component";
+import {RegisterUserComponent} from "./components/security/register-user/register-user.component";
+import {AdminDashboardComponent} from "./components/admin/view/admin-dashboard/admin-dashboard.component";
+import {authGuard} from "./shared/security/guards/auth.guard";
 
 
 export const routes: Routes = [
-  {path: '', component: LoginAdminComponent},
-  {path: 'admin/login', component: LoginAdminComponent},
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'reset-request', component: PasswordResetRequestComponent},
+  {path: 'password-change', component: PasswordChangeComponent},
+  {path:'admin/register',component:RegisterUserComponent},
   {path: 'app', component: AppLayoutComponent,
     children: [
       {
         path: 'employe', component: EmployeListComponent,
       },
       {
-        path: 'dashboard', component: AdminDashboardComponent,
+        path: 'dashboard', component: AdminDashboardComponent,canActivate: [authGuard],
+        data: {
+          roles: ['ADMIN'],
+      }
       },
       {
         path: 'departement', component: DepartementListComponent,
