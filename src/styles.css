@@ -8,3 +8,7 @@
 @import "font-awesome/css/font-awesome.css";
 @import "lineicons/web-font/lineicons.css";
 @import "primeicons/primeicons.css";
+.fc a {
+  color: black;
+  text-decoration: none;
+}

@@ -1,0 +1,50 @@
+<p-dialog header="Employe" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">motif</label>
+        <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.motif">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">date debut</label>
+        <input class="form-control my-2" id="3" type="date" [disabled]="true" [(ngModel)]="item.dateDebut">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">date fin</label>
+        <input class="form-control my-2" id="4" type="text" [disabled]="true" [(ngModel)]="item.dateFin">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="5">Duree</label>
+        <input class="form-control my-2" id="5" type="text" [disabled]="true" [(ngModel)]="item.duree">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="6">Type</label>
+        <input class="form-control my-2" id="6" type="text" [disabled]="true" [ngModel]="item.type?.libelle">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="7">employe</label>
+        <input class="form-control my-2" id="7" type="text" [disabled]="true" [ngModel]="item.employe?.nom">
+      </div>
+    </div>
+
+  </div>
+
+</p-dialog>

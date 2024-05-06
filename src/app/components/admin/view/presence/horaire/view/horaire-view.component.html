@@ -1,0 +1,30 @@
+<p-dialog header="Employe" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">debut</label>
+        <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.debut">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">fin</label>
+        <input class="form-control my-2" id="3" type="text" [disabled]="true" [(ngModel)]="item.fin">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">pause</label>
+        <input class="form-control my-2" id="4" type="text" [disabled]="true" [(ngModel)]="item.pause">
+      </div>
+    </div>
+  </div>
+
+
+</p-dialog>

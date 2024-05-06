@@ -1,0 +1,37 @@
+<p-dialog header="Employe" [(visible)]="editDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">debut</label>
+        <input class="form-control my-2" id="2" type="Time" [(ngModel)]="item.debut">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">fin</label>
+        <input class="form-control my-2" id="3" type="Time" [(ngModel)]="item.fin">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">pause</label>
+        <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.pause">
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer" >
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="edit" (click)="update()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>
+
+

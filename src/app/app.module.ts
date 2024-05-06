@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
 import {NgModule} from "@angular/core";
 
 
@@ -9,8 +9,8 @@ import {NgModule} from "@angular/core";
   imports: [
 
     BrowserAnimationsModule,
-    BrowserModule
-
+    BrowserModule,
+    FullCalendarModule
   ]
 
 })
