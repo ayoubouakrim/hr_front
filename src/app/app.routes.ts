@@ -1,14 +1,22 @@
 import {Routes} from '@angular/router';
 
-import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
+
+
 import {LoginComponent} from "./components/login/login.component";
 import {PasswordResetRequestComponent} from "./components/security/password-reset-request/password-reset-request.component";
 import {PasswordChangeComponent} from "./components/security/password-change/password-change.component";
-import {EmployeListComponent} from "./components/user/view/employe/employe/list/employe-list.component";
-import {DepartementListComponent} from "./components/user/view/departement/list/departement-list.component";
 import {RegisterUserComponent} from "./components/security/register-user/register-user.component";
-import {AdminDashboardComponent} from "./components/admin/view/admin-dashboard/admin-dashboard.component";
 import {authGuard} from "./shared/security/guards/auth.guard";
+import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
+import {EmployeListComponent} from "./components/admin/view/employe/employe/list/employe-list.component";
+import {AdminDashboardComponent} from "./components/admin/view/admin-dashboard/admin-dashboard.component";
+import {DepartementListComponent} from "./components/admin/view/departement/list/departement-list.component";
+import {AbsenceListComponent} from "./components/admin/view/conge/absence/list/absence-list.component";
+import {CongeListComponent} from "./components/admin/view/conge/conge/list/conge-list.component";
+import {HoraireListComponent} from "./components/admin/view/presence/horaire/list/horaire-list.component";
+import {PresenceListComponent} from "./components/admin/view/presence/presence/list/presence-list.component";
+import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
+
 
 
 export const routes: Routes = [
@@ -30,6 +38,21 @@ export const routes: Routes = [
       },
       {
         path: 'departement', component: DepartementListComponent,
+      },
+      {
+        path: 'absence', component: AbsenceListComponent,
+      },
+      {
+        path: 'conge', component: CongeListComponent,
+      },
+      {
+        path: 'horaire', component: HoraireListComponent,
+      },
+      {
+        path: 'presence', component: PresenceListComponent,
+      },
+      {
+        path: 'reunion', component: ReunionListComponent,
       },
   ],
   },

@@ -25,8 +25,8 @@
       <td>{{item.code}}</td>
       <td>{{item.libelle}}</td>
       <td>{{item.dateCreation}}</td>
+      <td>{{item.chef?.nom}}</td>
       <td>{{item.nbrEmploye}}</td>
-      <td>{{item.chef.nom}}</td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">
@@ -49,8 +49,7 @@
 </p-table>
 
 <app-departement-create></app-departement-create>
-<!--
 <app-departement-view></app-departement-view>
 <app-departement-edit></app-departement-edit>
 
--->
+

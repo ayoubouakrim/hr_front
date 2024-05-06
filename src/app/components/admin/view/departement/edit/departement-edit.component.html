@@ -1,0 +1,50 @@
+<p-dialog header="Employe" [(visible)]="editDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">libelle</label>
+        <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.libelle">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">date creation</label>
+        <input class="form-control my-2" id="3" type="text" [(ngModel)]="item.dateCreation">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">nombre de employes</label>
+        <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.nbrEmploye">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="5" class="dropdown-label">Employe</label>
+        <div class="dropdown-container">
+          <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="item.chef" id="5" [filter]="true" filterMatchMode="contains"
+                      [showClear]="true" optionLabel="nom" placeholder="chef" class="custom-dropdown"
+                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer" >
+    <div class="p-flexbox">
+      <p-button class="mx-2 my-2" label="edit" (click)="update()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>

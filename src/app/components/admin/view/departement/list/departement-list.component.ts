@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {DepartementService} from "../../../../../shared/service/admin/departement/departement.service";
 import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
 import {DepartementCreateComponent} from "../create/departement-create.component";
+import {DepartementViewComponent} from "../view/departement-view.component";
+import {DepartementEditComponent} from "../edit/departement-edit.component";
 
 @Component({
   selector: 'app-departement-list',
@@ -13,15 +15,21 @@ import {DepartementCreateComponent} from "../create/departement-create.component
     ButtonModule,
     SharedModule,
     TableModule,
-    DepartementCreateComponent
+    DepartementCreateComponent,
+    DepartementViewComponent,
+    DepartementEditComponent
   ],
   templateUrl: './departement-list.component.html',
   styleUrl: './departement-list.component.css'
 })
-export class DepartementListComponent {
+export class DepartementListComponent implements OnInit{
 
   constructor(private service: DepartementService) {
   }
+
+  ngOnInit(): void {
+        this.findAll();
+    }
 
 
   public findAll(): void {

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card my-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title">Horaire</h5>
+            <p class="card-text">dashboard > horaire</p>
+          </div>
+          <p-button label="Ajoute horaire" (click)="showDialog()"  severity="warning" icon="pi pi-plus" size="small"></p-button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <p-table [value]="items"  [tableStyle]="{'min-width': '1rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="code" >code<p-sortIcon field="code"></p-sortIcon></th>
+            <th pSortableColumn="employe" >debut<p-sortIcon field="employe"></p-sortIcon></th>
+            <th pSortableColumn="dateDebut" >fin<p-sortIcon field="dateDebut"></p-sortIcon></th>
+            <th pSortableColumn="dateFin" >pause<p-sortIcon field="dateFin"></p-sortIcon></th>
+            <th pSortableColumn="action" style="width : 20%">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.code}}</td>
+            <td>{{item.debut}}</td>
+            <td>{{item.fin}}</td>
+            <td>{{item.pause}}</td>
+            <td>
+              <div class="btn-group" role="group"
+                   aria-label="Basic outlined example">
+                <button type="button"
+                        class="btn btn-sm btn-outline-secondary" (click)="view(item)">
+                  <i class="fa fa-circle-info"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-primary" (click)="edit(item)">
+                  <i class="fa fa-pen-to-square"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+
+
+
+<app-horaire-create></app-horaire-create>
+<app-horaire-view></app-horaire-view>
+<app-horaire-edit></app-horaire-edit>
+
+
