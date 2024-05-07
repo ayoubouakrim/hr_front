@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class EmployeService{
   private _item: EmployeDto | undefined;
   private _items: Array<EmployeDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/employe';
+  private url = 'http://localhost:8037/api/v1/admin/employe';
 
   protected _editDialog: boolean = false;
   protected _viewDialog: boolean = false;
