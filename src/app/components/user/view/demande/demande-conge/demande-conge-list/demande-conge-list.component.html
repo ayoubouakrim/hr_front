@@ -1,0 +1,56 @@
+<div class="card my-3">
+  <div class="card-body d-flex justify-content-between align-items-center">
+    <div>
+      <h5 class="card-title">Demande de congé</h5>
+      <p class="card-text">dashboard > demande de congé</p>
+    </div>
+    <p-button label="Ajouter demande"  severity="info" icon="pi pi-plus" size="small"></p-button>
+  </div>
+</div>
+
+
+<p-table [value]="items"  [tableStyle]="{'min-width': '1rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="code" >Code<p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="raison" >Raison<p-sortIcon field="raison"></p-sortIcon></th>
+      <th pSortableColumn="matricule" >Nom<p-sortIcon field="matricule"></p-sortIcon></th>
+      <th pSortableColumn="dateDebut" >Date debut<p-sortIcon field="dateDebut"></p-sortIcon></th>
+      <th pSortableColumn="dateFin" >Date fin<p-sortIcon field="dateFin"></p-sortIcon></th>
+      <th pSortableColumn="typeConge" >Type de congé<p-sortIcon field="typeConge"></p-sortIcon></th>
+      <th pSortableColumn="etatDemande" >Etat de demande<p-sortIcon field="etatDemande"></p-sortIcon></th>
+      <th pSortableColumn="action" style="width : 20%">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{item.code}}</td>
+      <td>{{item.raison}}</td>
+      <td>{{item.employe.nom}}</td>
+      <td>{{ item.dateDebut | date:'yyyy-MM-dd' }}</td>
+      <td>{{ item.dateFin | date:'yyyy-MM-dd' }}</td>
+      <td>{{item.typeConge.libelle}}</td>
+      <td>{{item.etatDemande.libelle}}</td>
+      <td>
+        <div class="btn-group" role="group"
+             aria-label="Basic outlined example">
+          <button type="button"
+                  class="btn btn-sm btn-outline-secondary" (click)="view(item)">
+            <i class="fa fa-circle-info"></i>
+          </button>
+          <button type="button"
+                  class="btn btn-sm btn-outline-primary" (click)="edit(item)">
+            <i class="fa fa-pen-to-square"></i>
+          </button>
+          <button type="button"
+                  class="btn btn-sm btn-outline-danger" (click)="delete(item)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<app-demande-conge-create></app-demande-conge-create>
+<app-demande-conge-view></app-demande-conge-view>
+<app-demande-conge-edit></app-demande-conge-edit>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AbsenceAdminService} from "../../../../../../shared/service/admin/conge/absence-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeAbsenceAdminService} from "../../../../../../shared/service/admin/conge/type-absence-admin.service";
+import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {AbsenceDto} from "../../../../../../shared/model/conge/absence.model";
@@ -28,7 +28,9 @@ import {EtatCongeService} from "../../../../../../shared/service/admin/conge/eta
   styleUrl: './absence-create.component.css'
 })
 export class AbsenceCreateComponent {
-  constructor(private service: AbsenceAdminService, private employeService: EmployeService, private typeService: TypeAbsenceAdminService, private etatService: EtatCongeService) {
+
+  constructor(private service: AbsenceAdminService, private employeService: EmployeService, private typeService: TypeAbsenceService, private etatService: EtatCongeService) {
+
     this.employe = new EmployeDto()
     this.employeService.findAll().subscribe((data) => this.employes = data);
     this.type = new TypeAbsenceDto()

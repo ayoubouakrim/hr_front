@@ -1,90 +1,129 @@
-<<<<<<< HEAD
+<div class="container-fluid">
+  <div class="row my-3" [ngStyle]="{ 'display': isButtonClicked ? 'none' : 'block' }">
+    <div class="col-sm-12 mb-3">
+      <div class="card text-center card-annonce">
+        <div class="card-body">
+          <i class="bi bi-question-circle custom-icon"></i>
+        </div>
+        <button type="button" class="btn btn-link btnClass1" (click)="onClicked()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3 d-flex align-items-stretch">
+    <div class="col-sm-6 mb-3">
+      <div class="card cardView h-100">
+        <div class="card-body">
+          <div class="pre-div">
+            <h3 class="card-title">Welcome Back, Darle</h3>
+            <h5 class="card-text">You have <u class="underline-text">4 meetings</u> today,</h5>
+            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                    class="btn btn-classe btn-lg btn-block btn-primary btn-sm">View profile
+            </button>
+          </div>
+          <div class="circle-image">
+            <img src="/assets/image1.jpg" alt="Image">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <div class="card h-100">
+        <div class="mt-2 mp-n1 mx-3">
+          <h5>Statistics</h5>
+        </div>
+        <select class="form-select select-classe" aria-label="Today">
+          <option selected>Today</option>
+        </select>
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row body-class1">
+              <div class="col-sm-4 mt-3">
+                Work Time
+              </div>
+              <div class="col-sm-8 mt-3">
+                <button class="btn btn-classe1">Clock-In</button>
+              </div>
+            </div>
+            <div class="row mx-3">
+              <div class="col-sm-4">
+                <p>Remaining:<br> hhhhhhh</p>
+              </div>
+              <div class="col-sm-4">
+                <p>Overtime:<br> hhhhhhh</p>
+              </div>
+              <div class="col-sm-4">
+                <p>Break:<br> hhhhhhh</p>
+              </div>
+            </div>
+          </div>
 
-<div class="row">
-  <div class="col-lg-3 col-sm-6 col-12 my-2">
-    <div class="card">
-      <div class="card-content">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3 d-flex align-items-stretch">
+    <div class="col-sm-6 mb-3">
+      <div class="card h-100">
+        <div class="mt-2 mx-3">
+          <h5>Company Policy</h5>
+        </div>
+        <div class="icon_classe">
+          <i class="fas fa-chevron-left mx-2 i-classe"></i>
+          <i class="fas fa-chevron-right i-classe"></i>
+        </div>
         <div class="card-body">
-          <div class="media d-flex">
-            <div class="align-self-center">
-              <i class="fa-solid fa-user-tie lg mx-4 text-primary"></i>
+          <div class="class1">
+            <p class="mx-3 mt-2"><samp class="smp-classe">HR</samp> HR Policy</p>
+            <div class="mx-3">
+              <p class="mx-5">Policy Name : Work Policy</p>
+              <p>Updated On : Today</p>
+              <button type="button" class="btn btnClass2 btn-link"><i class="bi bi-download"></i></button>
             </div>
-            <div class="media-body text-right">
-              <h5>278</h5>
-              <span>Employes</span>
+          </div>
+          <div class="class2">
+            <p class="mx-3 mt-2"><samp class="smp-classe">EP</samp> EP Policy</p>
+            <div class="mx-3">
+              <p class="mx-5">Policy Name : Parking</p>
+              <p>Updated On : 25 Jan 2024</p>
+              <button type="button" class="btn btnClass2 btn-link"><i class="bi bi-download"></i></button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
-      <div class="card-content">
+    <div class="col-sm-6 mb-3">
+      <div class="card h-100">
+        <div class="mt-2 mp-n1 mx-3">
+          <h5>Attendance&Leaves</h5>
+        </div>
+        <select class="form-select select-classe" aria-label="Today">
+          <option selected>2024</option>
+        </select>
         <div class="card-body">
-          <div class="media d-flex">
-            <div class="align-self-center">
-              <i class="fa-solid fa-building lg mx-4 text-warning"></i>
-            </div>
-            <div class="media-body text-right">
-              <h5>156</h5>
-              <span>Departements</span>
-            </div>
+          <div class="mx-5">
+            <p class="card-text"><span style="color:#fc6132">3</span><br> Total<br> Leaves</p>
+            <p class="card-text"><span style="color:#ae08f6">3</span><br> Pending<br> Approval</p>
+          </div>
+          <div class="mx-5">
+            <p class="card-text"><span style="color:#e84646">3</span><br> Leaves<br> Taken</p>
+            <p class="card-text"><span style="color:#657cef">3</span><br> Working<br> Days</p>
+          </div>
+          <div class="mx-5">
+            <p class="card-text"><span style="color:#02801f">3</span><br> Leaves<br> Absent</p>
+            <p class="card-text"><span style="color:#e00517">3</span><br> Loss of<br> Pay</p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
-      <div class="card-content">
-        <div class="card-body">
-          <div class="media d-flex">
-            <div class="align-self-center">
-              <i class="fa-solid fa-suitcase lg mx-4 text-danger"></i>
-            </div>
-            <div class="media-body text-right">
-              <h5>0</h5>
-              <span>Conge</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
-      <div class="card-content">
-        <div class="card-body">
-          <div class="media d-flex">
-            <div class="align-self-center">
-              <i class="fa-solid fa-money-bill-1 lg mx-4 text-success"></i>
-            </div>
-            <div class="media-body text-right">
-              <h5>423</h5>
-              <span>salaire</span>
-            </div>
-          </div>
+        <div class="card-footer" style="height:50px">
+          <p>Apply Leave</p>
+          <button type="button" class="btn btnClass3 btn-link"><i class="bi bi-arrow-right-circle"></i></button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="row my-3">
-  <div class="col-xl-6 col-sm-6">
-    <div class="card text-center">
-      <div class="card-header">
-        Total employees
-      </div>
-      <div class="card-body">
-        <app-pie-chart></app-pie-chart>
-      </div>
-    </div>
-  </div>
-</div>
 
 
+<!--(click)="viewProfil()"-->
 
-=======
-<p>user-dashboard works!</p>
->>>>>>> 01f2a9d1b8b5d611932e9cab13c24205299cf151

@@ -4,8 +4,8 @@ import {EtatCongeDto} from "./etat-conge.model";
 
 export class CongeDto {
   public id: number | null;
-  public code: String;
-  public motif: String;
+  public code: string;
+  public motif: string;
   public dateDebut: Date | null;
   public dateFin: Date | null;
   public duree: number | null;

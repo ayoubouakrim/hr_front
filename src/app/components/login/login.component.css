@@ -1,0 +1,48 @@
+@media (min-width: 768px) {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #514d6c 60%, white 40%);
+  }
+}
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #f1764d; /* Couleur de fond du bouton */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #fa8426;
+}
+
+.divider:after,
+
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+input {
+  border :solid 0.5px #9a8a8a;
+}
+
+.alert {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert p {
+  text-align: center;
+  margin: 0;
+}

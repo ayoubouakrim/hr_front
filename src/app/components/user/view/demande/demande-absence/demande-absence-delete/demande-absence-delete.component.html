@@ -1,0 +1,16 @@
+<p-dialog header="demande d'absence" [(visible)]="deleteDialog" [style]="{width: '40vw'}">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir supprimer cet élément ?
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="p-flexbox">
+            <p-button class="mx-2 my-2" label="confirmer" (click)="deletebyCode();hideCreateDialog()" [rounded]="true" severity="warning"
+                      icon="pi pi-check"></p-button>
+            <p-button label="Annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+                      icon="pi pi-times"></p-button>
+          </div>
+        </ng-template>
+</p-dialog>

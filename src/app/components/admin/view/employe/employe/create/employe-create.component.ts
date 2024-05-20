@@ -53,6 +53,7 @@ export class EmployeCreateComponent implements OnInit{
 
   }
 
+
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -61,6 +62,7 @@ export class EmployeCreateComponent implements OnInit{
     }
 
   }
+
 
   public save(): void {
     console.log(this.item)
@@ -85,6 +87,8 @@ export class EmployeCreateComponent implements OnInit{
     });
     this.createDialog = false;
   }
+
+
 
 
   get item(): EmployeDto {

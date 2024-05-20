@@ -1,0 +1,52 @@
+<p-dialog header="Employe" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">Code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">Raison</label>
+        <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.raison">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">nom</label>
+        <input class="form-control my-2" id="3" type="text" [disabled]="true" [(ngModel)]="item.employe.nom">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="8">date debut</label>
+        <input class="form-control my-2" id="8" type="date" [disabled]="true" [ngModel]="item.dateDebut | date:'yyyy-MM-dd'">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="9">Date fin</label>
+        <input class="form-control my-2" id="9" type="date" [disabled]="true" [ngModel]="item.dateFin | date:'yyyy-MM-dd'">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="10">type d'absence</label>
+        <input class="form-control my-2" id="10" type="text" [disabled]="true" [ngModel]="item.typeAbsence.libelle">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="11">etat de demande</label>
+        <input class="form-control my-2" id="11" type="text" [disabled]="true" [ngModel]="item.etatDemande.libelle">
+      </div>
+    </div>
+  </div>
+</p-dialog>

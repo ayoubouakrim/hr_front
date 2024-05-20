@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CongeAdminService} from "../../../../../../shared/service/admin/conge/conge-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeCongeAdminService} from "../../../../../../shared/service/admin/conge/type-conge-admin.service";
+import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
@@ -34,7 +34,10 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrl: './conge-create.component.css'
 })
 export class CongeCreateComponent {
-  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeAdminService, private etatService: EtatCongeService,  private messageService: MessageService) {
+
+
+  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeService, private etatService: EtatCongeService,  private messageService: MessageService) {
+
     this.employe = new EmployeDto()
     this.employeService.findAll().subscribe((data) => this.employes = data);
     this.type = new TypeCongeDto()
