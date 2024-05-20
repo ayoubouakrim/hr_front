@@ -1,6 +1,6 @@
 import {EmployeDto} from "./employe.model";
 
-export class Commission {
+export class CommissionDto {
   public id: number | null;
   public code: String;
   public objectif : String;

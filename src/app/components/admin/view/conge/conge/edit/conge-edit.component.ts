@@ -10,6 +10,8 @@ import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "primeng/api";
+import {EtatCongeDto} from "../../../../../../shared/model/conge/etat-conge.model";
+import {EtatCongeService} from "../../../../../../shared/service/admin/conge/etat-conge.service";
 
 @Component({
   selector: 'app-conge-edit',
@@ -26,13 +28,18 @@ import {SharedModule} from "primeng/api";
   styleUrl: './conge-edit.component.css'
 })
 export class CongeEditComponent implements OnInit{
-  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeService) {
+
+  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeService,  private etatService: EtatCongeService) {
+
   }
   ngOnInit(): void {
     this.employe = new EmployeDto();
     this.employeService.findAll().subscribe((data) => this.employes = data);
     this.type = new TypeCongeDto();
     this.typeService.findAll().subscribe((data) => this.types = data);
+    this.etat = new EtatCongeDto()
+    this.etatService.findAll().subscribe( (data) => this.etats = data);
+
   }
 
   public update(): void {
@@ -79,6 +86,22 @@ export class CongeEditComponent implements OnInit{
 
   set employes(value: Array<EmployeDto>) {
     this.employeService.items = value;
+  }
+
+  get etat(): EtatCongeDto {
+    return this.etatService.item;
+  }
+
+  set etat(value: EtatCongeDto) {
+    this.etatService.item = value;
+  }
+
+  get etats(): Array<EtatCongeDto> {
+    return this.etatService.items;
+  }
+
+  set etats(value: Array<EtatCongeDto>) {
+    this.etatService.items = value;
   }
 
   get editDialog(): boolean {

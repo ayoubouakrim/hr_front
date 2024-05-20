@@ -9,7 +9,9 @@ import {HttpClient} from "@angular/common/http";
 export class TypeAbsenceService {
   private _item: TypeAbsenceDto | undefined;
   private _items: Array<TypeAbsenceDto> | undefined;
+
   private url = 'http://localhost:8089/api/v1/user/type-absence';
+
 
   constructor(private http : HttpClient) { }
 

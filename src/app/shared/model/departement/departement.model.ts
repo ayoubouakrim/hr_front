@@ -5,7 +5,7 @@ export class DepartementDto {
   public code: String;
   public libelle:String;
   public dateCreation: Date | null;
-  public chef: EmployeDto | null;
+  public chef: String;
   public nbrEmploye: number |null ;
 
   constructor() {
@@ -13,7 +13,7 @@ export class DepartementDto {
     this.code = '';
     this.libelle = '';
     this.dateCreation = null;
-    this.chef = null;
+    this.chef = '';
     this.nbrEmploye = null;
   }
 }

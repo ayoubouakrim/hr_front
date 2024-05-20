@@ -8,7 +8,11 @@ import {AbsenceDto} from "../../../../../../shared/model/conge/absence.model";
 import {AbsenceCreateComponent} from "../create/absence-create.component";
 import {AbsenceViewComponent} from "../view/absence-view.component";
 import {AbsenceEditComponent} from "../edit/absence-edit.component";
-
+import {MessageService, ConfirmationService} from 'primeng/api';
+import {MessagesModule} from 'primeng/messages';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
 
 
 @Component({
@@ -21,18 +25,22 @@ import {AbsenceEditComponent} from "../edit/absence-edit.component";
     AbsenceCreateComponent,
     AbsenceViewComponent,
     AbsenceEditComponent,
+    MessagesModule,
+    ToastModule,
+    ConfirmDialogModule,
 
   ],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './absence-list.component.html',
   styleUrl: './absence-list.component.css'
 })
-export class AbsenceListComponent implements OnInit{
+export class AbsenceListComponent implements OnInit {
   ngOnInit(): void {
     this.findAll();
   }
-  constructor(private service: AbsenceAdminService) {
-  }
 
+  constructor(private service: AbsenceAdminService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+  }
 
 
   public findAll(): void {
@@ -61,17 +69,45 @@ export class AbsenceListComponent implements OnInit{
     this.item = new AbsenceDto();
     this.createDialog = true;
   }
+
   public view(dto: AbsenceDto) {
     this.service.findByCode(dto).subscribe(res => {
       this.item = res;
       this.viewDialog = true;
     });
   }
+
   public edit(dto: AbsenceDto) {
     this.service.findByCode(dto).subscribe(res => {
       this.item = res;
       this.editDialog = true;
     });
+  }
+
+  public delete(dto: AbsenceDto) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous supprimer cet élément ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        this.service.delete(dto).subscribe(status => {
+          if (status > 0) {
+            const position = this.items.indexOf(dto);
+            position > -1 ? this.items.splice(position, 1) : false;
+            this.messageService.add({
+              severity:'success',
+              summary:'Succès',
+              detail:'supprime succeful'});
+          }
+
+        }, error => console.log(error));
+      }
+    });
+
   }
 
   get editDialog(): boolean {
@@ -89,6 +125,7 @@ export class AbsenceListComponent implements OnInit{
   set viewDialog(value: boolean) {
     this.service.viewDialog = value;
   }
+
   get createDialog(): boolean {
     return this.service.createDialog;
   }

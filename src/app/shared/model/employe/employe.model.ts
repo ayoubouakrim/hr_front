@@ -1,7 +1,12 @@
 import {GenderDto} from "./gender.model";
 import {PostDto} from "./post.model";
 import {DepartementDto} from "../departement/departement.model";
+
 import {User} from "../../security/shared/model/user.model";
+
+import {HoraireDto} from "../presence/horaire.model";
+
+
 
 export class EmployeDto {
   public id: number | null;
@@ -14,9 +19,16 @@ export class EmployeDto {
   public  telephone: String;
   public salaire: number | null;
   public dateEmbauche: Date | null;
+  public archive: boolean | null;
   public postDto: PostDto;
   public departementDto: DepartementDto;
+
   public user: User;
+
+  public imagePath: String;
+  public horaire: HoraireDto
+
+
 
 
   constructor() {
@@ -31,8 +43,17 @@ export class EmployeDto {
     this.telephone = '';
     this.salaire = null;
     this.dateEmbauche = null;
+    this.archive = null;
     this.postDto = new PostDto();
     this.departementDto = new DepartementDto();
+
     this.user = new User();
+
+    this.imagePath = '';
+    this.horaire = new HoraireDto();
+
+
+
+
   }
 }

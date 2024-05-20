@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class GenderService {
   private _item: GenderDto | undefined;
   private _items: Array<GenderDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/gender';
+  private url = 'http://localhost:8089/api/v1/admin/gender';
   constructor(private http: HttpClient) {
 
   }

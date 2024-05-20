@@ -1,4 +1,4 @@
-import {Component, signal, ChangeDetectorRef, OnInit} from '@angular/core';
+import {Component, ChangeDetectorRef, OnInit} from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import {CalendarOptions, EventInput} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -83,7 +83,7 @@ export class ReunionListComponent implements OnInit{
       this.items = data;
       console.log("Items:", this.items);
       this.mapItemsToEvents();
-      console.log("Events:", this.events);
+      console.log(this.calendarOptions.events);
 
     });
   }
@@ -92,14 +92,16 @@ export class ReunionListComponent implements OnInit{
     this.calendarOptions.events = this.items.map(reunion => ({
       id: reunion.code as string,
       title: reunion.title as string,
-      start: new Date(reunion.date + 'T' + reunion.heureDebut),
-      end: new Date(reunion.date + 'T' + reunion.heureFin),
+      start: new Date(reunion.date[0], reunion.date[1] - 1, reunion.date[2], reunion.heureDebut[0], reunion.heureDebut[1]),
+      end: new Date(reunion.date[0], reunion.date[1] - 1, reunion.date[2], reunion.heureFin[0], reunion.heureFin[1]),
       eventColor: '#2196f3',
       backgroundColor: '#F2BC57'
 
     }));
     this.changeDetector.detectChanges();
+
   }
+
 
   get item(): ReunionDto {
     return this.service.item;

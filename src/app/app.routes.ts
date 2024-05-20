@@ -5,7 +5,6 @@ import {
 } from "./components/security/password-reset-request/password-reset-request.component";
 import {RegisterUserComponent} from "./components/security/register-user/register-user.component";
 import {authGuard} from "./shared/security/guards/auth.guard";
-import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
 import {EmployeListComponent} from "./components/admin/view/employe/employe/list/employe-list.component";
 import {AdminDashboardComponent} from "./components/admin/view/admin-dashboard/admin-dashboard.component";
 import {DepartementListComponent} from "./components/admin/view/departement/list/departement-list.component";
@@ -14,8 +13,8 @@ import {CongeListComponent} from "./components/admin/view/conge/conge/list/conge
 import {HoraireListComponent} from "./components/admin/view/presence/horaire/list/horaire-list.component";
 import {PresenceListComponent} from "./components/admin/view/presence/presence/list/presence-list.component";
 import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
+
 import {UserDashboardComponent} from "./components/user/view/user-dashboard/user-dashboard.component";
-import {AppLayoutUserComponent} from "./layout/user/app-layout-user/app-layout-user..component";
 import {UserProfileComponent} from "./components/user/view/user-profile/user-profile.component";
 import {
   DemandeAbsenceListComponent
@@ -36,6 +35,16 @@ import {
   DemandeDocumentListAdminComponent
 } from "./components/admin/view/demande/demande-document/demande-document-list/demande-document-list.component";
 
+import {CommissionListComponent} from "./components/admin/view/employe/commission/list/commission-list.component";
+import {NotificationListComponent} from "./components/admin/view/notification/list/notification-list.component";
+import {SuiviMensuelListComponent} from "./components/admin/view/suiviMensuel/list/suivi-mensuel-list.component";
+import {ProfileComponent} from "./components/admin/profile/profile.component";
+import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
+import {UserLayoutComponent} from "./layout/user/user-layout/user-layout.component";
+
+
+
+
 export const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
@@ -48,7 +57,23 @@ export const routes: Routes = [
         path: 'employe', component: EmployeListComponent
       },
       {
-        path: 'dashboard', component: AdminDashboardComponent
+
+        path: 'dashboard', component: AdminDashboardComponent},
+      {
+        path: 'profile', component: ProfileComponent,
+      },
+      {
+        path: 'commission', component: CommissionListComponent,
+      },
+      {
+        path: 'notification', component: NotificationListComponent,
+      },
+      {
+        path: 'dashboard', component: AdminDashboardComponent,canActivate: [authGuard],
+        data: {
+          roles: ['ADMIN'],
+      }
+
       },
       {
         path: 'departement', component: DepartementListComponent
@@ -68,13 +93,17 @@ export const routes: Routes = [
       {
         path: 'reunion', component: ReunionListComponent,
       },
+
       {path: 'demande-absence', component: DemandeAbsenceListAdminComponent,},
       {path: 'demande-conge', component: DemandeCongeListAdminComponent},
-      {path: 'demande-document', component: DemandeDocumentListAdminComponent}
+      {path: 'demande-document', component: DemandeDocumentListAdminComponent},
+      {
+        path: 'rapport', component: SuiviMensuelListComponent,
+      },
     ],
   },
   {
-    path: 'app-user', component: AppLayoutUserComponent,
+    path: 'app-user', component: UserLayoutComponent,
     children: [
       {
         path: 'user-profile', component: UserProfileComponent
@@ -95,6 +124,10 @@ export const routes: Routes = [
       {path: 'demande-conge', component: DemandeCongeListComponent},
       {path: 'demande-document', component: DemandeDocumentListComponent}
     ],
+
+
+
+
   },
 ]
 /*

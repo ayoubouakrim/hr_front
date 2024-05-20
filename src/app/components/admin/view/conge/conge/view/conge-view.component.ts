@@ -6,6 +6,7 @@ import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "primeng/api";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-conge-view',
@@ -16,7 +17,8 @@ import {SharedModule} from "primeng/api";
     DropdownModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   templateUrl: './conge-view.component.html',
   styleUrl: './conge-view.component.css'

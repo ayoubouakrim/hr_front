@@ -1,5 +1,6 @@
 import {TypeCongeDto} from "./type-conge.model";
 import {EmployeDto} from "../employe/employe.model";
+import {EtatCongeDto} from "./etat-conge.model";
 
 export class CongeDto {
   public id: number | null;
@@ -9,7 +10,7 @@ export class CongeDto {
   public dateFin: Date | null;
   public duree: number | null;
   public type: TypeCongeDto;
-  public ended: boolean;
+  public etat: EtatCongeDto;
   public employe: EmployeDto;
 
 
@@ -21,7 +22,7 @@ export class CongeDto {
     this.dateFin = null;
     this.duree = null;
     this.type = new TypeCongeDto();
-    this.ended = false;
+    this.etat = new EtatCongeDto();
     this.employe = new EmployeDto();
   }
 }

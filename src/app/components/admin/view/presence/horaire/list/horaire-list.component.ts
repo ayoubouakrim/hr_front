@@ -10,6 +10,7 @@ import {TableModule} from "primeng/table";
 import {HoraireCreateComponent} from "../create/horaire-create.component";
 import {HoraireViewComponent} from "../view/horaire-view.component";
 import {HoraireEditComponent} from "../edit/horaire-edit.component";
+import {DepartementDto} from "../../../../../../shared/model/departement/departement.model";
 
 @Component({
   selector: 'app-horaire-list',
@@ -42,6 +43,7 @@ export class HoraireListComponent {
       this.items = data;
     })
   }
+
 
   get item(): HoraireDto {
     return this.service.item;

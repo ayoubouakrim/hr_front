@@ -26,19 +26,25 @@
     </div>
   </div>
   <div class="row my-3">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="5">Duree</label>
         <input class="form-control my-2" id="5" type="text" [disabled]="true" [(ngModel)]="item.duree">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="6">Type</label>
         <input class="form-control my-2" id="6" type="text" [disabled]="true" [ngModel]="item.type?.libelle">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="8">Etat</label>
+        <input class="form-control my-2" id="8" type="text" [disabled]="true" [ngModel]="item.etat?.libelle">
+      </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="7">employe</label>
         <input class="form-control my-2" id="7" type="text" [disabled]="true" [ngModel]="item.employe?.nom">

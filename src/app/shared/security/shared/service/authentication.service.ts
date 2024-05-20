@@ -9,8 +9,10 @@ import {EmployeUserService} from "../../../service/user/employe/employe-user.ser
 export class AuthenticationService {
   private _loginRequest = new LoginRequest();
   readonly url = "http://localhost:8089/api/v1/login"
+
   private _user: string = "";
   private matricule: string = "";
+
 
   constructor(private http: HttpClient, private employeUserService: EmployeUserService) {
   }

@@ -17,7 +17,7 @@
       <th pSortableColumn="dateDebut" >date debut<p-sortIcon field="dateDebut"></p-sortIcon></th>
       <th pSortableColumn="dateFin" >date fin<p-sortIcon field="dateFin"></p-sortIcon></th>
       <th pSortableColumn="duree" >duree<p-sortIcon field="duree"></p-sortIcon></th>
-      <th pSortableColumn="status" >status<p-sortIcon field="status"></p-sortIcon></th>
+      <th pSortableColumn="etat" >etat<p-sortIcon field="etat"></p-sortIcon></th>
       <th pSortableColumn="action" style="width : 20%">Action</th>
     </tr>
   </ng-template>
@@ -28,7 +28,7 @@
       <td>{{item.dateDebut}}</td>
       <td>{{item.dateFin}}</td>
       <td>{{item.duree}} jours</td>
-      <td>{{item.status}}</td>
+      <td>{{item.etat?.libelle}}</td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">
@@ -41,7 +41,7 @@
             <i class="fa fa-pen-to-square"></i>
           </button>
           <button type="button"
-                  class="btn btn-sm btn-outline-danger">
+                  class="btn btn-sm btn-outline-danger" (click)="delete(item)">
             <i class="fa fa-trash"></i>
           </button>
         </div>
@@ -50,6 +50,8 @@
   </ng-template>
 </p-table>
 
+<p-toast/>
+<p-confirmDialog/>
 <app-absence-create></app-absence-create>
 <app-absence-view></app-absence-view>
 <app-absence-edit></app-absence-edit>

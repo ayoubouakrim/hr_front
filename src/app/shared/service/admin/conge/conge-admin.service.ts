@@ -10,7 +10,7 @@ export class CongeAdminService {
 
   private _item: CongeDto | undefined;
   private _items: Array<CongeDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/conge';
+  private url = 'http://localhost:8089/api/v1/admin/conge';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;
@@ -54,7 +54,7 @@ export class CongeAdminService {
     return this.http.get<Array<CongeDto>>(this.url + "/all");
   }
   public delete(dto: CongeDto) {
-    return this.http.delete<number>(this.url + '/code/' + dto.code);
+    return this.http.delete<number>(this.url + '/id/' + dto.id);
   }
   public findByCode(dto: CongeDto) {
     return this.http.get<CongeDto>(this.url + '/code/' + dto.code);

@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class DepartementService {
   private _item: DepartementDto | undefined;
   private _items: Array<DepartementDto> | undefined;
-  private url = 'http://localhost:8037/api/v1/admin/departement';
+  private url = 'http://localhost:8089/api/v1/admin/departement';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;
