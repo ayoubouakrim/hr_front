@@ -1,6 +1,7 @@
 import {GenderDto} from "./gender.model";
 import {PostDto} from "./post.model";
 import {DepartementDto} from "../departement/departement.model";
+import {User} from "../../security/shared/model/user.model";
 
 export class EmployeDto {
   public id: number | null;
@@ -15,6 +16,7 @@ export class EmployeDto {
   public dateEmbauche: Date | null;
   public postDto: PostDto;
   public departementDto: DepartementDto;
+  public user: User;
 
 
   constructor() {
@@ -31,5 +33,6 @@ export class EmployeDto {
     this.dateEmbauche = null;
     this.postDto = new PostDto();
     this.departementDto = new DepartementDto();
+    this.user = new User();
   }
 }

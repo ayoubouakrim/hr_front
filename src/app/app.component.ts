@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 import {AppSidebarComponent} from "./layout/app-sidebar/app-sidebar.component";
 import {AdminDashboardComponent} from "./components/admin/view/admin-dashboard/admin-dashboard.component";
 

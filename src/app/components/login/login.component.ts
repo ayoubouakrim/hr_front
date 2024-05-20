@@ -1,26 +1,27 @@
-import {Component} from '@angular/core';
-import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink} from "@angular/router";
 import {LoginRequest} from "../../shared/security/shared/model/login-request.model";
 import {AuthenticationService} from "../../shared/security/shared/service/authentication.service";
 import {TokenService} from "../../shared/security/shared/service/token.service";
 import {CommonModule} from "@angular/common";
-
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   errorMsg: string = "";
   isUsernameFocused: boolean = false;
   isPasswordFocused: boolean = false;
+  isChecked: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,14 +31,20 @@ export class LoginComponent {
   }
 
   login() {
+    this.onRememberMeChange();
     this.errorMsg = "";
     this.authService.login().subscribe({
       next: (res) => {
         this.tokenService.token = res.body?.token as string;
+        if (res.body?.token != null) {
+          if (res.body?.username != null) {
+            this.user = res.body?.username;
+          }
+        }
         if (this.tokenService.userRoles.includes("ADMIN")) {
           this.router.navigate(['app/dashboard']);
         } else if (this.tokenService.userRoles.includes("USER")) {
-          //this.router.navigate(['app/dashboard']);
+          this.router.navigate(['app-user/dashboard-user']);
         }
       },
       error: (err: any) => {
@@ -51,6 +58,22 @@ export class LoginComponent {
     });
   }
 
+  onRememberMeChange() {
+    if (this.isChecked) {
+      const objetJSON = JSON.stringify(this.loginRequest);
+      localStorage.setItem("loginRequest", objetJSON);
+    } else {
+      localStorage.removeItem("loginRequest");
+    }
+  }
+
+  ngOnInit(): void {
+    const objetJSON = localStorage.getItem('loginRequest');
+    if (objetJSON !== null) {
+      this.loginRequest = JSON.parse(objetJSON);
+    }
+  }
+
   get loginRequest(): LoginRequest {
     return this.authService.loginRequest;
   }
@@ -58,4 +81,14 @@ export class LoginComponent {
   set loginRequest(value: LoginRequest) {
     this.authService.loginRequest = value;
   }
+
+  get user(): string {
+    return this.authService.user;
+  }
+
+  set user(value: string) {
+    this.authService.user = value;
+  }
 }
+
+

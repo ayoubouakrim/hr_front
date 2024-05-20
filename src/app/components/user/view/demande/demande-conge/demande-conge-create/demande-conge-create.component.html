@@ -1,0 +1,59 @@
+<p-dialog header="demande d'absence" [(visible)]="visible" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">Code</label>
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">Raison</label>
+        <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.raison">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">Matricule</label>
+        <input class="form-control my-2" id="3" type="text" [(ngModel)]="item.employe.matricule">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">Date debut</label>
+        <input class="form-control my-2" id="4" type="date" [(ngModel)]="item.dateDebut">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="5">Date fin</label>
+        <input class="form-control my-2" id="5" type="date" [(ngModel)]="item.dateFin">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="6" class="dropdown-label">Type de congé</label>
+        <div class="dropdown-container">
+          <p-dropdown appendTo="body" [options]="typeConges" [(ngModel)]="item.typeConge" id="6" [filter]="true"
+                      filterMatchMode="contains"
+                      [showClear]="true" optionLabel="libelle" placeholder="type d'absence" class="custom-dropdown"
+                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="save" (click)="save(item)" [rounded]="true" severity="warning"
+                icon="pi pi-check"></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+                icon="pi pi-times"></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>

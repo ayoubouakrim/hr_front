@@ -11,14 +11,13 @@
           <!-- Email input -->
           <div data-mdb-input-init class="form-outline mb-4">
             <label class="form-label" for="form1Example13">Username</label>
-            <input [(ngModel)]="loginRequest.username" type="text" placeholder="" name="username" required (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" id="form1Example13" class="form-control form-control-lg" />
+            <input [(ngModel)]="loginRequest.username" type="text" placeholder="" name="username" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" id="form1Example13" class="form-control form-control-lg" />
           </div>
 
           <!-- Password input -->
           <div data-mdb-input-init class="form-outline mb-4">
             <label class="form-label" for="form1Example23">Password</label>
             <input [(ngModel)]="loginRequest.password" type="password" placeholder="" name="password" id="form1Example23" class="form-control form-control-lg" required (focus)="isPasswordFocused = true" (blur)="isPasswordFocused = false"/>
-            <span class="toggle-password" onclick="document.getElementById('password').type = (document.getElementById('password').type === 'password') ? 'text' : 'password'"><i></i></span>
           </div>
 
           <div class="alert alert-danger" role="alert" *ngIf="errorMsg && !isUsernameFocused && !isPasswordFocused">
@@ -28,10 +27,10 @@
           <div class="d-flex justify-content-around align-items-center mb-4">
             <!-- Checkbox -->
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+              <input class="form-check-input" type="checkbox" [(ngModel)]="isChecked" name="rememberMe" id="form1Example3"/>
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
-            <a href="/reset-request">Forgot password?</a>
+            <a routerLink="/reset-request">Forgot password?</a>
           </div>
 
           <!-- Submit button -->

@@ -7,7 +7,7 @@ import {PasswordResetRequest} from "../model/password-reset-request.model";
 })
 export class PasswordResetRequestService {
   private _passwordResetRequest = new PasswordResetRequest();
-  readonly url = "http://localhost:8037/api/v1/passwordReset/email"
+  readonly url = "http://localhost:8089/api/v1/passwordReset/email"
 
   constructor(private http: HttpClient) {
   }

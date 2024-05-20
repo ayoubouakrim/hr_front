@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {CongeAdminService} from "../../../../../../shared/service/admin/conge/conge-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeCongeAdminService} from "../../../../../../shared/service/admin/conge/type-conge-admin.service";
+import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
 import {ButtonModule} from "primeng/button";
@@ -26,7 +26,7 @@ import {SharedModule} from "primeng/api";
   styleUrl: './conge-edit.component.css'
 })
 export class CongeEditComponent implements OnInit{
-  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeAdminService) {
+  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeService) {
   }
   ngOnInit(): void {
     this.employe = new EmployeDto();

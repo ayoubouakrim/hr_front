@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {EmployeDto} from "../../../model/employe/employe.model";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
+import {User} from "../../../security/shared/model/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class EmployeUserService {
   private _item: EmployeDto | undefined;
   private _items: Array<EmployeDto> | undefined;
-  private url = 'http://localhost:8037/api/v1/admin/employe';
+  private url = 'http://localhost:8089/api/v1/user/employe';
 
   protected _editDialog: boolean = false;
   protected _viewDialog: boolean = false;
@@ -22,9 +23,14 @@ export class EmployeUserService {
   public findAll() {
     return this.http.get<Array<EmployeDto>>(this.url + "/all");
   }
-  public findByMatricule(dto: EmployeDto) {
-    return this.http.get<EmployeDto>(this.url + '/matricule/' + dto.matricule);
+  public findByMatricule(matricule : string) {
+    return this.http.get<EmployeDto>(this.url + '/matricule/' + matricule);
   }
+
+  public findByUserUsername(username : string) {
+    return this.http.get<EmployeDto>(this.url + '/username/' + username);
+  }
+
   public delete(dto: EmployeDto) {
     return this.http.delete<number>(this.url + '/matricule/' + dto.matricule);
   }

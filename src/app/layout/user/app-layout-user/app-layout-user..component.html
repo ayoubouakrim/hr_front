@@ -1,0 +1,14 @@
+<div class="top-bar-class">
+<app-top-bar (toggleSidebar)="toggleSidebar()"></app-top-bar>
+</div>
+<div class="container-fluid p-0 d-flex h-100">
+  <app-sidebar-user id="bdSidebar" [ngStyle]="{ 'display': isSidebarHidden ? 'none' : 'block' }"></app-sidebar-user>
+  <div class="bg-light flex-fill">
+    <div class="p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+

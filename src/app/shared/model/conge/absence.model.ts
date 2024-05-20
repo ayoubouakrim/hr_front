@@ -5,8 +5,8 @@ import {TypeAbsenceDto} from "./type-absence.model";
 export class AbsenceDto {
 
   public id: number | null;
-  public code: String;
-  public motif: String;
+  public code: string;
+  public motif: string;
   public dateDebut: Date | null;
   public dateFin: Date | null;
   public duree: number | null;

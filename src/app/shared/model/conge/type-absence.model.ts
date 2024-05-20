@@ -1,8 +1,8 @@
 export class TypeAbsenceDto {
 
   public id: number | null;
-  public code: String;
-  public libelle: String;
+  public code: string;
+  public libelle: string;
 
 
   constructor() {

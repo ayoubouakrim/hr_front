@@ -3,13 +3,13 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #667eea 60%, white 40%);
+    background: linear-gradient(to right, #514d6c 60%, white 40%);
   }
 }
 .btn {
   width: 100%;
   padding: 10px;
-  background: #fa8426; /* Couleur de fond du bouton */
+  background: #f1764d; /* Couleur de fond du bouton */
   border: none;
   border-radius: 5px;
   color: #fff;

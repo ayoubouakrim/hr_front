@@ -42,8 +42,6 @@ export class EmployeCreateComponent implements OnInit{
     });
   }
 
-
-
   public save(): void {
     this.service.save().subscribe(data => {
       if (data != null) {
@@ -53,6 +51,7 @@ export class EmployeCreateComponent implements OnInit{
       }
     });
   }
+
   get item(): EmployeDto {
     return this.service.item;
   }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {AbsenceAdminService} from "../../../../../../shared/service/admin/conge/absence-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeAbsenceAdminService} from "../../../../../../shared/service/admin/conge/type-absence-admin.service";
+import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {AbsenceDto} from "../../../../../../shared/model/conge/absence.model";
 import {ButtonModule} from "primeng/button";
@@ -26,7 +26,7 @@ import {SharedModule} from "primeng/api";
   styleUrl: './absence-edit.component.css'
 })
 export class AbsenceEditComponent implements OnInit{
-  constructor(private service: AbsenceAdminService, private employeService: EmployeService, private typeService: TypeAbsenceAdminService) {
+  constructor(private service: AbsenceAdminService, private employeService: EmployeService, private typeService: TypeAbsenceService) {
   }
   ngOnInit(): void {
     this.employe = new EmployeDto();

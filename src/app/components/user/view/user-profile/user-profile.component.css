@@ -1,0 +1,44 @@
+.profile-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 50px 20px;
+  background: linear-gradient(#e3e3e2, #8d7c7c);
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-image {
+  width: 40%;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #fff;
+}
+
+.profile-name {
+  font-size: 32px;
+  margin-top: 20px;
+}
+
+.profile-info {
+  margin-top: 40px;
+}
+
+.profile-info p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.profile-info p strong {
+  font-weight: bold;
+}
+.input{
+border: solid 1px #000000;
+}
+
+
