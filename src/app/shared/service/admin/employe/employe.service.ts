@@ -9,10 +9,13 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class EmployeService{
   private _item: EmployeDto | undefined;
   private _items: Array<EmployeDto> | undefined;
-  private url = 'http://localhost:8037/api/v1/admin/employe';
+  private url = 'http://localhost:8089/api/v1/admin/employe';
 
   protected _editDialog: boolean = false;
   protected _viewDialog: boolean = false;
+  private _createDialog: boolean = false;
+
+
   constructor(private http: HttpClient) {
 
   }
@@ -30,6 +33,12 @@ export class EmployeService{
   }
   public update(): Observable<EmployeDto> {
     return this.http.put<EmployeDto>(this.url + '/update', this.item);
+  }
+  public updatePar(dto: EmployeDto): Observable<EmployeDto> {
+    return this.http.put<EmployeDto>(this.url + '/update', dto);
+  }
+  public totalSalaire(): Observable<number>{
+    return this.http.get<number>(this.url + '/total-salaire')
   }
   get item(): EmployeDto {
     if (this._item == null) {
@@ -53,18 +62,8 @@ export class EmployeService{
     this._items = value;
   }
 
-  private _visibleSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public visible$: Observable<boolean> = this._visibleSubject.asObservable();
 
 
-
-  public showDialog(): void {
-    this._visibleSubject.next(true);
-  }
-
-  public hideDialog(): void {
-    this._visibleSubject.next(false);
-  }
 
 
   get editDialog(): boolean {
@@ -81,5 +80,13 @@ export class EmployeService{
 
   set viewDialog(value: boolean) {
     this._viewDialog = value;
+  }
+
+  get createDialog(): boolean {
+    return this._createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this._createDialog = value;
   }
 }

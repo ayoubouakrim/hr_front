@@ -7,7 +7,7 @@ import {AuthenticationResponse} from "../model/authentication-response.model";
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService{
   private _loginRequest = new LoginRequest();
-  readonly url = "http://localhost:8037/api/v1/login"
+  readonly url = "http://localhost:8089/api/v1/login"
 
   constructor(private http: HttpClient) {
   }

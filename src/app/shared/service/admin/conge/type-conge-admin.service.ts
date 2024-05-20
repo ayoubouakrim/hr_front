@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 export class TypeCongeAdminService {
   private _item: TypeCongeDto | undefined;
   private _items: Array<TypeCongeDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/type-conge';
+  private url = 'http://localhost:8089/api/v1/admin/type-conge';
 
   constructor(private http : HttpClient) { }
 

@@ -11,6 +11,13 @@ import {DepartementService} from "../../../../../../shared/service/admin/departe
 import {GenderDto} from "../../../../../../shared/model/employe/gender.model";
 import {DepartementDto} from "../../../../../../shared/model/departement/departement.model";
 import {PostDto} from "../../../../../../shared/model/employe/post.model";
+import {HoraireAdminService} from "../../../../../../shared/service/admin/presence/horaire-admin.service";
+import {HoraireDto} from "../../../../../../shared/model/presence/horaire.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {MessagesModule} from "primeng/messages";
+
 
 @Component({
   selector: 'app-employe-create',
@@ -19,8 +26,11 @@ import {PostDto} from "../../../../../../shared/model/employe/post.model";
     DialogModule,
     FormsModule,
     ButtonModule,
-    DropdownModule
+    DropdownModule,
+    MessagesModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './employe-create.component.html',
   styleUrl: './employe-create.component.css'
 })
@@ -32,27 +42,51 @@ export class EmployeCreateComponent implements OnInit{
     this.postService.findAll().subscribe((data) => this.posts = data);
     this.departement = new DepartementDto();
     this.departementService.findAll().subscribe((data) => this.departements = data);
-
+    this.horaire = new HoraireDto();
+    this.horaireService.findAll().subscribe((data) => this.horaires = data);
   }
   visible: boolean = false;
 
-  constructor(private service: EmployeService, private genderService: GenderService, private postService: PostService, private departementService: DepartementService) {
-    this.service.visible$.subscribe((visible: boolean) => {
-      this.visible = visible;
-    });
+  selectedFile!: File;
+  selectedFileData: any;
+  constructor(private messageService: MessageService, private service: EmployeService, private genderService: GenderService, private postService: PostService, private departementService: DepartementService, private horaireService: HoraireAdminService) {
+
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.item.imagePath = "assets/empImages/" + file.name;
 
+    }
+
+  }
 
   public save(): void {
+    console.log(this.item)
     this.service.save().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.createDialog = false;
   }
+
+
   get item(): EmployeDto {
     return this.service.item;
   }
@@ -94,6 +128,20 @@ export class EmployeCreateComponent implements OnInit{
   set genders(value: Array<GenderDto>) {
     this.genderService.items = value;
   }
+
+
+  get horaire(): HoraireDto {
+    return this.horaireService.item;
+  }
+  set horaire(value: HoraireDto) {
+    this.horaireService.item = value;
+  }
+  get horaires(): Array<HoraireDto> {
+    return this.horaireService.items;
+  }
+  set horaires(value: Array<HoraireDto>) {
+    this.horaireService.items = value;
+  }
   get departement(): DepartementDto {
     return this.departementService.item;
   }
@@ -107,7 +155,16 @@ export class EmployeCreateComponent implements OnInit{
     this.departementService.items = value;
   }
 
-  hideCreateDialog() {
-    this.visible = false;
+  get createDialog(): boolean {
+    return this.service.createDialog;
   }
+
+  set createDialog(value: boolean) {
+    this.service.createDialog = value;
+  }
+
+  hideCreateDialog() {
+    this.createDialog = false;
+  }
+
 }

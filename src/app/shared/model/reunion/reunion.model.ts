@@ -6,9 +6,9 @@ export class ReunionDto {
   public code: String;
   public title: String;
   public objectif: String;
-  public heureDebut: Time | null;
-  public heureFin: Time | null;
-  public date: Date |null;
+  public heureDebut: Time | any;
+  public heureFin: Time | any;
+  public date: Date | any;
   public employes: Array<EmployeDto>;
 
 

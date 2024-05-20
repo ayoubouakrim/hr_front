@@ -1,4 +1,4 @@
-<p-dialog header="Employe" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Conge" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -21,12 +21,12 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="4">Duree</label>
-        <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.duree">
+        <input class="form-control my-2" id="4" type="number" [(ngModel)]="item.duree">
       </div>
     </div>
   </div>
   <div class="row my-3">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="5" class="dropdown-label">Type</label>
         <div class="dropdown-container">
@@ -37,7 +37,18 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="7" class="dropdown-label">Etat</label>
+        <div class="dropdown-container">
+          <p-dropdown appendTo="body" [options]="etats" [(ngModel)]="item.etat" id="7" [filter]="true" filterMatchMode="contains"
+                      [showClear]="true" optionLabel="libelle" placeholder="Etat" class="custom-dropdown"
+                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="form-group">
         <label for="6" class="dropdown-label">Employe</label>
         <div class="dropdown-container">
@@ -57,3 +68,4 @@
   </ng-template>
 
 </p-dialog>
+<p-toast/>

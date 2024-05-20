@@ -1,16 +1,16 @@
 
 <div class="row">
-  <div class="col-lg-3 col-sm-6 col-12 my-2">
-    <div class="card">
+  <div class="col-lg-3 col-sm-6 col-12 my-2 ">
+    <div class="card bg-1">
       <div class="card-content">
         <div class="card-body">
           <div class="media d-flex">
             <div class="align-self-center">
-              <i class="fa-solid fa-user-tie lg mx-4 text-primary"></i>
+              <i class="fa-solid fa-user-tie lg mx-4 text-light"></i>
             </div>
             <div class="media-body text-right">
-              <h5>278</h5>
-              <span>Employes</span>
+              <h5 class="text-light">{{ employes.length }}</h5>
+              <span class="text-light">Employes</span>
             </div>
           </div>
         </div>
@@ -18,16 +18,16 @@
     </div>
   </div>
   <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
+    <div class="card bg-2">
       <div class="card-content">
         <div class="card-body">
           <div class="media d-flex">
             <div class="align-self-center">
-              <i class="fa-solid fa-building lg mx-4 text-warning"></i>
+              <i class="fa-solid fa-building lg mx-4 text-light"></i>
             </div>
             <div class="media-body text-right">
-              <h5>156</h5>
-              <span>Departements</span>
+              <h5 class="text-light">{{ departements.length }}</h5>
+              <span class="text-light">Departements</span>
             </div>
           </div>
         </div>
@@ -35,16 +35,16 @@
     </div>
   </div>
   <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
+    <div class="card bg-1">
       <div class="card-content">
         <div class="card-body">
           <div class="media d-flex">
             <div class="align-self-center">
-              <i class="fa-solid fa-suitcase lg mx-4 text-danger"></i>
+              <i class="fa-solid fa-suitcase lg mx-4 text-light"></i>
             </div>
             <div class="media-body text-right">
-              <h5>0</h5>
-              <span>Conge</span>
+              <h5 class="text-light">{{ conges.length}}</h5>
+              <span class="text-light">Conge</span>
             </div>
           </div>
         </div>
@@ -52,16 +52,16 @@
     </div>
   </div>
   <div class="col-xl-3 col-sm-6 col-12 my-2">
-    <div class="card">
+    <div class="card bg-2">
       <div class="card-content">
         <div class="card-body">
           <div class="media d-flex">
             <div class="align-self-center">
-              <i class="fa-solid fa-money-bill-1 lg mx-4 text-success"></i>
+              <i class="fa-solid fa-money-bill-1 lg mx-4 text-light"></i>
             </div>
             <div class="media-body text-right">
-              <h5>423</h5>
-              <span>salaire</span>
+              <h5 class="text-light">{{totalsalaire}} DH</h5>
+              <span class="text-light">salaire</span>
             </div>
           </div>
         </div>
@@ -70,13 +70,77 @@
   </div>
 </div>
 <div class="row my-3">
-  <div class="col-xl-6 col-sm-6">
+  <div class="col-xl-6 col-md-6 mb-3">
     <div class="card text-center">
-      <div class="card-header">
+      <div class="card-header bg-1 text-light">
         Total employees
       </div>
       <div class="card-body">
         <app-pie-chart></app-pie-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6 col-md-6">
+    <div class="card text-center">
+      <div class="card-header bg-1 text-light">
+        En Conge
+      </div>
+      <div class="card-body">
+        <p-table [value]="conges"  [tableStyle]="{'min-width': '1rem'}">
+
+          <ng-template pTemplate="body" let-conge>
+            <tr>
+              <td>
+                <span class="p-column-title">Representative</span>
+                <img
+                  class="rounded-circle"
+                  [alt]="conge.employe?.nom"
+                  src="{{conge.employe?.imagePath}}"
+                  width="32"
+                  style="vertical-align: middle" />
+                <span class="ml-1 vertical-align-middle ms-3">{{ conge.employe?.nom }} {{ conge.employe?.prenom }}</span>
+              </td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container admin px-4 py-4 pt-5">
+  <div class="row ">
+    <div class="col-md-4 d-flex justify-content-center align-items-center">
+      <div class="card mb-3">
+        <img src="assets/empImages/pro1.webp" class="card-img-top img-fluid rounded-4" style="height:225px; width: 225px;" alt="Employee Image">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="employee-info">
+            <h5 class="card-title">Nom Prenom</h5>
+            <p class="text-right"><b>Poste:</b> xxxxxx</p>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Matricule:</b> XXXX</li>
+                <li class="list-group-item"><b>CIN:</b> XXXXXXXX</li>
+                <li class="list-group-item"><b>Adresse:</b> Adresse Example</li>
+                <li class="list-group-item"><b>Genre:</b> Male/Female</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Téléphone:</b> XXXXXXXXXX</li>
+                <li class="list-group-item"><b>Salaire:</b> $XXXXX</li>
+                <li class="list-group-item"><b>Date d'embauche:</b> XX/XX/XXXX</li>
+                <li class="list-group-item"><b>Département:</b> Department Name</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

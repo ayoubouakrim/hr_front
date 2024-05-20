@@ -1,19 +1,73 @@
 <div class="container-fluid p-0 d-flex h-100">
-  <app-sidebar></app-sidebar>
+  <app-sidebar class="w-25"></app-sidebar>
 
   <div class="bg-light flex-fill">
-    <div class="p-2 d-md-none d-flex text-white bg-info">
-      <a href="#" class="text-white"
+
+    <div class="p-2 d-flex text-white bg-info">
+      <a href="#" class="text-white d-md-none"
          data-bs-toggle="offcanvas"
          data-bs-target="#bdSidebar">
         <i class="fa-solid fa-bars"></i>
       </a>
-      <span class="ms-3">GFG Portal</span>
+      <span class="ms-3 d-md-none">GFG Portal</span>
+      <div class="ms-auto">
+        <a href="#" class="sidebar-link a" (click)="showNotifi($event)">
+          <i class="fa fa-bell"></i>
+        </a>
+        <a class="a" routerLink="/app/profile/">
+          <img
+            class="rounded-circle mx-3"
+
+            src="assets/empImages/pro2.png"
+            width="28"
+            style="vertical-align: middle" />
+        </a>
+
+        <a href="#" class="sidebar-link a">
+          <i class="lni lni-exit"></i>
+          <span>Logout</span>
+        </a>
+      </div>
     </div>
+
+
     <div class="p-4">
     <router-outlet></router-outlet>
     </div>
   </div>
+  <p-dialog header="Notifications" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="container">
+      <div class="">
+        <div class="list-group-item ">
+          <hr>
+          <h5 class="mb-1 text-1">Meeting Reminder</h5>
+          <p class="mb-1">Don't forget the team meeting scheduled for tomorrow at 10 AM in the conference room.</p>
+          <small class="text-muted">2024-05-18 09:00:00</small>
+          <hr>
+        </div>
+        <div class="list-group-item">
+          <h5 class="mb-1">Project Deadline</h5>
+          <p class="mb-1">The deadline for the project submission is approaching. Please ensure all tasks are completed by the end of the day.</p>
+          <small class="text-muted">2024-05-17 17:00:00</small>
+          <hr>
+        </div>
+        <div class="list-group-item">
+          <h5 class="mb-1">System Maintenance</h5>
+          <p class="mb-1">Scheduled maintenance will occur on Saturday, 20th May, from 2 AM to 4 AM. Services may be unavailable during this time.</p>
+          <small class="text-muted">2024-05-15 12:00:00</small>
+          <hr>
+        </div>
+        <div class="list-group-item">
+          <h5 class="mb-1">New Policy Update</h5>
+          <p class="mb-1">Please review the latest update to the company’s remote work policy in your email.</p>
+          <small class="text-muted">2024-05-14</small>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
 </div>
+
+
 
 

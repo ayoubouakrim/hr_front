@@ -10,7 +10,7 @@ import {PostDto} from "../../../model/employe/post.model";
 export class PostService {
   private _item: PostDto | undefined;
   private _items: Array<PostDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/post';
+  private url = 'http://localhost:8089/api/v1/admin/post';
   constructor(private http: HttpClient) {
 
   }

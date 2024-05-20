@@ -7,6 +7,7 @@ import {DepartementDto} from "../../../../../shared/model/departement/departemen
 import {DepartementCreateComponent} from "../create/departement-create.component";
 import {DepartementViewComponent} from "../view/departement-view.component";
 import {DepartementEditComponent} from "../edit/departement-edit.component";
+import {HoraireDto} from "../../../../../shared/model/presence/horaire.model";
 
 @Component({
   selector: 'app-departement-list',
@@ -28,8 +29,8 @@ export class DepartementListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-        this.findAll();
-    }
+    this.findAll();
+  }
 
 
   public findAll(): void {
@@ -68,6 +69,16 @@ export class DepartementListComponent implements OnInit{
     this.service.findByCode(dto).subscribe(res => {
       this.item = res;
       this.editDialog = true;
+    });
+  }
+  public  delete(dto: DepartementDto) {
+    this.service.delete(dto).subscribe(status => {
+      if (status > 0) {
+        const position = this.items.indexOf(dto);
+        position > -1 ? this.items.splice(position, 1) : false;
+
+      }
+
     });
   }
 

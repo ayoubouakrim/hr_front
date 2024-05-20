@@ -16,6 +16,10 @@ import {CongeListComponent} from "./components/admin/view/conge/conge/list/conge
 import {HoraireListComponent} from "./components/admin/view/presence/horaire/list/horaire-list.component";
 import {PresenceListComponent} from "./components/admin/view/presence/presence/list/presence-list.component";
 import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
+import {CommissionListComponent} from "./components/admin/view/employe/commission/list/commission-list.component";
+import {NotificationListComponent} from "./components/admin/view/notification/list/notification-list.component";
+import {SuiviMensuelListComponent} from "./components/admin/view/suiviMensuel/list/suivi-mensuel-list.component";
+import {ProfileComponent} from "./components/admin/profile/profile.component";
 
 
 
@@ -29,6 +33,15 @@ export const routes: Routes = [
     children: [
       {
         path: 'employe', component: EmployeListComponent,
+      },
+      {
+        path: 'profile', component: ProfileComponent,
+      },
+      {
+        path: 'commission', component: CommissionListComponent,
+      },
+      {
+        path: 'notification', component: NotificationListComponent,
       },
       {
         path: 'dashboard', component: AdminDashboardComponent,canActivate: [authGuard],
@@ -53,6 +66,9 @@ export const routes: Routes = [
       },
       {
         path: 'reunion', component: ReunionListComponent,
+      },
+      {
+        path: 'rapport', component: SuiviMensuelListComponent,
       },
   ],
   },

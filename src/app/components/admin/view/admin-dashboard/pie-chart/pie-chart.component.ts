@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import Chart from 'chart.js/auto';
+import {DepartementService} from "../../../../../shared/service/admin/departement/departement.service";
+import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,27 +11,43 @@ import Chart from 'chart.js/auto';
   styleUrl: './pie-chart.component.css'
 })
 export class PieChartComponent implements OnInit{
+  nbrEmployeList: (number | null)[] = [];
+  depNom: (String | null)[] = [];
+  constructor(private departementService: DepartementService) {
+
+
+
+  }
   ngOnInit(): void {
-    this.createChart();
+    this.departement = new DepartementDto()
+    this.departementService.findAll().subscribe((data) => {
+      this.departements = data;
+      this.nbrEmployeList = this.departements.map((department) => department.nbrEmploye);
+      this.depNom = this.departements.map((department) => department.libelle);
+      console.log(this.nbrEmployeList);
+      this.createChart();
+    });
+
+
   }
 
 
   public chart: any;
 
   createChart(){
-
+    console.log(this.nbrEmployeList)
     this.chart = new Chart("MyChart", {
       type: 'pie', //this denotes tha type of chart
 
       data: {// values on X-Axis
-
+        labels : this.depNom,
         datasets: [{
-          label: 'My First Dataset',
-          data: [300, 240, 100, 432, 253, 34],
+
+          data: this.nbrEmployeList,
           backgroundColor: [
-            'red',
-            'pink',
-            'green',
+            '#4333A6',
+            '#2585D9',
+            '#1e3a59',
             'yellow',
             'orange',
             'blue',
@@ -42,5 +60,19 @@ export class PieChartComponent implements OnInit{
       }
 
     });
+  }
+
+
+  get departement(): DepartementDto {
+    return this.departementService.item;
+  }
+  set departement(value: DepartementDto) {
+    this.departementService.item = value;
+  }
+  get departements(): Array<DepartementDto> {
+    return this.departementService.items;
+  }
+  set departements(value: Array<DepartementDto>) {
+    this.departementService.items = value;
   }
 }

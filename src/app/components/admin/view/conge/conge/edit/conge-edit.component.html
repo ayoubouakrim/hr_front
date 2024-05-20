@@ -1,4 +1,4 @@
-<p-dialog header="Employe" [(visible)]="editDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Conge" [(visible)]="editDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -26,18 +26,29 @@
     </div>
   </div>
   <div class="row my-3">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="5" class="dropdown-label">Type</label>
         <div class="dropdown-container">
           <p-dropdown appendTo="body" [options]="types" [(ngModel)]="item.type" id="5" [filter]="true" filterMatchMode="contains"
+                      [showClear]="true" optionLabel="libelle" placeholder="etat" class="custom-dropdown"
+                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="7" class="dropdown-label">Etat</label>
+        <div class="dropdown-container">
+          <p-dropdown appendTo="body" [options]="etats" [(ngModel)]="item.etat" id="7" [filter]="true" filterMatchMode="contains"
                       [showClear]="true" optionLabel="libelle" placeholder="type" class="custom-dropdown"
                       [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
           </p-dropdown>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="6" class="dropdown-label">Employe</label>
         <div class="dropdown-container">

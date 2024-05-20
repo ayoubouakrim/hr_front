@@ -3,6 +3,6 @@ export class LoginRequest {
   public password : string;
   constructor() {
     this.username = '';
-    this.password='';
+    this.password= '';
   }
 }

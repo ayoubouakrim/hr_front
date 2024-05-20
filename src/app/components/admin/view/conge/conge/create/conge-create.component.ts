@@ -9,7 +9,12 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
+import {EtatCongeService} from "../../../../../../shared/service/admin/conge/etat-conge.service";
+import {EtatCongeDto} from "../../../../../../shared/model/conge/etat-conge.model";
+import {ToastModule} from "primeng/toast";
+import {MessagesModule} from "primeng/messages";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-conge-create',
@@ -20,28 +25,46 @@ import {SharedModule} from "primeng/api";
     DropdownModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MessagesModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './conge-create.component.html',
   styleUrl: './conge-create.component.css'
 })
 export class CongeCreateComponent {
-  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeAdminService) {
+  constructor(private service: CongeAdminService, private employeService: EmployeService, private typeService: TypeCongeAdminService, private etatService: EtatCongeService,  private messageService: MessageService) {
     this.employe = new EmployeDto()
     this.employeService.findAll().subscribe((data) => this.employes = data);
     this.type = new TypeCongeDto()
     this.typeService.findAll().subscribe((data) => this.types = data);
+    this.etat = new EtatCongeDto()
+    this.etatService.findAll().subscribe( (data) => this.etats = data);
 
   }
 
   public save(): void {
     this.service.save().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.createDialog = false;
   }
   get item(): CongeDto {
     return this.service.item;
@@ -84,6 +107,22 @@ export class CongeCreateComponent {
 
   set employes(value: Array<EmployeDto>) {
     this.employeService.items = value;
+  }
+
+  get etat(): EtatCongeDto {
+    return this.etatService.item;
+  }
+
+  set etat(value: EtatCongeDto) {
+    this.etatService.item = value;
+  }
+
+  get etats(): Array<EtatCongeDto> {
+    return this.etatService.items;
+  }
+
+  set etats(value: Array<EtatCongeDto>) {
+    this.etatService.items = value;
   }
   get type(): TypeCongeDto {
     return this.typeService.item;

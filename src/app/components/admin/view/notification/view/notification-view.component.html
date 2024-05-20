@@ -1,0 +1,50 @@
+<p-dialog header="Notification" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">title</label>
+        <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.objectif">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">debut</label>
+        <input class="form-control my-2" id="3" type="text" [disabled]="true" [ngModel]="item.timeSend">
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">fin</label>
+        <input class="form-control my-2" id="4" type="text" [disabled]="true" [(ngModel)]="item.timeExpiration">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="5">contenu</label>
+        <textarea class="form-control my-2" id="5" type="text" [disabled]="true" [(ngModel)]="item.message"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="6">participants</label>
+        <p-dropdown appendTo="body" [options]="extractedEmployees" [(ngModel)]="item.notificationEmployes" id="6" [filter]="true" filterMatchMode="contains"
+                    [showClear]="true" optionLabel="nom" placeholder="participants" class="custom-dropdown"
+                    [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+        </p-dropdown>
+      </div>
+    </div>
+
+  </div>
+
+
+</p-dialog>
+

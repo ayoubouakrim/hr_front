@@ -1,0 +1,47 @@
+<p-dialog header="Employe" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="2">title</label>
+        <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.objectif">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="6" >participants</label>
+        <p-multiSelect
+          id="6"
+          [options]="employes"
+          [(ngModel)]="selectedEmployees"
+          optionLabel="nom"
+          placeholder="Select participants"
+          [style]="{'width': '100%'}"/>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="3">Contenu</label>
+        <textarea class="form-control my-2" rows="5" id="3" type="text" [(ngModel)]="item.message"> </textarea>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <ng-template pTemplate="footer">
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning"
+                icon="pi pi-check"></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+                icon="pi pi-times"></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>

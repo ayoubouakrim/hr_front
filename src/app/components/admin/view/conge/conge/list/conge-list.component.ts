@@ -11,6 +11,11 @@ import {CongeEditComponent} from "../edit/conge-edit.component";
 import {AbsenceCreateComponent} from "../../absence/create/absence-create.component";
 import {AbsenceEditComponent} from "../../absence/edit/absence-edit.component";
 import {AbsenceViewComponent} from "../../absence/view/absence-view.component";
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 
@@ -27,8 +32,12 @@ import {AbsenceViewComponent} from "../../absence/view/absence-view.component";
     AbsenceCreateComponent,
     AbsenceEditComponent,
     AbsenceViewComponent,
+    MessagesModule,
+    ToastModule,
+    ConfirmDialogModule,
 
   ],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './conge-list.component.html',
   styleUrl: './conge-list.component.css'
 })
@@ -36,7 +45,7 @@ export class CongeListComponent implements OnInit{
   ngOnInit(): void {
     this.findAll();
   }
-  constructor(private service: CongeAdminService) {
+  constructor(private service: CongeAdminService, private messageService: MessageService, private confirmationService: ConfirmationService) {
   }
 
 
@@ -78,6 +87,31 @@ export class CongeListComponent implements OnInit{
       this.item = res;
       this.editDialog = true;
     });
+  }
+  public delete(dto: CongeDto) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous supprimer cet élément ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        this.service.delete(dto).subscribe(status => {
+          if (status > 0) {
+            const position = this.items.indexOf(dto);
+            position > -1 ? this.items.splice(position, 1) : false;
+            this.messageService.add({
+              severity:'success',
+              summary:'Succès',
+              detail:'supprime succeful'});
+          }
+
+        }, error => console.log(error));
+      }
+    });
+
   }
 
   get editDialog(): boolean {

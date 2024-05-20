@@ -1,0 +1,40 @@
+<p-dialog header="Suivi Mensuel" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2" class="dropdown-label">Employe</label>
+        <div class="dropdown-container">
+          <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="item.employe" id="2" [filter]="true" filterMatchMode="contains"
+                      [showClear]="true" optionLabel="nom" placeholder="employe" class="custom-dropdown"
+                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">mois</label>
+        <input class="form-control my-2" id="3" type="number" [(ngModel)]="item.mois">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">annee</label>
+        <input class="form-control my-2" id="4" type="number" [(ngModel)]="item.annee">
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer" >
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>

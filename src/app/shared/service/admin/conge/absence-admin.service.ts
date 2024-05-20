@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AbsenceDto} from "../../../model/conge/absence.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {CongeDto} from "../../../model/conge/conge.model";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {Observable} from "rxjs";
 export class AbsenceAdminService {
   private _item: AbsenceDto | undefined;
   private _items: Array<AbsenceDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/absence';
+  private url = 'http://localhost:8089/api/v1/admin/absence';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;
@@ -52,7 +53,7 @@ export class AbsenceAdminService {
   public findAll() {
     return this.http.get<Array<AbsenceDto>>(this.url + "/all");
   }
-  public delete(dto: AbsenceDto) {
+  public delete(dto: CongeDto) {
     return this.http.delete<number>(this.url + '/code/' + dto.code);
   }
   public findByCode(dto: AbsenceDto) {

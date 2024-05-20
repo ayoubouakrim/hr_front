@@ -25,10 +25,17 @@
     <tr>
       <td>{{item.matricule}}</td>
       <td>{{item.cin}}</td>
-      <td>{{item.nom}}</td>
+      <td><span class="p-column-title">Representative</span>
+        <img
+          class="rounded-circle"
+          [alt]="item.nom"
+          src="{{item.imagePath}}"
+          width="32"
+          style="vertical-align: middle" />
+        <span class="ml-1 vertical-align-middle ms-3">{{ item.nom }}</span></td>
       <td>{{item.prenom}}</td>
       <td>{{item.postDto.libelle}}</td>
-      <td>{{item.salaire}}</td>
+      <td>{{item.salaire}} Dh</td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">
@@ -41,7 +48,7 @@
             <i class="fa fa-pen-to-square"></i>
           </button>
           <button type="button"
-                  class="btn btn-sm btn-outline-danger">
+                  class="btn btn-sm btn-outline-danger" (click)="archive(item)">
             <i class="fa fa-trash"></i>
           </button>
         </div>
@@ -49,6 +56,9 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
 <app-employe-create></app-employe-create>
 <app-employe-view></app-employe-view>
 <app-employe-edit></app-employe-edit>

@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class HoraireAdminService {
   private _item: HoraireDto | undefined;
   private _items: Array<HoraireDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/horaire';
+  private url = 'http://localhost:8089/api/v1/admin/horaire';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;

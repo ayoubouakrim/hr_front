@@ -1,6 +1,7 @@
 
 import {EmployeDto} from "../employe/employe.model";
 import {TypeAbsenceDto} from "./type-absence.model";
+import {EtatCongeDto} from "./etat-conge.model";
 
 export class AbsenceDto {
 
@@ -11,7 +12,7 @@ export class AbsenceDto {
   public dateFin: Date | null;
   public duree: number | null;
   public type: TypeAbsenceDto;
-  public ended: boolean;
+  public etat: EtatCongeDto;
   public employe: EmployeDto;
 
 
@@ -23,7 +24,7 @@ export class AbsenceDto {
     this.dateFin = null;
     this.duree = null;
     this.type = new TypeAbsenceDto();
-    this.ended = false;
+    this.etat = new EtatCongeDto();
     this.employe = new EmployeDto();
   }
 }

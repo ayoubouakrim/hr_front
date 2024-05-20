@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class ReunionService {
   private _item: ReunionDto | undefined;
   private _items: Array<ReunionDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/reunion';
+  private url = 'http://localhost:8089/api/v1/admin/reunion';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;
