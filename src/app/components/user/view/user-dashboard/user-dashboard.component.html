@@ -17,14 +17,14 @@
       <div class="card cardView h-100">
         <div class="card-body">
           <div class="pre-div">
-            <h3 class="card-title">Welcome Back, Darle</h3>
-            <h5 class="card-text">You have <u class="underline-text">4 meetings</u> today,</h5>
+            <h3 class="card-title">Bonjour, {{this.nom}}</h3>
+            <h5 class="card-text">Vous avez <u class="underline-text">{{this.nbReunions}} reunions</u> Aujourd'hui,</h5>
             <button type="button" data-mdb-button-init data-mdb-ripple-init
-                    class="btn btn-classe btn-lg btn-block btn-primary btn-sm" (click)="showProfil()">View profile
+                    class="btn btn-classe btn-lg btn-block btn-primary btn-sm" (click)="showProfil()">Voir profile
             </button>
           </div>
           <div class="circle-image">
-            <img src="/assets/image1.jpg" alt="Image">
+            <img src="{{this.path}}" alt="Image">
           </div>
         </div>
       </div>

@@ -12,6 +12,8 @@ import {LayoutService} from "../../../../shared/service/layout/layout.service";
 import {Router} from "@angular/router";
 import {NotificationUserService} from "../../../../shared/service/user/notification/notification-user.service";
 import {NotificationDto} from "../../../../shared/model/notification/notification.model";
+import {ReunionUserService} from "../../../../shared/service/user/reunion/reunion-user.service";
+import {ReunionDto} from "../../../../shared/model/reunion/reunion.model";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -29,12 +31,16 @@ export class UserDashboardComponent implements OnInit {
   datee: Date = new Date();
   debut: Date = new Date();
   fin: Date = new Date();
+  nom: string = "";
+  path: string = "";
+  nbReunions: number = 0;
   public notifications: Array<NotificationDto>;
   currentNotificationIndex: number = 0;
 
   constructor(private authService: AuthenticationService, private presenceUserService: PresenceUserService,
               private employeService: EmployeUserService, private horaireService: HoraireUserService,
-              private layoutService: LayoutService, private router: Router, private notificationService: NotificationUserService) {
+              private layoutService: LayoutService, private router: Router, private notificationService: NotificationUserService,
+              private reunionService: ReunionUserService) {
     this.notifications = new Array<NotificationDto>();
   }
 
@@ -59,8 +65,19 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this.authService.findEmploye();
     const matricule = localStorage.getItem('matricule') as string;
+    this.reunionService.findByEmployesMatricule(matricule).subscribe({
+      next: (response) => {
+        this.reunions = response;
+      },
+      error: (error) => {
+        console.error('find failed:', error);
+      }
+    });
+    this.nbReunions = this.reunions.length;
     this.employeService.findByMatricule(matricule).subscribe({
       next: (response) => {
+        this.nom = response.nom as string;
+        this.path = response.imagePath as string;
         this.horaire = response.horaire;
       },
       error: (error) => {
@@ -154,5 +171,13 @@ export class UserDashboardComponent implements OnInit {
 
   set horaire(value: HoraireDto) {
     this.horaireService.item = value;
+  }
+
+  get reunions(): Array<ReunionDto> {
+    return this.reunionService.items;
+  }
+
+  set reunions(value: Array<ReunionDto>) {
+    this.reunionService.items = value;
   }
 }
