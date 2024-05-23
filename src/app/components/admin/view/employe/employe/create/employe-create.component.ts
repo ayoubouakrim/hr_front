@@ -17,6 +17,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {MessagesModule} from "primeng/messages";
+import {User} from "../../../../../../shared/security/shared/model/user.model";
+import {UserService} from "../../../../../../shared/security/shared/service/user.service";
 
 
 @Component({
@@ -44,12 +46,15 @@ export class EmployeCreateComponent implements OnInit{
     this.departementService.findAll().subscribe((data) => this.departements = data);
     this.horaire = new HoraireDto();
     this.horaireService.findAll().subscribe((data) => this.horaires = data);
+    this.user = new User();
+    this.userService.findAll().subscribe( (data) => this.users = data);
+
+    this.item.imagePath = "assets/empImages/default-avatar.jpg";
+    console.log(this.item.imagePath);
   }
   visible: boolean = false;
 
-  selectedFile!: File;
-  selectedFileData: any;
-  constructor(private messageService: MessageService, private service: EmployeService, private genderService: GenderService, private postService: PostService, private departementService: DepartementService, private horaireService: HoraireAdminService) {
+  constructor(private userService: UserService, private messageService: MessageService, private service: EmployeService, private genderService: GenderService, private postService: PostService, private departementService: DepartementService, private horaireService: HoraireAdminService) {
 
   }
 
@@ -71,12 +76,12 @@ export class EmployeCreateComponent implements OnInit{
         this.messageService.add({
           severity:'success',
           summary:'Succès',
-          detail:'le Congé a été ajouté avec succès'});
+          detail:'l\'employé a été ajouté avec succès'});
       } else {
         this.messageService.add({
           severity:'error',
           summary:'échec',
-          detail:'le conge n\'a pas été ajouté'});
+          detail:'l\'employé n\'a pas été ajouté'});
       }
     }, (error: HttpErrorResponse) => {
       this.messageService.add({
@@ -134,6 +139,19 @@ export class EmployeCreateComponent implements OnInit{
   }
 
 
+
+  get user(): User {
+    return this.userService.item;
+  }
+  set user(value: User) {
+    this.userService.item = value;
+  }
+  get users(): Array<User> {
+    return this.userService.items;
+  }
+  set users(value: Array<User>) {
+    this.userService.items = value;
+  }
   get horaire(): HoraireDto {
     return this.horaireService.item;
   }

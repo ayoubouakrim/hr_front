@@ -1,0 +1,44 @@
+<p-dialog header="Departement" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3" >roles</label>
+        <p-multiSelect
+          id="3"
+          [options]="roles"
+          [(ngModel)]="item.roles"
+          optionLabel="name"
+          placeholder="Select roles"
+          [style]="{'width': '100%'}"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">username</label>
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.username">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">email</label>
+        <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.email">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">Password</label>
+        <input class="form-control my-2" id="4" type="password" [(ngModel)]="item.password">
+      </div>
+    </div>
+
+
+  </div>
+
+  <ng-template pTemplate="footer" >
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>

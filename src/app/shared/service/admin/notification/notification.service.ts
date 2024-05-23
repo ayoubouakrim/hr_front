@@ -70,8 +70,11 @@ export class NotificationAdminService {
   public findByCode(dto: NotificationDto) {
     return this.http.get<NotificationDto>(this.url + '/code/' + dto.code);
   }
-  public updatePar(dto: NotificationDto): Observable<EmployeDto> {
-    return this.http.put<EmployeDto>(this.url + '/update', dto);
+  public updatePar(dto: NotificationDto): Observable<NotificationDto> {
+    return this.http.put<NotificationDto>(this.url + '/update', dto);
+  }
+  public findNotifications(matricule: String){
+    return this.http.get<Array<NotificationDto>>(this.url + '/matricule/' + matricule);
   }
   get item(): NotificationDto {
     if (this._item == null) {

@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {LoginComponent} from "./components/login/login.component";
 import {
   PasswordResetRequestComponent
 } from "./components/security/password-reset-request/password-reset-request.component";
@@ -41,6 +40,8 @@ import {SuiviMensuelListComponent} from "./components/admin/view/suiviMensuel/li
 import {ProfileComponent} from "./components/admin/profile/profile.component";
 import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
 import {UserLayoutComponent} from "./layout/user/user-layout/user-layout.component";
+import {LoginComponent} from "./components/login/login.component";
+import {UserListComponent} from "./components/admin/view/account/user-list/user-list.component";
 
 
 
@@ -55,6 +56,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'employe', component: EmployeListComponent
+      },
+      {
+        path: 'accounts', component: UserListComponent
       },
       {
 

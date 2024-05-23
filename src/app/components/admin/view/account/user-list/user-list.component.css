@@ -1,0 +1,10 @@
+.role-span {
+
+  padding: 2px 5px;
+  border-radius: 15px;
+  margin-right: 5px;
+  text-transform: lowercase;
+  background-color: #fff;
+  border: 1px solid #142334;
+}
+

@@ -28,6 +28,9 @@ export class EmployeService{
   public findByMatricule(dto: EmployeDto) {
     return this.http.get<EmployeDto>(this.url + '/matricule/' + dto.matricule);
   }
+  public findProfile(matricule: String) {
+    return this.http.get<EmployeDto>(this.url + '/matricule/' + matricule);
+  }
   public delete(dto: EmployeDto) {
     return this.http.delete<number>(this.url + '/matricule/' + dto.matricule);
   }
@@ -39,6 +42,10 @@ export class EmployeService{
   }
   public totalSalaire(): Observable<number>{
     return this.http.get<number>(this.url + '/total-salaire')
+  }
+
+  public findByUserUsername(username : string) {
+    return this.http.get<EmployeDto>(this.url + '/username/' + username);
   }
   get item(): EmployeDto {
     if (this._item == null) {

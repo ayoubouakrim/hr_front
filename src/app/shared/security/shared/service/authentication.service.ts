@@ -4,6 +4,7 @@ import {LoginRequest} from "../model/login-request.model";
 import {Observable} from "rxjs";
 import {AuthenticationResponse} from "../model/authentication-response.model";
 import {EmployeUserService} from "../../../service/user/employe/employe-user.service";
+import {EmployeService} from "../../../service/admin/employe/employe.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -14,7 +15,7 @@ export class AuthenticationService {
   private matricule: string = "";
 
 
-  constructor(private http: HttpClient, private employeUserService: EmployeUserService) {
+  constructor(private http: HttpClient, private employeUserService: EmployeUserService, private employeService: EmployeService) {
   }
 
   get loginRequest(): LoginRequest {
@@ -46,6 +47,18 @@ export class AuthenticationService {
 
   findEmploye() {
     const subscription = this.employeUserService.findByUserUsername(this.user).subscribe({
+      next: (res) => {
+        this.matricule = res.matricule as string;
+        localStorage.setItem('matricule', this.matricule);
+      },
+      error: (error) => {
+        console.error("Erreur lors de la recherche de l'employé : ", error);
+      }
+    });
+  }
+  findAdmin() {
+    console.log("ffffff" + this.user);
+    const subscription = this.employeService.findByUserUsername(this.user).subscribe({
       next: (res) => {
         this.matricule = res.matricule as string;
         localStorage.setItem('matricule', this.matricule);

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {AbsenceAdminService} from "../../../../../../shared/service/admin/conge/absence-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {AbsenceDto} from "../../../../../../shared/model/conge/absence.model";
@@ -12,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "primeng/api";
 import {EtatCongeDto} from "../../../../../../shared/model/conge/etat-conge.model";
 import {EtatCongeService} from "../../../../../../shared/service/admin/conge/etat-conge.service";
+import {TypeAbsenceService} from "../../../../../../shared/service/admin/conge/type-absence.service";
 
 @Component({
   selector: 'app-absence-create',

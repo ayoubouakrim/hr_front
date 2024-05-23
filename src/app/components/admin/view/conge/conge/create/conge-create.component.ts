@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {CongeAdminService} from "../../../../../../shared/service/admin/conge/conge-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
@@ -15,6 +14,7 @@ import {EtatCongeDto} from "../../../../../../shared/model/conge/etat-conge.mode
 import {ToastModule} from "primeng/toast";
 import {MessagesModule} from "primeng/messages";
 import {HttpErrorResponse} from "@angular/common/http";
+import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 
 @Component({
   selector: 'app-conge-create',
