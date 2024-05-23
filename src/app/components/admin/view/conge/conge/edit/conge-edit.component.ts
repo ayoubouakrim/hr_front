@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {CongeAdminService} from "../../../../../../shared/service/admin/conge/conge-admin.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
 import {ButtonModule} from "primeng/button";
@@ -12,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "primeng/api";
 import {EtatCongeDto} from "../../../../../../shared/model/conge/etat-conge.model";
 import {EtatCongeService} from "../../../../../../shared/service/admin/conge/etat-conge.service";
+import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 
 @Component({
   selector: 'app-conge-edit',

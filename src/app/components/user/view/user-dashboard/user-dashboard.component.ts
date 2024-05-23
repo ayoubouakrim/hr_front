@@ -1,28 +1,158 @@
 import {Component, OnInit} from '@angular/core';
 import {PieChartComponent} from "../../../admin/view/admin-dashboard/pie-chart/pie-chart.component";
-import {NgStyle} from "@angular/common";
+import {DatePipe, NgStyle, Time} from "@angular/common";
 import {AuthenticationService} from "../../../../shared/security/shared/service/authentication.service";
+import {PresenceUserService} from "../../../../shared/service/user/presence/presence-user.service";
+import {PresenceDto} from "../../../../shared/model/presence/presence.model";
+import {format} from 'date-fns';
+import {EmployeUserService} from "../../../../shared/service/user/employe/employe-user.service";
+import {HoraireUserService} from "../../../../shared/service/user/presence/horaire-user.service";
+import {HoraireDto} from "../../../../shared/model/presence/horaire.model";
+import {LayoutService} from "../../../../shared/service/layout/layout.service";
+import {Router} from "@angular/router";
+import {NotificationUserService} from "../../../../shared/service/user/notification/notification-user.service";
+import {NotificationDto} from "../../../../shared/model/notification/notification.model";
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
   imports: [
     PieChartComponent,
-    NgStyle
+    NgStyle,
+    DatePipe
   ],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
-export class UserDashboardComponent implements OnInit{
-  isButtonClicked : boolean = false;
+export class UserDashboardComponent implements OnInit {
+  isButtonClicked: boolean = false;
+  datee: Date = new Date();
+  debut: Date = new Date();
+  fin: Date = new Date();
+  public notifications: Array<NotificationDto>;
+  currentNotificationIndex: number = 0;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private presenceUserService: PresenceUserService,
+              private employeService: EmployeUserService, private horaireService: HoraireUserService,
+              private layoutService: LayoutService, private router: Router, private notificationService: NotificationUserService) {
+    this.notifications = new Array<NotificationDto>();
   }
+
   onClicked() {
-    this.isButtonClicked = !this.isButtonClicked;
+    if (this.notifications && this.notifications.length > 0 && this.currentNotificationIndex < this.notifications.length) {
+      this.notifications[this.currentNotificationIndex].isChecked = true;
+      this.notificationService.update(this.notifications[this.currentNotificationIndex]).subscribe({
+        next: (response) => {
+          console.error('Save successful:', response);
+        },
+        error: (error) => {
+          console.error('Update failed:', error);
+        }
+      });
+      this.currentNotificationIndex++;
+      if (this.currentNotificationIndex >= this.notifications.length) {
+        this.isButtonClicked = !this.isButtonClicked;
+      }
+    }
   }
 
   ngOnInit() {
     this.authService.findEmploye();
+    const matricule = localStorage.getItem('matricule') as string;
+    this.employeService.findByMatricule(matricule).subscribe({
+      next: (response) => {
+        this.horaire = response.horaire;
+      },
+      error: (error) => {
+        console.error('find failed:', error);
+      }
+    });
+    this.notificationService.findByMatriculeAndIsCheked(matricule, false).subscribe({
+      next: (response) => {
+        this.notifications = response;
+      },
+      error: (error) => {
+        console.error('find failed:', error);
+      }
+    });
+  }
+
+  parseDate(dateArray: number[] | any): string {
+    if (!Array.isArray(dateArray) || dateArray.length !== 3) {
+      console.error('Invalid date array:', dateArray);
+      return '';
+    }
+    const [hours, minutes, seconds] = dateArray;
+    const formattedDate = `${hours}:${minutes}:${seconds}`;
+    return formattedDate;
+  }
+
+  showProfil() {
+    this.layoutService.showProfil()
+  }
+
+  applyLeave() {
+    this.router.navigate(['/app-user/demande-conge']);
+  }
+
+  clockIn() {
+    this.datee = new Date();
+    const dateString = format(this.datee, 'yyyy-MM-dd');
+    this.item.datee = dateString;
+    localStorage.setItem('datee', dateString);
+    const matricule: string = localStorage.getItem('matricule') as string;
+    this.employeService.findByMatricule(matricule).subscribe({
+      next: (response) => {
+        this.item.employe = response;
+        this.presenceUserService.save().subscribe({
+          next: (response) => {
+            console.log('Save successful:', response);
+          },
+          error: (error) => {
+            console.error('Save failed:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('find failed:', error);
+      }
+    });
+  }
+
+  clockOut() {
+    const dateString = localStorage.getItem('datee') as string;
+    const matricule = localStorage.getItem('matricule') as string;
+    this.presenceUserService.findByEmployeMatriculeAndDatee(matricule, dateString).subscribe({
+      next: (presence) => {
+        this.item = presence;
+        this.presenceUserService.update().subscribe({
+          next: (response) => {
+            console.log('Update successful:', response);
+          },
+          error: (error) => {
+            console.error('Update failed:', error);
+          }
+        });
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    });
+  }
+
+  get item(): PresenceDto {
+    return this.presenceUserService.item;
+  }
+
+  set item(value: PresenceDto) {
+    this.presenceUserService.item = value;
+  }
+
+  get horaire(): HoraireDto {
+    return this.horaireService.item;
+  }
+
+  set horaire(value: HoraireDto) {
+    this.horaireService.item = value;
   }
 }

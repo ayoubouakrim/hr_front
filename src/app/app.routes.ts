@@ -106,10 +106,13 @@ export const routes: Routes = [
     path: 'app-user', component: UserLayoutComponent,
     children: [
       {
-        path: 'user-profile', component: UserProfileComponent
+        path: 'profile', component: UserProfileComponent
       },
       {
-        path: 'dashboard-user', component: UserDashboardComponent
+        path: 'dashboard-user', component: UserDashboardComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
         path: 'horaire', component: HoraireListComponent,

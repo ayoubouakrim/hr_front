@@ -15,6 +15,6 @@ export class LayoutService {
   }
 
   showProfil(){
-   this.router.navigate(['/app-user/user-profile']);
+   this.router.navigate(['/app-user/profile']);
   }
 }

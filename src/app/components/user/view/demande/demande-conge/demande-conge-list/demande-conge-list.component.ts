@@ -2,16 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {DemandeCongeCreateComponent} from "../demande-conge-create/demande-conge-create.component";
 import {DemandeCongeViewComponent} from "../demande-conge-view/demande-conge-view.component";
 import {DemandeCongeEditComponent} from "../demande-conge-edit/demande-conge-edit.component";
 import {DemandeCongeUserService} from "../../../../../../shared/service/user/demande/demande-conge-user.service";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-conge.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {DatePipe} from "@angular/common";
+import {TypeCongeService} from "../../../../../../shared/service/user/conge/type-conge.service";
+import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
 
 @Component({
   selector: 'app-demande-conge-list',
@@ -55,21 +55,6 @@ export class DemandeCongeListComponent implements OnInit{
     this.service.findAll().subscribe(data => {
       this.items = data;
     })
-  }
-
-  public delete(dto: DemandeCongeDto) {
-    this.service.findByCode(dto).subscribe(res => {
-      this.item = res;
-      this.deleteDialog = true;
-    });
-  }
-
-  get deleteDialog(): boolean {
-    return this.service.deleteDialog;
-  }
-
-  set deleteDialog(value: boolean) {
-    this.service.deleteDialog = value;
   }
 
   get item(): DemandeCongeDto{

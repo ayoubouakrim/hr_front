@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {TypeCongeDto} from "../../model/conge/type-conge.model";
 import {HttpClient} from "@angular/common/http";
+import {TypeCongeDto} from "../../../model/conge/type-conge.model";
 
 
 @Injectable({

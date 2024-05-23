@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {TypeDocumentDto} from "../../model/demande/type-document.model";
+import {TypeDocumentDto} from "../../../model/demande/type-document.model";
 
 @Injectable({
   providedIn: 'root'

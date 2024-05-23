@@ -4,6 +4,7 @@
       <div class="card text-center card-annonce">
         <div class="card-body">
           <i class="bi bi-question-circle custom-icon"></i>
+          <b class="bnotClass">{{this.notifications[currentNotificationIndex].objectif}}</b>
         </div>
         <button type="button" class="btn btn-link btnClass1" (click)="onClicked()">
           <i class="bi bi-x"></i>
@@ -19,7 +20,7 @@
             <h3 class="card-title">Welcome Back, Darle</h3>
             <h5 class="card-text">You have <u class="underline-text">4 meetings</u> today,</h5>
             <button type="button" data-mdb-button-init data-mdb-ripple-init
-                    class="btn btn-classe btn-lg btn-block btn-primary btn-sm">View profile
+                    class="btn btn-classe btn-lg btn-block btn-primary btn-sm" (click)="showProfil()">View profile
             </button>
           </div>
           <div class="circle-image">
@@ -33,32 +34,29 @@
         <div class="mt-2 mp-n1 mx-3">
           <h5>Statistics</h5>
         </div>
-        <select class="form-select select-classe" aria-label="Today">
-          <option selected>Today</option>
-        </select>
         <div class="card-body">
           <div class="container-fluid">
             <div class="row body-class1">
               <div class="col-sm-4 mt-3">
                 Work Time
               </div>
-              <div class="col-sm-8 mt-3">
-                <button class="btn btn-classe1">Clock-In</button>
+              <div class="col-sm-8 mt-3 d-flex">
+                <button class="btn btn-classe1" (click)="clockIn()">Clock-In</button>
+                <button class="btn btn-classe1" (click)="clockOut()">Clock-Out</button>
               </div>
             </div>
             <div class="row mx-3">
               <div class="col-sm-4">
-                <p>Remaining:<br> hhhhhhh</p>
+                <p>Heure Debut<br>{{parseDate(this.horaire.debut)}}</p>
               </div>
               <div class="col-sm-4">
-                <p>Overtime:<br> hhhhhhh</p>
+                <p>Heure Fin<br>{{parseDate(this.horaire.fin)}}</p>
               </div>
               <div class="col-sm-4">
-                <p>Break:<br> hhhhhhh</p>
+                <p>Pause:<br>{{this.horaire.pause}} Heure</p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -117,7 +115,7 @@
         </div>
         <div class="card-footer" style="height:50px">
           <p>Apply Leave</p>
-          <button type="button" class="btn btnClass3 btn-link"><i class="bi bi-arrow-right-circle"></i></button>
+          <button type="button" class="btn btnClass3 btn-link" (click)="applyLeave()"><i class="bi bi-arrow-right-circle"></i></button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {EtatDemandeDto} from "../../model/demande/etat-demande.model";
 import {HttpClient} from "@angular/common/http";
+import {EtatDemandeDto} from "../../../model/demande/etat-demande.model";
 
 
 

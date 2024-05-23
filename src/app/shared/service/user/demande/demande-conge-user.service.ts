@@ -14,7 +14,6 @@ export class DemandeCongeUserService {
   private url = 'http://localhost:8089/api/v1/user/demandeConge';
   protected _editDialog: boolean = false;
   protected _viewDialog: boolean = false;
-  protected _deleteDialog: boolean = false;
 
   constructor(private http: HttpClient) {
   }
@@ -53,14 +52,6 @@ export class DemandeCongeUserService {
   }
   public findByEtatDemandeCode(dto: DemandeCongeDto) {
     return this.http.get<Array<DemandeCongeDto>>(this.url + '/find/etatDemande/code/' + dto.etatDemande.code);
-  }
-
-  get deleteDialog(): boolean {
-    return this._deleteDialog;
-  }
-
-  set deleteDialog(value: boolean) {
-    this._deleteDialog = value;
   }
 
   get editDialog(): boolean {

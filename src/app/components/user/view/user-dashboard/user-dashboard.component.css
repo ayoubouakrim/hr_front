@@ -87,9 +87,24 @@
   height:80px;
 }
 
+.bnotClass {
+  margin-left: 10px;
+  margin-top: -14px;
+  font: 18px/1 "Poppins", sans-serif;
+  font-weight: 350;
+}
+
+
 .btn-classe1 {
-  margin-left: 60%;
+  margin-left: 10%;
+  height:60%;
+  display: flex;
   background-color: #fa8426;
+  color: white;
+}
+
+:hover.btn-classe1{
+  background-color: #fc9849;
   color: white;
 }
 

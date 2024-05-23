@@ -1,44 +1,22 @@
-.profile-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 50px 20px;
-  background: linear-gradient(#e3e3e2, #8d7c7c);
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+.row-overlap {
+  margin-top: -15%;
+  position: relative;
+  z-index: 2;
+}
+.card {
+  margin-bottom: 20px;
 }
 
-.profile-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.profile-image {
-  width: 40%;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid #fff;
-}
-
-.profile-name {
-  font-size: 32px;
-  margin-top: 20px;
-}
-
-.profile-info {
-  margin-top: 40px;
-}
-
-.profile-info p {
+form label{
   font-size: 18px;
-  margin-bottom: 10px;
+  color:#8f9096;
 }
-
-.profile-info p strong {
-  font-weight: bold;
+form .form-control,form .form-control:focus{
+  border-color:transparent;
+  border-bottom-color: #1e1e1e;
+  box-shadow:none;
 }
-.input{
-border: solid 1px #000000;
+.bg-info {
+  border-color: #2d2d2d;
+  background: linear-gradient(90deg, #f1764d, #514d6c) !important;
 }
-
-

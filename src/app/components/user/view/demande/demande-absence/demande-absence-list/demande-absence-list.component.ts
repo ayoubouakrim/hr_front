@@ -3,8 +3,6 @@ import {ButtonModule} from "primeng/button";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {DemandeAbsenceUserService} from "../../../../../../shared/service/user/demande/demande-absence-user.service";
-import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
@@ -12,7 +10,8 @@ import {DemandeAbsenceCreateComponent} from "../demande-absence-create/demande-a
 import {DemandeAbsenceEditComponent} from "../demande-absence-edit/demande-absence-edit.component";
 import {DemandeAbsenceViewComponent} from "../demande-absence-view/demande-absence-view.component";
 import {DatePipe} from "@angular/common";
-import {DemandeAbsenceDeleteComponent} from "../demande-absence-delete/demande-absence-delete.component";
+import {TypeAbsenceService} from "../../../../../../shared/service/user/conge/type-absence.service";
+import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
 
 
 
@@ -28,7 +27,6 @@ import {DemandeAbsenceDeleteComponent} from "../demande-absence-delete/demande-a
     DemandeAbsenceEditComponent,
     DemandeAbsenceViewComponent,
     DatePipe,
-    DemandeAbsenceDeleteComponent,
   ],
   templateUrl: './demande-absence-list.component.html',
   styleUrl: './demande-absence-list.component.css'
@@ -49,13 +47,6 @@ export class DemandeAbsenceListComponent implements OnInit{
     this.service.findByCode(dto).subscribe(res => {
       this.item = res;
       this.editDialog = true;
-    });
-  }
-
-  public delete(dto: DemandeAbsenceDto) {
-    this.service.findByCode(dto).subscribe(res => {
-      this.item = res;
-      this.deleteDialog = true;
     });
   }
 
@@ -87,13 +78,6 @@ export class DemandeAbsenceListComponent implements OnInit{
     this.service.editDialog = value;
   }
 
-  get deleteDialog(): boolean {
-    return this.service.deleteDialog;
-  }
-
-  set deleteDialog(value: boolean) {
-    this.service.deleteDialog = value;
-  }
   showDialog(): void {
     this.createDialog = true;
   }

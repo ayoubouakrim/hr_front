@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DemandeAbsenceDto} from "../../../model/demande/demande-absence.model";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 
 
@@ -14,7 +14,6 @@ export class DemandeAbsenceUserService {
   private _items: Array<DemandeAbsenceDto> | undefined;
   private url = 'http://localhost:8089/api/v1/user/DemandeAbsence';
   protected _editDialog: boolean = false;
-  protected _deleteDialog: boolean = false;
   protected _viewDialog: boolean = false;
   protected _createDialog: boolean = false;
   private matricule : string = "";
@@ -68,14 +67,6 @@ export class DemandeAbsenceUserService {
 
   set editDialog(value: boolean) {
     this._editDialog = value;
-  }
-
-  get deleteDialog(): boolean {
-    return this._deleteDialog;
-  }
-
-  set deleteDialog(value: boolean) {
-    this._deleteDialog = value;
   }
 
   get viewDialog(): boolean {
