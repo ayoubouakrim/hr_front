@@ -42,6 +42,7 @@ import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
 import {UserLayoutComponent} from "./layout/user/user-layout/user-layout.component";
 import {LoginComponent} from "./components/login/login.component";
 import {UserListComponent} from "./components/admin/view/account/user-list/user-list.component";
+import {ProfileUserComponent} from "./components/user/profile/profile-user.component";
 
 
 
@@ -110,7 +111,7 @@ export const routes: Routes = [
     path: 'app-user', component: UserLayoutComponent,
     children: [
       {
-        path: 'user-profile', component: UserProfileComponent
+        path: 'profile', component: ProfileUserComponent,
       },
       {
         path: 'dashboard-user', component: UserDashboardComponent

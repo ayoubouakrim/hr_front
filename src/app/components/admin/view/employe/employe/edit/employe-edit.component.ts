@@ -3,7 +3,7 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
 import {GenderService} from "../../../../../../shared/service/admin/employe/gender.service";
 import {PostService} from "../../../../../../shared/service/admin/employe/post.service";
@@ -12,6 +12,9 @@ import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 import {PostDto} from "../../../../../../shared/model/employe/post.model";
 import {GenderDto} from "../../../../../../shared/model/employe/gender.model";
 import {DepartementDto} from "../../../../../../shared/model/departement/departement.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-employe-edit',
@@ -22,14 +25,17 @@ import {DepartementDto} from "../../../../../../shared/model/departement/departe
     DropdownModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MessagesModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './employe-edit.component.html',
   styleUrl: './employe-edit.component.css'
 })
 export class EmployeEditComponent implements OnInit{
 
-  constructor(private service: EmployeService, private genderService: GenderService , private postService: PostService, private departementService: DepartementService) {
+  constructor(private service: EmployeService, private genderService: GenderService , private postService: PostService, private departementService: DepartementService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -45,11 +51,24 @@ export class EmployeEditComponent implements OnInit{
   public update(): void {
     this.service.update().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'l\'employé a été édité avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'l\'employé n\'a pas été édité'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.editDialog = false;
   }
   hideCreateDialog() {
     this.editDialog = false;

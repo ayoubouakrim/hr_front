@@ -8,18 +8,20 @@ import {DepartementCreateComponent} from "../create/departement-create.component
 import {DepartementViewComponent} from "../view/departement-view.component";
 import {DepartementEditComponent} from "../edit/departement-edit.component";
 import {HoraireDto} from "../../../../../shared/model/presence/horaire.model";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-departement-list',
   standalone: true,
-  imports: [
-    ButtonModule,
-    SharedModule,
-    TableModule,
-    DepartementCreateComponent,
-    DepartementViewComponent,
-    DepartementEditComponent
-  ],
+    imports: [
+        ButtonModule,
+        SharedModule,
+        TableModule,
+        DepartementCreateComponent,
+        DepartementViewComponent,
+        DepartementEditComponent,
+        DatePipe
+    ],
   templateUrl: './departement-list.component.html',
   styleUrl: './departement-list.component.css'
 })

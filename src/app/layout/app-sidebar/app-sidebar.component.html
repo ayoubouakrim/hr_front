@@ -33,6 +33,12 @@
       </ul>
     </li>
     <li class="nav-item mb-1">
+      <a href="#" class="nav-link" routerLink="/app/accounts">
+        <i class="fa-solid fa-address-card"></i>
+        <span>Comptes</span>
+      </a>
+    </li>
+    <li class="nav-item mb-1">
       <a href="#" routerLink="/app/departement" class="sidebar-link">
         <i class="fa-solid fa-building"></i>
         <span>Departement</span>
@@ -60,11 +66,22 @@
       </a>
     </li>
     <li class="nav-item mb-1">
-      <a href="#" class="nav-link">
+      <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
+         data-bs-target="#demande" aria-expanded="false" aria-controls="multi-two">
         <i class="fa-solid fa-envelope"></i>
-        <span>Demandes</span>
+        <span>Conge</span>
       </a>
-    </li>
+      <ul id="demande" class="sidebar-dropdown list-unstyled collapse">
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app/demande-conge">conge</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app/demande-absence">absence</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app/demande-document">document</a>
+        </li>
+      </ul>
     <li class="nav-item mb-1">
       <a href="#" class="nav-link" routerLink="/app/notification">
         <i class="fa-solid fa-bell"></i>

@@ -25,10 +25,12 @@
     <tr>
       <td>{{item.code}}</td>
       <td>{{item.employe?.nom}}</td>
-      <td>{{item.dateDebut}}</td>
-      <td>{{item.dateFin}}</td>
+      <td>{{item.dateDebut | date:'yyyy-MM-dd'}}</td>
+      <td>{{item.dateFin | date:'yyyy-MM-dd'}}</td>
       <td>{{item.duree}} jours</td>
-      <td>{{item.etat?.libelle}}</td>
+      <td>
+          <span [ngStyle]="{'background-color': getColor(item.etat?.libelle)}" class="role-span">{{ item.etat?.libelle }}</span>
+      </td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">

@@ -24,7 +24,7 @@
     <tr>
       <td>{{item.code}}</td>
       <td>{{item.libelle}}</td>
-      <td>{{item.dateCreation}}</td>
+      <td>{{item.dateCreation | date:'yyyy-MM-dd'}}</td>
       <td>{{item.chef?.nom}}</td>
       <td>{{item.nbrEmploye}}</td>
       <td>
@@ -38,7 +38,7 @@
                   class="btn btn-sm btn-outline-primary" (click)="edit(item)">
             <i class="fa fa-pen-to-square"></i>
           </button>
-          
+
         </div>
       </td>
     </tr>
