@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PieChartComponent} from "./pie-chart/pie-chart.component";
-import { TableModule } from 'primeng/table';
+import {TableModule} from 'primeng/table';
 import {EmployeListComponent} from "../employe/employe/list/employe-list.component";
 import {EmployeService} from "../../../../shared/service/admin/employe/employe.service";
 import {CongeAdminService} from "../../../../shared/service/admin/conge/conge-admin.service";
@@ -8,7 +8,7 @@ import {DepartementService} from "../../../../shared/service/admin/departement/d
 import {EmployeDto} from "../../../../shared/model/employe/employe.model";
 import {DepartementDto} from "../../../../shared/model/departement/departement.model";
 import {CongeDto} from "../../../../shared/model/conge/conge.model";
-
+import {AuthenticationService} from "../../../../shared/security/shared/service/authentication.service";
 
 
 @Component({
@@ -22,10 +22,11 @@ import {CongeDto} from "../../../../shared/model/conge/conge.model";
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
-export class AdminDashboardComponent implements OnInit{
+export class AdminDashboardComponent implements OnInit {
 
   currentDate: Date = new Date();
-  constructor(private employeService:EmployeService, private congeService:CongeAdminService, private departementService: DepartementService,) {
+
+  constructor(private employeService: EmployeService, private congeService: CongeAdminService, private departementService: DepartementService,private authService: AuthenticationService) {
     this.employe = new EmployeDto();
     this.employeService.findAll().subscribe((data) => this.employes = data.filter(item => !item.archive));
     this.departement = new DepartementDto();
@@ -52,16 +53,20 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-        this.getTotalSalaire();
-    }
-  products: any;
-  private _totalsalaire!: number ;
-  public getTotalSalaire()  {
-    this.employeService.totalSalaire().subscribe( data => {
-      this.totalsalaire = data ;
+    this.getTotalSalaire();
+    this.authService.findAdmin();
+  }
+
+
+  private _totalsalaire!: number;
+
+  public getTotalSalaire() {
+    this.employeService.totalSalaire().subscribe(data => {
+      this.totalsalaire = data;
     });
     console.log(this._totalsalaire)
   }
+
   get totalsalaire(): number {
     return this._totalsalaire;
   }
@@ -89,12 +94,15 @@ export class AdminDashboardComponent implements OnInit{
   get departement(): DepartementDto {
     return this.departementService.item;
   }
+
   set departement(value: DepartementDto) {
     this.departementService.item = value;
   }
+
   get departements(): Array<DepartementDto> {
     return this.departementService.items;
   }
+
   set departements(value: Array<DepartementDto>) {
     this.departementService.items = value;
   }
@@ -102,12 +110,15 @@ export class AdminDashboardComponent implements OnInit{
   get conge(): CongeDto {
     return this.congeService.item;
   }
+
   set conge(value: CongeDto) {
     this.congeService.item = value;
   }
+
   get conges(): Array<CongeDto> {
     return this.congeService.items;
   }
+
   set conges(value: Array<CongeDto>) {
     this.congeService.items = value;
   }

@@ -1,3 +1,12 @@
 .btn-me {
   background-color : #F5F749;
 }
+
+.btn-outline-success {
+  border-color: #f1764d !important;
+  color: #f1764d !important;
+}
+.btn-outline-success:hover {
+  background-color: #f1764d !important;
+  color: #fff !important;
+}

@@ -31,7 +31,7 @@ export class UserDashboardComponent implements OnInit {
   datee: Date = new Date();
   debut: Date = new Date();
   fin: Date = new Date();
-  nom: string = "";
+  prenom: string = "";
   path: string = "";
   nbReunions: number = 0;
   public notifications: Array<NotificationDto>;
@@ -73,10 +73,12 @@ export class UserDashboardComponent implements OnInit {
         console.error('find failed:', error);
       }
     });
-    this.nbReunions = this.reunions.length;
+    if(this.nbReunions) {
+      this.nbReunions = this.reunions.length;
+    }
     this.employeService.findByMatricule(matricule).subscribe({
       next: (response) => {
-        this.nom = response.nom as string;
+        this.prenom = response.prenom as string;
         this.path = response.imagePath as string;
         this.horaire = response.horaire;
       },
@@ -95,8 +97,8 @@ export class UserDashboardComponent implements OnInit {
   }
 
   parseDate(dateArray: number[] | any): string {
-    if (!Array.isArray(dateArray) || dateArray.length !== 3) {
-      console.error('Invalid date array:', dateArray);
+    if (!dateArray || !Array.isArray(dateArray) || dateArray.length !== 3) {
+      //console.error('Invalid date array:', dateArray);
       return '';
     }
     const [hours, minutes, seconds] = dateArray;

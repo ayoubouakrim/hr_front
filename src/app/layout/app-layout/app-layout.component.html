@@ -18,12 +18,12 @@
           <img
             class="rounded-circle mx-3"
 
-            src="assets/empImages/pro2.png"
+            src="{{imgPath}}"
             width="28"
             style="vertical-align: middle" />
         </a>
 
-        <a href="#" class="sidebar-link a">
+        <a href="#" class="sidebar-link a" (click)="logout()">
           <i class="lni lni-exit"></i>
           <span>Logout</span>
         </a>
@@ -38,31 +38,17 @@
   <p-dialog header="Notifications" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
     <div class="container">
       <div class="">
-        <div class="list-group-item ">
-          <hr>
-          <h5 class="mb-1 text-1">Meeting Reminder</h5>
-          <p class="mb-1">Don't forget the team meeting scheduled for tomorrow at 10 AM in the conference room.</p>
-          <small class="text-muted">2024-05-18 09:00:00</small>
-          <hr>
-        </div>
-        <div class="list-group-item">
-          <h5 class="mb-1">Project Deadline</h5>
-          <p class="mb-1">The deadline for the project submission is approaching. Please ensure all tasks are completed by the end of the day.</p>
-          <small class="text-muted">2024-05-17 17:00:00</small>
-          <hr>
-        </div>
-        <div class="list-group-item">
-          <h5 class="mb-1">System Maintenance</h5>
-          <p class="mb-1">Scheduled maintenance will occur on Saturday, 20th May, from 2 AM to 4 AM. Services may be unavailable during this time.</p>
-          <small class="text-muted">2024-05-15 12:00:00</small>
-          <hr>
-        </div>
-        <div class="list-group-item">
-          <h5 class="mb-1">New Policy Update</h5>
-          <p class="mb-1">Please review the latest update to the company’s remote work policy in your email.</p>
-          <small class="text-muted">2024-05-14</small>
-          <hr>
-        </div>
+        @for (element of notfs; track element; let i = $index){
+          <div class="list-group-item ">
+            <hr>
+            <h5 class="mb-1 text-1">{{element.objectif}}</h5>
+            <p class="mb-1">{{element.message}}</p>
+            <small class="text-muted">{{ parseDate(element.timeSend) | date: 'yyyy-MM-dd HH:mm:ss' }}</small>
+
+          </div>
+        }
+        <hr>
+
       </div>
     </div>
   </p-dialog>

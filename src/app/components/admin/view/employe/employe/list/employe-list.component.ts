@@ -10,6 +10,8 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import jsPDF from 'jspdf';
+import autoTable from "jspdf-autotable";
 @Component({
   selector: 'app-employe-list',
   standalone: true,
@@ -29,6 +31,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   styleUrl: './employe-list.component.css'
 })
 export class EmployeListComponent implements OnInit{
+
+  public ListData : EmployeDto[] = [];
+  public rows: any[] = [];
   ngOnInit(): void {
     this.findAll();
   }
@@ -39,7 +44,34 @@ export class EmployeListComponent implements OnInit{
     this.service.findAll().subscribe(data => {
       // Filter items where archive is false
       this.items = data.filter(item => !item.archive);
+      this.ListData = data.filter(item => !item.archive) ;
+
+      for (var k = 0; k < this.ListData.length; k++) {
+        this.rows.push([
+          this.ListData[k].id,
+          this.ListData[k].matricule,
+          this.ListData[k].cin,
+          this.ListData[k].prenom,
+          this.ListData[k].nom,
+          this.ListData[k].adresse,
+          this.ListData[k].telephone,
+          this.ListData[k].salaire,
+          this.ListData[k].postDto?.libelle,
+          this.ListData[k].departementDto?.libelle
+        ]);
+      }
     });
+  }
+
+  downloadPDF() {
+    const doc = new jsPDF();
+
+    autoTable(doc, {
+      head: [['ID', 'Matricule', 'Cin', 'Prenom', 'Nom','Adress','Telephone', 'Salaire', 'Poste','Departement']] ,
+      body: this.rows,
+    })
+
+    doc.save('table.pdf')
   }
 
   get item(): EmployeDto {

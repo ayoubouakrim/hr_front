@@ -4,17 +4,16 @@ import {LoginRequest} from "../model/login-request.model";
 import {Observable} from "rxjs";
 import {AuthenticationResponse} from "../model/authentication-response.model";
 import {EmployeUserService} from "../../../service/user/employe/employe-user.service";
+import {EmployeService} from "../../../service/admin/employe/employe.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   private _loginRequest = new LoginRequest();
   readonly url = "http://localhost:8089/api/v1/login"
-
-  private _user: string = "";
   private matricule: string = "";
 
 
-  constructor(private http: HttpClient, private employeUserService: EmployeUserService) {
+  constructor(private http: HttpClient, private employeUserService: EmployeUserService, private employeService: EmployeService) {
   }
 
   get loginRequest(): LoginRequest {
@@ -36,16 +35,21 @@ export class AuthenticationService {
     return !!localStorage.getItem('token');
   }
 
-  get user(): string {
-    return this._user;
-  }
-
-  set user(value: string) {
-    this._user = value;
-  }
-
   findEmploye() {
-    const subscription = this.employeUserService.findByUserUsername(this.user).subscribe({
+    const username = localStorage.getItem('username') as string;
+    const subscription = this.employeUserService.findByUserUsername(username).subscribe({
+      next: (res) => {
+        this.matricule = res.matricule as string;
+        localStorage.setItem('matricule', this.matricule);
+      },
+      error: (error) => {
+        console.error("Erreur lors de la recherche de l'employé : ", error);
+      }
+    });
+  }
+  findAdmin() {
+    const username = localStorage.getItem('username') as string;
+    const subscription = this.employeService.findByUserUsername(username).subscribe({
       next: (res) => {
         this.matricule = res.matricule as string;
         localStorage.setItem('matricule', this.matricule);

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {EtatDemandeDto} from "../../../model/demande/etat-demande.model";
 
-
+import { EtatDemandeDto } from '../../../model/demande/etat-demande.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,9 @@ import {EtatDemandeDto} from "../../../model/demande/etat-demande.model";
 export class EtatDemandeService {
   private _item: EtatDemandeDto | undefined;
   private _items: Array<EtatDemandeDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/user/etatDemande';
+
+  private url = 'http://localhost:8089/api/v1/admin/etatDemande';
+
   constructor(private http: HttpClient) { }
 
   public findAll() {

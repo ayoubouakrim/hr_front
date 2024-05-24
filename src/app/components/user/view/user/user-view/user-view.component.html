@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="container-fluid card">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="1">Username</label>
+          <input class="form-control" id="1" type="text" [disabled]="true" [(ngModel)]="item.username">
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="2">Email</label>
+          <input class="form-control" id="2" type="text" [disabled]="true" [(ngModel)]="item.email">
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="3">Role</label>
+          <input class="form-control" id="3" type="text" [disabled]="true" [(ngModel)]="item.roles[0].name">
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-md-4">
+        <div class="form-group">
+          <button type="button" class="btn btn-info rounded border border-black" (click)="edit()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-user-edit></app-user-edit>
