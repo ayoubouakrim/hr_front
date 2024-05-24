@@ -12,7 +12,6 @@ export class TypeAbsenceService {
 
   private url = 'http://localhost:8089/api/v1/admin/type-absence';
 
-
   constructor(private http : HttpClient) { }
 
   public findAll() {

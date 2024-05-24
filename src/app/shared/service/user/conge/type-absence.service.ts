@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {TypeAbsenceDto} from "../../model/conge/type-absence.model";
 import {HttpClient} from "@angular/common/http";
+import {TypeAbsenceDto} from "../../../model/conge/type-absence.model";
 
 
 @Injectable({

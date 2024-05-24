@@ -5,12 +5,12 @@ import {TableModule} from "primeng/table";
 import {DemandeDocumentCreateComponent} from "../demande-document-create/demande-document-create.component";
 import {DemandeDocumentViewComponent} from "../demande-document-view/demande-document-view.component";
 import {DemandeDocumentEditComponent} from "../demande-document-edit/demande-document-edit.component";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {DemandeDocumentUserService} from "../../../../../../shared/service/user/demande/demande-document-user.service";
-import {TypeDocumentService} from "../../../../../../shared/service/type-etat/type-document.service";
 import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-document.model";
 import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande-document.model";
+import {TypeDocumentService} from "../../../../../../shared/service/user/demande/type-document.service";
+import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
 
 @Component({
   selector: 'app-demande-document-list',

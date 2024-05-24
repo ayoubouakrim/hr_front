@@ -12,30 +12,9 @@
   <hr>
   <ul class="mynav nav nav-pills flex-column mb-auto">
     <li class="nav-item mb-1">
-      <a href="#"  routerLink="/app/dashboard">
+      <a href="#"  routerLink="/app-user/dashboard-user">
         <i class="fa-solid fa-gauge-high"></i>
         <span>Dashboard</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
-         data-bs-target="#employe" aria-expanded="false" aria-controls="multi-two">
-        <i class="fa-solid fa-user-tie"></i>
-        <span>Employe</span>
-      </a>
-      <ul id="employe" class="sidebar-dropdown list-unstyled collapse">
-        <li class="sidebar-item">
-          <a href="#" routerLink="/app/employe" class="sidebar-link">employe</a>
-        </li>
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link" routerLink="/app/commission">commission</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item mb-1">
-      <a href="#" routerLink="/app/departement" class="sidebar-link">
-        <i class="fa-solid fa-building"></i>
-        <span>Departement</span>
       </a>
     </li>
     <li class="nav-item mb-1">
@@ -46,30 +25,36 @@
       </a>
       <ul id="conge" class="sidebar-dropdown list-unstyled collapse">
         <li class="nav-item">
-          <a href="#" class="nav-link" routerLink="/app/conge">conge</a>
+          <a href="#" class="nav-link" routerLink="/app-user/conge">conge</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" routerLink="/app/absence">absence</a>
+          <a href="#" class="nav-link" routerLink="/app-user/absence">absence</a>
         </li>
       </ul>
     </li>
     <li class="nav-item mb-1">
-      <a href="#" class="nav-link" routerLink="/app/reunion">
+      <a href="#" class="nav-link" routerLink="/app-user/reunion">
         <i class="fa-solid fa-calendar" ></i>
         <span>Reunion</span>
       </a>
     </li>
     <li class="nav-item mb-1">
-      <a href="#" class="nav-link">
+      <a href="#" class="sidebar-link " data-bs-toggle="collapse"
+         data-bs-target="#demande" aria-expanded="false" aria-controls="multi-two">
         <i class="fa-solid fa-envelope"></i>
         <span>Demandes</span>
       </a>
-    </li>
-    <li class="nav-item mb-1">
-      <a href="#" class="nav-link" routerLink="/app/notification">
-        <i class="fa-solid fa-bell"></i>
-        <span>Notifications</span>
-      </a>
+      <ul id="demande" class="sidebar-dropdown list-unstyled collapse">
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app-user/demande-conge">conge</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app-user/demande-absence">absence</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" routerLink="/app-user/demande-document">document</a>
+        </li>
+      </ul>
     </li>
     <li class="sidebar-item">
       <a href="#" class="sidebar-link  " data-bs-toggle="collapse"
@@ -79,26 +64,19 @@
       </a>
       <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link" routerLink="/app/horaire">horaire</a>
+          <a href="#" class="sidebar-link" routerLink="/app-user/horaire">horaire</a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link" routerLink="/app/presence">presence</a>
+          <a href="#" class="sidebar-link" routerLink="/app-user/presence">presence</a>
         </li>
       </ul>
     </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link" routerLink="/app/rapport">
-        <i class="fa-solid fa-book"></i>
-        <span>Rapport</span>
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link">
-        <i class="lni lni-cog"></i>
-        <span>Configuration</span>
+    <li class="nav-item mb-1">
+      <a href="#" class="nav-link" routerLink="/app-user/user">
+        <i class="fa-solid fa-user-circle" ></i>
+        <span>User</span>
       </a>
     </li>
     <hr>
   </ul>
-
 </div>

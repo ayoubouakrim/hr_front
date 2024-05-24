@@ -10,8 +10,6 @@ import {EmployeService} from "../../../service/admin/employe/employe.service";
 export class AuthenticationService {
   private _loginRequest = new LoginRequest();
   readonly url = "http://localhost:8089/api/v1/login"
-
-  private _user: string = "";
   private matricule: string = "";
 
 
@@ -37,16 +35,9 @@ export class AuthenticationService {
     return !!localStorage.getItem('token');
   }
 
-  get user(): string {
-    return this._user;
-  }
-
-  set user(value: string) {
-    this._user = value;
-  }
-
   findEmploye() {
-    const subscription = this.employeUserService.findByUserUsername(this.user).subscribe({
+    const username = localStorage.getItem('username') as string;
+    const subscription = this.employeUserService.findByUserUsername(username).subscribe({
       next: (res) => {
         this.matricule = res.matricule as string;
         localStorage.setItem('matricule', this.matricule);
@@ -57,8 +48,8 @@ export class AuthenticationService {
     });
   }
   findAdmin() {
-    console.log("ffffff" + this.user);
-    const subscription = this.employeService.findByUserUsername(this.user).subscribe({
+    const username = localStorage.getItem('username') as string;
+    const subscription = this.employeService.findByUserUsername(username).subscribe({
       next: (res) => {
         this.matricule = res.matricule as string;
         localStorage.setItem('matricule', this.matricule);

@@ -3,13 +3,14 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "primeng/api";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
+import {MessageService, SharedModule} from "primeng/api";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {DemandeCongeUserService} from "../../../../../../shared/service/user/demande/demande-conge-user.service";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-conge.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
+import {TypeCongeService} from "../../../../../../shared/service/user/conge/type-conge.service";
+import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-demande-conge-edit',
@@ -27,7 +28,7 @@ import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.mode
 export class DemandeCongeEditComponent {
 
   constructor(private service : DemandeCongeUserService, private typeCongeService : TypeCongeService
-    , private etatDemandeService : EtatDemandeService ) {
+    , private etatDemandeService : EtatDemandeService, private messageService: MessageService) {
   }
 
   public update(item:DemandeCongeDto): void {
@@ -35,10 +36,22 @@ export class DemandeCongeEditComponent {
       if (data != null) {
         this.items = this.items.filter(obj => obj.id !== item.id);
         this.items.push(data);
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
   }
 

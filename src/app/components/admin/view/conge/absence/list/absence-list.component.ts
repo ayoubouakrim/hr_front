@@ -12,7 +12,6 @@ import {MessageService, ConfirmationService} from 'primeng/api';
 import {MessagesModule} from 'primeng/messages';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {CongeDto} from "../../../../../../shared/model/conge/conge.model";
 
 
 @Component({

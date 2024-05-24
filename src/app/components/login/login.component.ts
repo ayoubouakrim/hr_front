@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
         this.tokenService.token = res.body?.token as string;
         if (res.body?.token != null) {
           if (res.body?.username != null) {
-            this.user = res.body?.username;
+            const user = res.body?.username;
+            localStorage.setItem('username',user)
           }
         }
         if (this.tokenService.userRoles.includes("ADMIN")) {
@@ -80,14 +81,6 @@ export class LoginComponent implements OnInit {
 
   set loginRequest(value: LoginRequest) {
     this.authService.loginRequest = value;
-  }
-
-  get user(): string {
-    return this.authService.user;
-  }
-
-  set user(value: string) {
-    this.authService.user = value;
   }
 }
 

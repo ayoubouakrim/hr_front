@@ -7,10 +7,10 @@ import {
   DemandeDocumentAdminService
 } from "../../../../../../shared/service/admin/demande/demande-document-admin.service";
 import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande-document.model";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
-import {TypeDocumentService} from "../../../../../../shared/service/type-etat/type-document.service";
 import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-document.model";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
+import {TypeDocumentService} from "../../../../../../shared/service/admin/demande/type-document.service";
+import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
 
 
 @Component({

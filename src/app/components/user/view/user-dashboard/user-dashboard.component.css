@@ -54,7 +54,7 @@
 
 .btnClass2 {
   font-size: 20px;
-  margin-top: -80%;
+  margin-top: -90%;
   margin-left: 80%;
   color: #000000;
 }
@@ -62,6 +62,18 @@
 .btnClass2:hover {
   color: #605f5f;
 }
+
+.btnClassbtn{
+  font-size: 20px;
+  margin-top: -98%;
+  margin-left: 80%;
+  color: #000000;
+}
+
+.btnClassbtn{
+  color: #605f5f;
+}
+
 .card-annonce {
   height: 40px;
   margin-top: -20px;
@@ -87,9 +99,24 @@
   height:80px;
 }
 
+.bnotClass {
+  margin-left: 10px;
+  margin-top: -14px;
+  font: 18px/1 "Poppins", sans-serif;
+  font-weight: 350;
+}
+
+
 .btn-classe1 {
-  margin-left: 60%;
+  margin-left: 10%;
+  height:60%;
+  display: flex;
   background-color: #fa8426;
+  color: white;
+}
+
+:hover.btn-classe1{
+  background-color: #fc9849;
   color: white;
 }
 
