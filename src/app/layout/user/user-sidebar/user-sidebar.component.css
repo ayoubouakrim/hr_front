@@ -48,7 +48,8 @@ html, body {
   border-radius: 2px;
 }
 .bg {
-  height: 100%;
+  height: 100vh;
+  min-height: 100%;
   position: -ms-device-fixed;
 }
 

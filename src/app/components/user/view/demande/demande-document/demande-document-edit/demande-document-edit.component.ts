@@ -3,13 +3,14 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "primeng/api";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
+import {MessageService, SharedModule} from "primeng/api";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {DemandeDocumentUserService} from "../../../../../../shared/service/user/demande/demande-document-user.service";
-import {TypeDocumentService} from "../../../../../../shared/service/type-etat/type-document.service";
 import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-document.model";
 import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande-document.model";
+import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
+import {TypeDocumentService} from "../../../../../../shared/service/user/demande/type-document.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-demande-document-edit',
@@ -27,7 +28,7 @@ import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande
 export class DemandeDocumentEditComponent {
 
   constructor(private service : DemandeDocumentUserService, private typeDocumentService : TypeDocumentService
-    , private etatDemandeService : EtatDemandeService ) {
+    , private etatDemandeService : EtatDemandeService, private messageService: MessageService) {
   }
 
   public update(): void {
@@ -35,10 +36,22 @@ export class DemandeDocumentEditComponent {
       if (data != null) {
         this.items = this.items.filter(obj => obj.id !== this.item.id);
         this.items.push(data);
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
   }
 

@@ -3,11 +3,12 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {DemandeAbsenceUserService} from "../../../../../../shared/service/user/demande/demande-absence-user.service";
 import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
-import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
+import {TypeAbsenceService} from "../../../../../../shared/service/user/conge/type-absence.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-demande-absence-create',
@@ -28,7 +29,7 @@ export class DemandeAbsenceCreateComponent implements OnInit{
 
   matricule:string = "";
 
-  constructor(private service : DemandeAbsenceUserService, private typeAbsenceService : TypeAbsenceService) {
+  constructor(private service : DemandeAbsenceUserService, private typeAbsenceService : TypeAbsenceService, private messageService: MessageService) {
 
   }
 
@@ -47,10 +48,22 @@ export class DemandeAbsenceCreateComponent implements OnInit{
     this.service.save(item).subscribe(data => {
       if (data != null) {
         this.items.push(data);
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
   }
 

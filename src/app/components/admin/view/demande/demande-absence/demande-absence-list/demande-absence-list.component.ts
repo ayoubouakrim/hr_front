@@ -4,11 +4,11 @@ import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {DemandeAbsenceViewComponent} from "../demande-absence-view/demande-absence-view.component";
 import {DemandeAbsenceAdminService} from "../../../../../../shared/service/admin/demande/demande-absence-admin.service";
-import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
+import {TypeAbsenceService} from "../../../../../../shared/service/admin/conge/type-absence.service";
+import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
 
 @Component({
   selector: 'app-demande-absence-list',

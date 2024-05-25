@@ -40,8 +40,6 @@ export class EmployeListComponent implements OnInit{
   constructor(private service: EmployeService, private messageService: MessageService, private confirmationService: ConfirmationService) {
   }
 
-
-
   public findAll(): void {
     this.service.findAll().subscribe(data => {
       // Filter items where archive is false

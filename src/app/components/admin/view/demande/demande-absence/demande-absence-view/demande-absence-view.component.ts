@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {DialogModule} from "primeng/dialog";
 import {PaginatorModule} from "primeng/paginator";
-import {TypeAbsenceService} from "../../../../../../shared/service/type-etat/type-absence.service";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
 import {DemandeAbsenceAdminService} from "../../../../../../shared/service/admin/demande/demande-absence-admin.service";
+import {TypeAbsenceService} from "../../../../../../shared/service/admin/conge/type-absence.service";
+import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
 
 @Component({
   selector: 'app-demande-absence-view',

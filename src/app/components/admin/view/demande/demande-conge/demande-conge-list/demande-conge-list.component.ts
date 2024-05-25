@@ -4,11 +4,11 @@ import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {DemandeCongeAdminService} from "../../../../../../shared/service/admin/demande/demande-conge-admin.service";
 import {DemandeCongeViewComponent} from "../demande-conge-view/demande-conge-view.component";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
-import {EtatDemandeService} from "../../../../../../shared/service/type-etat/etat-demande.service";
 import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-conge.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
+import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
+import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
 
 @Component({
   selector: 'app-demande-conge-list',

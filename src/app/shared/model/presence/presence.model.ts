@@ -8,7 +8,7 @@ export class PresenceDto {
   public heureArrivee: Time | null;
   public heureDepart: Time | null;
   public presence: boolean;
-  public datee: Date | null;
+  public datee: string | null;
   public nombreHeurePresence: number | null;
   public nombreHeureRetard: number | null;
   public employe: EmployeDto;

@@ -4,6 +4,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {DialogModule} from "primeng/dialog";
 import {AdminDashboardComponent} from "../../../components/admin/view/admin-dashboard/admin-dashboard.component";
 import {AppSidebarComponent} from "../../app-sidebar/app-sidebar.component";
+
 import {NotificationDto} from "../../../shared/model/notification/notification.model";
 import {LayoutService} from "../../../shared/service/layout/layout.service";
 import {NotificationAdminService} from "../../../shared/service/admin/notification/notification.service";
@@ -12,6 +13,8 @@ import {EmployeDto} from "../../../shared/model/employe/employe.model";
 import {NotificationUserService} from "../../../shared/service/user/notification/notification-user.service";
 import {EmployeUserService} from "../../../shared/service/user/employe/employe-user.service";
 import {DatePipe} from "@angular/common";
+import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
+
 
 
 @Component({
@@ -23,7 +26,9 @@ import {DatePipe} from "@angular/common";
     RouterOutlet,
     RouterLink,
     DialogModule,
-    DatePipe
+    DatePipe,
+    UserSidebarComponent
+
   ],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css'
@@ -46,14 +51,21 @@ export class UserLayoutComponent {
 
   visible: boolean = false;
 
+
   public logout() {
     this.layoutService.logout();
   }
 
-  public showNotifi(event: Event) {
+
+
+
+
+  public showNotifi(event: Event){
+
     event.preventDefault();
     this.visible = true;
   }
+
 
   public findProfile(matricule: String) {
     this.employeService.findProfile(matricule).subscribe(res => {
@@ -110,6 +122,7 @@ export class UserLayoutComponent {
   set notifications(value: Array<NotificationDto>) {
     this.notificationService.items = value;
   }
+
 
 
 

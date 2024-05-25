@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { TypeCongeDto } from '../../../model/conge/type-conge.model';
 
+import { TypeCongeDto } from '../../../model/conge/type-conge.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class TypeCongeService {
   private _items: Array<TypeCongeDto> | undefined;
 
   private url = 'http://localhost:8089/api/v1/admin/type-conge';
+
 
   constructor(private http : HttpClient) { }
 

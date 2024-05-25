@@ -3,6 +3,9 @@ import {NotificationDto} from "../../../model/notification/notification.model";
 import {EmployeDto} from "../../../model/employe/employe.model";
 import {HttpClient} from "@angular/common/http";
 
+import {Observable} from "rxjs";
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,9 +55,36 @@ export class NotificationUserService {
 
   }
 
+
   public findNotifications(matricule: String){
     return this.http.get<Array<NotificationDto>>(this.url + '/matricule/' + matricule);
   }
+
+  public save(): Observable<NotificationDto> {
+    return this.http.post<NotificationDto>(this.url + "/add", this.item);
+  }
+
+  public update(dto :NotificationDto): Observable<NotificationDto> {
+    return this.http.put<NotificationDto>(this.url + "/update", dto);
+  }
+  public findAll() {
+    return this.http.get<Array<NotificationDto>>(this.url + "/all");
+  }
+  public delete(dto: NotificationDto) {
+    return this.http.delete<number>(this.url + '/code/' + dto.code);
+  }
+  public findByCode(dto: NotificationDto) {
+    return this.http.get<NotificationDto>(this.url + '/code/' + dto.code);
+  }
+  public updatePar(dto: NotificationDto): Observable<EmployeDto> {
+    return this.http.put<EmployeDto>(this.url + '/update', dto);
+  }
+
+  public findByMatriculeAndIsCheked(matricule : string,isChecked : boolean){
+    return this.http.get<Array<NotificationDto>>(this.url + "/matricule/"+matricule+"/isChecked/"+isChecked);
+  }
+
+
   get item(): NotificationDto {
     if (this._item == null) {
       this._item = new NotificationDto();

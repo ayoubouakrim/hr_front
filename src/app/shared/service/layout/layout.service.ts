@@ -11,10 +11,11 @@ export class LayoutService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('matricule');
+    localStorage.removeItem('username');
     window.location.reload();
   }
 
   showProfil(){
-   this.router.navigate(['/app-user/user-profile']);
+   this.router.navigate(['/app-user/profile']);
   }
 }

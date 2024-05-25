@@ -3,11 +3,12 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {DemandeCongeUserService} from "../../../../../../shared/service/user/demande/demande-conge-user.service";
-import {TypeCongeService} from "../../../../../../shared/service/type-etat/type-conge.service";
 import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-conge.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
+import {TypeCongeService} from "../../../../../../shared/service/user/conge/type-conge.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-demande-conge-create',
@@ -26,7 +27,7 @@ export class DemandeCongeCreateComponent implements OnInit{
 
   visible: boolean = false;
 
-  constructor(private service : DemandeCongeUserService, private typeCongeService : TypeCongeService) {
+  constructor(private service : DemandeCongeUserService, private typeCongeService : TypeCongeService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -41,10 +42,22 @@ export class DemandeCongeCreateComponent implements OnInit{
     this.service.save(item).subscribe(data => {
       if (data != null) {
         this.items.push(data);
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le Congé a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le conge n\'a pas été ajouté'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
   }
 
