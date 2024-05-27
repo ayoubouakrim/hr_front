@@ -87,10 +87,11 @@
   color: #000000;
 }
 
-.select-classe {
-  width: 18%;
-  margin-left: 75%;
-  margin-top: -5%;
+.sampClass{
+  font-size: 20px;
+  border-radius: 10%;
+  background-color: #fcecde;
+  margin-left: 70%;
 }
 
 .body-class1 {

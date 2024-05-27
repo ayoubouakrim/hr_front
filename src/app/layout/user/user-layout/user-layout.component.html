@@ -38,7 +38,7 @@
   <p-dialog header="Notifications" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
     <div class="container">
       <div class="">
-        @for (element of notfs; track element; let i = $index){
+        @for (element of notifications; track element; let i = $index){
           <div class="list-group-item ">
             <hr>
             <h5 class="mb-1 text-1">{{element.objectif}}</h5>

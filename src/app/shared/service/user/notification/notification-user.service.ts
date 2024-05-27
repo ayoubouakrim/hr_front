@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {NotificationDto} from "../../../model/notification/notification.model";
-import {EmployeDto} from "../../../model/employe/employe.model";
 import {HttpClient} from "@angular/common/http";
 
 import {Observable} from "rxjs";
@@ -12,6 +11,10 @@ import {Observable} from "rxjs";
 export class NotificationUserService {
   private _item: NotificationDto | undefined;
   private _items: Array<NotificationDto> | undefined;
+
+  private _notification: NotificationDto | undefined;
+  private _notifications: Array<NotificationDto> | undefined;
+
   private url = 'http://localhost:8089/api/v1/user/notification';
 
   private _viewDialog: boolean = false;
@@ -27,8 +30,6 @@ export class NotificationUserService {
   constructor(private http: HttpClient) {
 
   }
-
-
 
   public findNotifications(matricule: String){
     return this.http.get<Array<NotificationDto>>(this.url + '/matricule/' + matricule);
@@ -71,5 +72,29 @@ export class NotificationUserService {
 
   set items(value: Array<NotificationDto>) {
     this._items = value;
+  }
+
+
+  get notification(): NotificationDto{
+    if (this._notification == null) {
+      this._notification = new NotificationDto();
+    }
+    return this._notification;
+  }
+
+  set notification(value: NotificationDto) {
+    this._notification = value;
+  }
+
+
+  get notifications(): Array<NotificationDto> {
+    if (this._notifications == null) {
+      this._notifications = new Array<NotificationDto>();
+    }
+    return this._notifications;
+  }
+
+  set notifications(value: Array<NotificationDto>) {
+    this._notifications = value;
   }
 }
