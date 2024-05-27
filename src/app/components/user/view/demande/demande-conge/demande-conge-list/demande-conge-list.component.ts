@@ -9,7 +9,7 @@ import {DemandeCongeEditComponent} from "../demande-conge-edit/demande-conge-edi
 import {DemandeCongeUserService} from "../../../../../../shared/service/user/demande/demande-conge-user.service";
 import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-conge.model";
 import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.model";
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgStyle} from "@angular/common";
 import {TypeCongeService} from "../../../../../../shared/service/user/conge/type-conge.service";
 import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
 
@@ -23,7 +23,8 @@ import {EtatDemandeService} from "../../../../../../shared/service/user/demande/
     DemandeCongeCreateComponent,
     DemandeCongeViewComponent,
     DemandeCongeEditComponent,
-    DatePipe
+    DatePipe,
+    NgStyle
   ],
   templateUrl: './demande-conge-list.component.html',
   styleUrl: './demande-conge-list.component.css'
@@ -48,15 +49,33 @@ export class DemandeCongeListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.findAll();
+    this.service.findDemandes();
+  }
+  public getColor(status: string): string {
+    if (status === 'c3') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'c1') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'c2') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
   }
 
-  public findAll(): void {
-    this.service.findAll().subscribe(data => {
-      this.items = data;
-    })
+
+  showDialog(): void {
+    this.item = new DemandeCongeDto();
+    this.createDialog = true;
   }
 
+  get createDialog(): boolean {
+    return this.service.createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this.service.createDialog = value;
+  }
   get item(): DemandeCongeDto{
     return this.service.item;
   }

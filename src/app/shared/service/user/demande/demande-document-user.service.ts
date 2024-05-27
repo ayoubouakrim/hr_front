@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {DemandeDocumentDto} from "../../../model/demande/demande-document.model";
+import {DemandeCongeDto} from "../../../model/demande/demande-conge.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class DemandeDocumentUserService {
   private url = 'http://localhost:8089/api/v1/user/demandeDocument';
   protected _editDialog: boolean = false;
   protected _viewDialog: boolean = false;
+  protected _createDialog: boolean = false;
 
+
+  private matricule: string = "";
   constructor(private http: HttpClient) {
   }
 
@@ -32,9 +36,6 @@ export class DemandeDocumentUserService {
   public update(): Observable<DemandeDocumentDto> {
     return this.http.put<DemandeDocumentDto>(this.url + '/update', this.item);
   }
-  public findByEmployeMatricule(dto: DemandeDocumentDto) {
-    return this.http.get<Array<DemandeDocumentDto>>(this.url + '/find/employe/matricule/' + dto.employe.matricule);
-  }
 
   public findByTypeAbsenceCode(dto: DemandeDocumentDto) {
     return this.http.get<Array<DemandeDocumentDto>>(this.url + '/find/typeDocument/code/' + dto.typeDocument.code);
@@ -42,16 +43,25 @@ export class DemandeDocumentUserService {
   public findByEtatDemandeCode(dto: DemandeDocumentDto) {
     return this.http.get<Array<DemandeDocumentDto>>(this.url + '/find/etatDemande/code/' + dto.etatDemande.code);
   }
-
-  private _visibleSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public visible$: Observable<boolean> = this._visibleSubject.asObservable();
-
-  public showDialog(): void {
-    this._visibleSubject.next(true);
+  public findByEmployeMatricule(matricule: string) {
+    return this.http.get<Array<DemandeDocumentDto>>(this.url + '/find/employe/matricule/' + matricule);
+  }
+  public findDemandes() {
+    this.matricule = localStorage.getItem('matricule') as string;
+    this.findByEmployeMatricule(this.matricule).subscribe(data => {
+      this.items = data;
+      console.log(data)
+    })
   }
 
-  public hideDialog(): void {
-    this._visibleSubject.next(false);
+
+
+  get createDialog(): boolean {
+    return this._createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this._createDialog = value;
   }
 
 

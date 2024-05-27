@@ -34,6 +34,9 @@ export class EmployeUserService {
   public delete(dto: EmployeDto) {
     return this.http.delete<number>(this.url + '/matricule/' + dto.matricule);
   }
+  public findProfile(matricule: String) {
+    return this.http.get<EmployeDto>(this.url + '/matricule/' + matricule);
+  }
   public update(): Observable<EmployeDto> {
     return this.http.put<EmployeDto>(this.url + '/update', this.item);
   }

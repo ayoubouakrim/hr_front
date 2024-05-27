@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {ButtonModule} from "primeng/button";
-import {SharedModule} from "primeng/api";
+import {ConfirmationService, MessageService, SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {CommissionAdminService} from "../../../../../../shared/service/admin/employe/commission.service";
 import {CommissionDto} from "../../../../../../shared/model/employe/commission.model";
@@ -12,6 +12,10 @@ import {CommissionCreateComponent} from "../create/commission-create.component";
 import {CommissionViewComponent} from "../view/commission-view.component";
 import {CommissionEditComponent} from "../edit/commission-edit.component";
 import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {InputTextModule} from "primeng/inputtext";
 
 
 
@@ -29,8 +33,13 @@ import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
     CommissionCreateComponent,
     CommissionViewComponent,
     CommissionEditComponent,
+    MessagesModule,
+    ToastModule,
+    ConfirmDialogModule,
+    InputTextModule,
 
   ],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './commission-list.component.html',
   styleUrl: './commission-list.component.css'
 })
@@ -38,7 +47,7 @@ export class CommissionListComponent implements OnInit{
   ngOnInit(): void {
     this.findAll();
   }
-  constructor(private service: CommissionAdminService) {
+  constructor(private service: CommissionAdminService, private messageService: MessageService, private confirmationService: ConfirmationService) {
   }
 
 
@@ -83,21 +92,38 @@ export class CommissionListComponent implements OnInit{
     });
   }
   public archive(dto: CommissionDto): void {
-    this.service.findByCode(dto).subscribe(res => {
-      this.item = res;
+    this.confirmationService.confirm({
+      message: 'Voulez-vous archiver cet élément ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        this.service.findByCode(dto).subscribe(res => {
+          this.item = res;
 
-      // Update the item with archive set to true
-      this.item.archive = true;
+          // Update the item with archive set to true
+          this.item.archive = true;
 
-      // Call the service to update the item
-      this.service.updatePar(this.item).subscribe(data => {
-        if (data != null) {
-          alert("OK");
-        } else {
-          alert("Error");
-        }
-      });
+          // Call the service to update the item
+          this.service.updatePar(this.item).subscribe(data => {
+            if (data != null) {
+              const position = this.items.indexOf(dto);
+              position > -1 ? this.items.splice(position, 1) : false;
+              this.messageService.add({
+                severity:'success',
+                summary:'Succès',
+                detail:'archivé avec succès'});
+            } else {
+              alert("Error");
+            }
+          });
+        });
+      }
     });
+
   }
 
   get editDialog(): boolean {

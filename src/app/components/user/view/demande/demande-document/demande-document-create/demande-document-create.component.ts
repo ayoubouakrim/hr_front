@@ -21,6 +21,7 @@ import {HttpErrorResponse} from "@angular/common/http";
         PaginatorModule,
         SharedModule
     ],
+  providers: [MessageService],
   templateUrl: './demande-document-create.component.html',
   styleUrl: './demande-document-create.component.css'
 })
@@ -29,9 +30,7 @@ export class DemandeDocumentCreateComponent implements OnInit{
   visible: boolean = false;
 
   constructor(private service : DemandeDocumentUserService, private typeDocumentService : TypeDocumentService, private messageService: MessageService) {
-    this.service.visible$.subscribe((visible: boolean) => {
-      this.visible = visible;
-    });
+
   }
 
   ngOnInit(): void {

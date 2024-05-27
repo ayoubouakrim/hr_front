@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import {NotificationDto} from "../../../model/notification/notification.model";
 import {EmployeDto} from "../../../model/employe/employe.model";
 import {HttpClient} from "@angular/common/http";
+
 import {Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,17 @@ export class NotificationUserService {
 
   }
 
+
+
+  public findNotifications(matricule: String){
+    return this.http.get<Array<NotificationDto>>(this.url + '/matricule/' + matricule);
+  }
+
+  public save(): Observable<NotificationDto> {
+    return this.http.post<NotificationDto>(this.url + "/add", this.item);
+  }
+
+
   public updateChecked(dto :NotificationDto): Observable<NotificationDto> {
     return this.http.put<NotificationDto>(this.url + "/update", dto);
   }
@@ -36,6 +49,7 @@ export class NotificationUserService {
   public findByMatriculeAndCheked(matricule : string,checked : boolean){
     return this.http.get<Array<NotificationDto>>(this.url + "/matricule/"+matricule+"/checked/"+checked);
   }
+
 
   get item(): NotificationDto {
     if (this._item == null) {

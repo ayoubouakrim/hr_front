@@ -12,7 +12,6 @@ import {HoraireListComponent} from "./components/admin/view/presence/horaire/lis
 import {PresenceListComponent} from "./components/admin/view/presence/presence/list/presence-list.component";
 import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
 import {UserDashboardComponent} from "./components/user/view/user-dashboard/user-dashboard.component";
-import {UserProfileComponent} from "./components/user/view/user-profile/user-profile.component";
 import {
   DemandeAbsenceListComponent
 } from "./components/user/view/demande/demande-absence/demande-absence-list/demande-absence-list.component";
@@ -40,6 +39,9 @@ import {AppLayoutComponent} from "./layout/app-layout/app-layout.component";
 import {UserLayoutComponent} from "./layout/user/user-layout/user-layout.component";
 import {LoginComponent} from "./components/login/login.component";
 import {UserListComponent} from "./components/admin/view/account/user-list/user-list.component";
+
+import {ProfileUserComponent} from "./components/user/profile/profile-user.component";
+
 import {UserViewComponent} from "./components/user/view/user/user-view/user-view.component";
 import {ListComponent} from "./components/user/view/reunion/list/list.component";
 import {PresenceListUserComponent} from "./components/user/view/presence/list/presence-list-user.component";
@@ -47,6 +49,7 @@ import {AbsenceListUserComponent} from "./components/user/view/conge/absence/lis
 import {CongeListUserComponent} from "./components/user/view/conge/conge/list/conge-list-user.component";
 import {ReinitiaPasswordComponent} from "./components/security/reinitia-password/reinitia-password.component";
 import {CommissionListUserComponent} from "./components/user/view/commission/list/commission-list-user.component";
+
 
 export const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -57,10 +60,12 @@ export const routes: Routes = [
     path: 'app', component: AppLayoutComponent,
     children: [
       {
+
         path: 'employe', component: EmployeListComponent, canActivate: [authGuard],
         data: {
           roles: 'ADMIN',
         }
+
       },
       {
         path: 'accounts', component: UserListComponent, canActivate: [authGuard],
@@ -159,10 +164,12 @@ export const routes: Routes = [
     path: 'app-user', component: UserLayoutComponent,
     children: [
       {
-        path: 'profile', component: UserProfileComponent, canActivate: [authGuard],
+
+        path: 'profile', component: ProfileUserComponent, canActivate: [authGuard],
         data: {
           roles: 'USER',
         }
+
       },
       {
         path: 'user', component: UserViewComponent, canActivate: [authGuard],

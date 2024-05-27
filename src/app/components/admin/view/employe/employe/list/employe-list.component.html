@@ -18,7 +18,35 @@
 
 
 
-<p-table [value]="items"  [tableStyle]="{'min-width': '1rem'}">
+<p-table #dt2 [value]="items"   [tableStyle]="{'min-width': '1rem'}">
+  <ng-template pTemplate="caption">
+    <div class="row" >
+      <div class="col-md-4">
+        <p-columnFilter
+          type="text"
+          field="matricule"
+          placeholder="chercher par matricule"
+        />
+
+      </div>
+      <div class="col-md-4">
+        <p-columnFilter
+          type="text"
+          field="nom"
+          placeholder="chercher par nom"
+           />
+
+      </div>
+      <div class="col-md-4">
+        <p-columnFilter
+          type="text"
+          field="departement"
+          placeholder="chercher par departement"
+        />
+
+      </div>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="matricule" >Matricule<p-sortIcon field="matricule"></p-sortIcon></th>

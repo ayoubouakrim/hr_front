@@ -56,7 +56,15 @@ export class DemandeDocumentListComponent implements OnInit{
   }
 
   showDialog(): void {
-    this.service.showDialog();
+    this.createDialog = true;
+  }
+
+  get createDialog(): boolean {
+    return this.service.createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this.service.createDialog = value;
   }
 
   get item(): DemandeDocumentDto{

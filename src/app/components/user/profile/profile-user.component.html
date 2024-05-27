@@ -14,10 +14,10 @@
   <div class="row row-overlap mx-4">
     <div class="col-md-3">
       <div class="card h-100 bg-info">
-        <img class="mt-4 mx-5 rounded-circle img-fluid" src="assets/empImages/pro2.png" alt="Card image cap">
+        <img class="mt-4 mx-5 rounded-circle img-fluid" src="{{item.imagePath}}" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title text-light text-center">nom prenow</h5>
-          <p class="card-text text-light text-center">poste</p>
+          <h5 class="card-title text-light text-center">{{ item.nom }} {{ item.prenom }}</h5>
+          <p class="card-text text-light text-center">{{ item.postDto?.libelle }}</p>
 
         </div>
       </div>
@@ -29,58 +29,58 @@
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="matricule">Matricule</label>
-                <input type="text" class="form-control" id="matricule" placeholder="Matricule">
+                <input type="text" class="form-control" id="matricule" placeholder="Matricule" name="matricule" [ngModel]="item.matricule" [disabled]="true">
               </div>
               <div class="form-group col-md-6">
                 <label for="cin">CIN</label>
-                <input type="text" class="form-control" id="cin" placeholder="CIN">
+                <input type="text" class="form-control" id="cin" placeholder="CIN" name="cin" [ngModel]="item.cin" [disabled]="true">
               </div>
             </div>
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" placeholder="Nom">
+                <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" [ngModel]="item.nom" [disabled]="true">
               </div>
               <div class="form-group col-md-6">
                 <label for="prenom">Prenom</label>
-                <input type="text" class="form-control" id="prenom" placeholder="Prenom">
+                <input type="text" class="form-control" id="prenom" placeholder="Prenom" name="prenom" [ngModel]="item.prenom" [disabled]="true">
               </div>
             </div>
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" id="adresse" placeholder="Adresse">
+                <input type="text" class="form-control" id="adresse" placeholder="Adresse" name="adresse" [ngModel]="item.adresse" [disabled]="true">
               </div>
               <div class="form-group col-md-6">
                 <label for="gender">Gender</label>
-                <input type="text" class="form-control" id="gender" placeholder="Gender">
+                <input type="text" class="form-control" id="gender" placeholder="Gender" name="gender" [ngModel]="item.gender?.libelle" [disabled]="true">
               </div>
             </div>
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="telephone">Telephone</label>
-                <input type="text" class="form-control" id="telephone" placeholder="Telephone">
+                <input type="text" class="form-control" id="telephone" placeholder="Telephone" name="telephone" [ngModel]="item.telephone" [disabled]="true">
               </div>
               <div class="form-group col-md-6">
                 <label for="salaire">Salaire</label>
-                <input type="number" class="form-control" id="salaire" placeholder="Salaire">
+                <input type="number" class="form-control" id="salaire" placeholder="Salaire" name="salaire" [ngModel]="item.salaire" [disabled]="true">
               </div>
             </div>
 
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="dateEmbauche">Date Embauche</label>
-                <input type="text" class="form-control" id="dateEmbauche">
+                <input type="text" class="form-control" id="dateEmbauche" name="dateEmbauche" [ngModel]="item.dateEmbauche | date:'yyyy-MM-dd'" [disabled]="true">
               </div>
               <div class="form-group col-md-6">
                 <label for="departement">Departement</label>
-                <input type="text" class="form-control" id="departement" placeholder="Departement">
+                <input type="text" class="form-control" id="departement" placeholder="Departement" name="departement" [ngModel]="item.departementDto?.libelle" [disabled]="true">
               </div>
             </div>
             <div class="row mb-3">
               <div class="form-group col-md-6">
                 <label for="post">Post</label>
-                <input type="text" class="form-control" id="post" placeholder="Post">
+                <input type="text" class="form-control" id="post" placeholder="Post" name="poste" [ngModel]="item.postDto?.libelle" [disabled]="true">
               </div>
             </div>
           </form>

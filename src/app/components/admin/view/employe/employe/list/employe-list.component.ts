@@ -12,6 +12,8 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable";
+
+import {InputTextModule} from "primeng/inputtext";
 @Component({
   selector: 'app-employe-list',
   standalone: true,
@@ -24,6 +26,7 @@ import autoTable from "jspdf-autotable";
     MessagesModule,
     ToastModule,
     ConfirmDialogModule,
+    InputTextModule,
 
   ],
   providers: [MessageService, ConfirmationService],
@@ -31,7 +34,6 @@ import autoTable from "jspdf-autotable";
   styleUrl: './employe-list.component.css'
 })
 export class EmployeListComponent implements OnInit{
-
   public ListData : EmployeDto[] = [];
   public rows: any[] = [];
   ngOnInit(): void {

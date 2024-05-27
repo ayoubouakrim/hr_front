@@ -15,6 +15,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {DatePipe, NgStyle} from "@angular/common";
 
 
 
@@ -35,6 +36,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MessagesModule,
     ToastModule,
     ConfirmDialogModule,
+    NgStyle,
+    DatePipe,
 
   ],
   providers: [MessageService, ConfirmationService],
@@ -49,7 +52,17 @@ export class CongeListComponent implements OnInit{
   }
 
 
-
+  public getColor(status: string): string {
+    if (status === 'Non commencé') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'En cours') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'Terminé') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
+  }
   public findAll(): void {
     this.service.findAll().subscribe(data => {
       this.items = data;

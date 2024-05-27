@@ -3,11 +3,14 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {DepartementService} from "../../../../../shared/service/admin/departement/departement.service";
 import {EmployeService} from "../../../../../shared/service/admin/employe/employe.service";
 import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
 import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ToastModule} from "primeng/toast";
+import {MessagesModule} from "primeng/messages";
 
 
 @Component({
@@ -18,13 +21,16 @@ import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
     DialogModule,
     DropdownModule,
     PaginatorModule,
-    SharedModule
+    SharedModule,
+    MessagesModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './departement-edit.component.html',
   styleUrl: './departement-edit.component.css'
 })
 export class DepartementEditComponent implements OnInit {
-  constructor(private service: DepartementService, private employeService: EmployeService) {
+  constructor(private service: DepartementService, private employeService: EmployeService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -35,11 +41,24 @@ export class DepartementEditComponent implements OnInit {
   public update(): void {
     this.service.update().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le département a été édité avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'le département n\'a pas été édité'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.editDialog = false;
   }
 
   hideCreateDialog() {

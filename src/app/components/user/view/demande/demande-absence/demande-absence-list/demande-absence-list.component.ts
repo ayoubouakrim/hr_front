@@ -9,11 +9,9 @@ import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demand
 import {DemandeAbsenceCreateComponent} from "../demande-absence-create/demande-absence-create.component";
 import {DemandeAbsenceEditComponent} from "../demande-absence-edit/demande-absence-edit.component";
 import {DemandeAbsenceViewComponent} from "../demande-absence-view/demande-absence-view.component";
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgStyle} from "@angular/common";
 import {TypeAbsenceService} from "../../../../../../shared/service/user/conge/type-absence.service";
 import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
-
-
 
 
 @Component({
@@ -27,14 +25,14 @@ import {EtatDemandeService} from "../../../../../../shared/service/user/demande/
     DemandeAbsenceEditComponent,
     DemandeAbsenceViewComponent,
     DatePipe,
+    NgStyle,
   ],
   templateUrl: './demande-absence-list.component.html',
   styleUrl: './demande-absence-list.component.css'
 })
-export class DemandeAbsenceListComponent implements OnInit{
+export class DemandeAbsenceListComponent implements OnInit {
 
-  constructor(private service : DemandeAbsenceUserService, private typeAbsenceService : TypeAbsenceService
-    , private etatDemandeService : EtatDemandeService) {
+  constructor(private service: DemandeAbsenceUserService, private typeAbsenceService: TypeAbsenceService, private etatDemandeService: EtatDemandeService) {
   }
 
   public view(dto: DemandeAbsenceDto) {
@@ -43,6 +41,7 @@ export class DemandeAbsenceListComponent implements OnInit{
       this.viewDialog = true;
     });
   }
+
   public edit(dto: DemandeAbsenceDto) {
     this.service.findByCode(dto).subscribe(res => {
       this.item = res;
@@ -54,7 +53,7 @@ export class DemandeAbsenceListComponent implements OnInit{
     this.service.findDemandes();
   }
 
-  get item(): DemandeAbsenceDto{
+  get item(): DemandeAbsenceDto {
     return this.service.item;
   }
 
@@ -78,7 +77,20 @@ export class DemandeAbsenceListComponent implements OnInit{
     this.service.editDialog = value;
   }
 
+  public getColor(status: string): string {
+    if (status === 'c3') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'c1') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'c2') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
+  }
+
   showDialog(): void {
+    this.item = new DemandeAbsenceDto();
     this.createDialog = true;
   }
 
@@ -89,6 +101,7 @@ export class DemandeAbsenceListComponent implements OnInit{
   set createDialog(value: boolean) {
     this.service.createDialog = value;
   }
+
   get viewDialog(): boolean {
     return this.service.viewDialog;
   }
@@ -100,12 +113,15 @@ export class DemandeAbsenceListComponent implements OnInit{
   get typeAbsence(): TypeAbsenceDto {
     return this.typeAbsenceService.item;
   }
+
   set typeAbsence(value: TypeAbsenceDto) {
     this.typeAbsenceService.item = value;
   }
+
   get typeAbsences(): Array<TypeAbsenceDto> {
     return this.typeAbsenceService.items;
   }
+
   set typeAbsences(value: Array<TypeAbsenceDto>) {
     this.typeAbsenceService.items = value;
   }
@@ -113,12 +129,15 @@ export class DemandeAbsenceListComponent implements OnInit{
   get etatDemande(): EtatDemandeDto {
     return this.etatDemandeService.item;
   }
+
   set etatDemande(value: EtatDemandeDto) {
     this.etatDemandeService.item = value;
   }
+
   get etatDemandes(): Array<EtatDemandeDto> {
     return this.etatDemandeService.items;
   }
+
   set etatDemandes(value: Array<EtatDemandeDto>) {
     this.etatDemandeService.items = value;
   }

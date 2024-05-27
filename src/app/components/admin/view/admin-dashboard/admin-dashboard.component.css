@@ -7,10 +7,9 @@
   display: flex;
   justify-content: space-between;
 }
-.admin {
-  border: solid 1px #b2b2b2;
-  border-radius: 10px;
-  background: linear-gradient(80deg, #f1764d, #514d6c) !important;
+.img {
+  height : 150px;
+  width: 150px;
 }
 .bg-2 {
   background-color: #514d6c;
@@ -22,3 +21,8 @@
 .text-3 {
   color: #fff;
 }
+.bg-info {
+  border-color: #2d2d2d;
+  background: linear-gradient(90deg, #f1764d , #514d6c 70%) !important;
+}
+

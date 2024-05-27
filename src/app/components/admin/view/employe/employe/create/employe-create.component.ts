@@ -37,6 +37,8 @@ import {UserService} from "../../../../../../shared/security/shared/service/user
   styleUrl: './employe-create.component.css'
 })
 export class EmployeCreateComponent implements OnInit{
+
+  protected imgPath = "assets/empImages/default-avatar.jpg";
   ngOnInit(): void {
     this.gender = new GenderDto();
     this.genderService.findAll().subscribe((data) => this.genders = data);
@@ -49,7 +51,6 @@ export class EmployeCreateComponent implements OnInit{
     this.user = new User();
     this.userService.findAll().subscribe( (data) => this.users = data);
 
-    this.item.imagePath = "assets/empImages/default-avatar.jpg";
     console.log(this.item.imagePath);
   }
   visible: boolean = false;
@@ -62,6 +63,7 @@ export class EmployeCreateComponent implements OnInit{
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
+      this.imgPath = "assets/empImages/" + file.name;
       this.item.imagePath = "assets/empImages/" + file.name;
 
     }
@@ -73,6 +75,7 @@ export class EmployeCreateComponent implements OnInit{
     console.log(this.item)
     this.service.save().subscribe(data => {
       if (data != null) {
+        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',

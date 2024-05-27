@@ -29,7 +29,9 @@
       <td>{{item.dateDebut}}</td>
       <td>{{item.dateFin}}</td>
       <td>{{item.typeConge.libelle}}</td>
-      <td>{{item.etatDemande.libelle}}</td>
+      <td>
+        <span [ngStyle]="{'background-color': getColor(item.etatDemande.code)}" class="role-span">{{ item.etatDemande?.libelle }}</span>
+      </td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">
