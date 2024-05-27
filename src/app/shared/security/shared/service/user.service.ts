@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user.model";
-import {NotificationDto} from "../../../model/notification/notification.model";
+
+import {PasswordEmailChange} from "../model/password-email-change.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +29,15 @@ export class UserService {
   public save(): Observable<User> {
     return this.http.post<User>(this.url + "/save", this.item);
   }
-  public update(): Observable<NotificationDto> {
-    return this.http.put<NotificationDto>(this.url + "/update", this.item);
+  public update(): Observable<User> {
+    return this.http.put<User>(this.url + "/update", this.item);
   }
   public findAll() {
     return this.http.get<Array<User>>(this.url );
+  }
+
+  public updatePassword(passwordAndEmailChange : PasswordEmailChange){
+    return this.http.put(this.url + "/password/update", passwordAndEmailChange);
   }
 
   get item(): User {

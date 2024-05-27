@@ -1,4 +1,6 @@
+
 import {Component, OnInit} from '@angular/core';
+
 
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {DialogModule} from "primeng/dialog";
@@ -11,7 +13,7 @@ import {NotificationUserService} from "../../../shared/service/user/notification
 import {EmployeUserService} from "../../../shared/service/user/employe/employe-user.service";
 import {DatePipe} from "@angular/common";
 import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
-
+import {CommonModule} from "@angular/common";
 
 
 @Component({
@@ -21,6 +23,7 @@ import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
     AppSidebarComponent,
     RouterOutlet,
     RouterLink,
+    CommonModule,
     DialogModule,
     DatePipe,
     UserSidebarComponent
@@ -48,9 +51,11 @@ export class UserLayoutComponent implements OnInit{
   visible: boolean = false;
 
 
+
   public logout() {
     this.layoutService.logout();
   }
+
 
 
 
@@ -60,6 +65,20 @@ export class UserLayoutComponent implements OnInit{
 
     event.preventDefault();
     this.visible = true;
+    if(this.arrayOfNotifications) {
+      this.arrayOfNotifications.forEach(notification => {
+        notification.checked = true;
+        this.notificationService.updateChecked(notification).subscribe({
+          next: (response) => {
+            console.error('Update successful:', response);
+          },
+          error: (error) => {
+            console.error('Update failed:', error);
+          }
+        });
+      });
+    }
+    this.arrayOfNotifications = new Array<NotificationDto>();
   }
 
 
@@ -69,6 +88,15 @@ export class UserLayoutComponent implements OnInit{
       this.imgPath = res.imagePath as string;
       console.log(this.employe);
     });
+  }
+
+
+  get arrayOfNotifications(): Array<NotificationDto> {
+    return this.notificationService.items;
+  }
+
+  set arrayOfNotifications(value: Array<NotificationDto>) {
+    this.notificationService.items = value;
   }
 
 
@@ -118,6 +146,7 @@ export class UserLayoutComponent implements OnInit{
   set notifications(value: Array<NotificationDto>) {
     this.notificationService.items = value;
   }
+
 
 
 

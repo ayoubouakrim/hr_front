@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
@@ -23,10 +23,12 @@ import {PasswordEmailChange} from "../../../../../shared/security/shared/model/p
   templateUrl: './user-edit.component.html',
   styleUrl: './user-edit.component.css'
 })
-export class UserEditComponent {
+export class UserEditComponent{
   passwordSaisie: string = '';
 
-  constructor(private userService: UserUserService, private userService1: UserService) {
+  constructor(private userService: UserUserService,
+              private userService1: UserService,
+              ) {
   }
 
   update(){
@@ -34,7 +36,7 @@ export class UserEditComponent {
     this.item1.username = this.item.username;
     this.item1.password = this.passwordSaisie;
     this.item1.email = this.item.email;
-    this.userService.updatePasswordAndEmail(this.item1).subscribe({
+    this.userService.updatePasswordAndEmail().subscribe({
       next: (response) => {
         console.log('update succes:', response);
       },
@@ -43,6 +45,7 @@ export class UserEditComponent {
       }
     });
   }
+
   get item(): User {
     return this.userService1.item;
   }

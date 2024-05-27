@@ -105,7 +105,7 @@
           <hr>
           <p class="card-text text-light"><strong><u>email:</u></strong> {{user.email}}</p>
           <hr>
-          <p class="card-text text-light text-lowercase"><strong><u>role:</u></strong> {{user.roles[0].name}}</p>
+          <p class="card-text text-light text-lowercase"><strong><u>role:</u></strong> {{user.roles[0]?.name}}</p>
 
           <div class="d-flex justify-content-center">
             <button class="btn btn-info" type="submit" (click)="edit()">Edit informations</button>

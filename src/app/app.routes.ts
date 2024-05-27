@@ -11,7 +11,6 @@ import {CongeListComponent} from "./components/admin/view/conge/conge/list/conge
 import {HoraireListComponent} from "./components/admin/view/presence/horaire/list/horaire-list.component";
 import {PresenceListComponent} from "./components/admin/view/presence/presence/list/presence-list.component";
 import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
-
 import {UserDashboardComponent} from "./components/user/view/user-dashboard/user-dashboard.component";
 import {
   DemandeAbsenceListComponent
@@ -44,60 +43,120 @@ import {UserListComponent} from "./components/admin/view/account/user-list/user-
 import {ProfileUserComponent} from "./components/user/profile/profile-user.component";
 
 import {UserViewComponent} from "./components/user/view/user/user-view/user-view.component";
-
-
-
+import {ListComponent} from "./components/user/view/reunion/list/list.component";
+import {PresenceListUserComponent} from "./components/user/view/presence/list/presence-list-user.component";
+import {AbsenceListUserComponent} from "./components/user/view/conge/absence/list/absence-list-user.component";
+import {CongeListUserComponent} from "./components/user/view/conge/conge/list/conge-list-user.component";
+import {ReinitiaPasswordComponent} from "./components/security/reinitia-password/reinitia-password.component";
+import {CommissionListUserComponent} from "./components/user/view/commission/list/commission-list-user.component";
 
 
 export const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'reset-request', component: PasswordResetRequestComponent},
+  {path: 'edit-password', component: ReinitiaPasswordComponent},
   {
     path: 'app', component: AppLayoutComponent,
     children: [
       {
-        path: 'employe', component: EmployeListComponent
+
+        path: 'employe', component: EmployeListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
+
       },
       {
-        path: 'accounts', component: UserListComponent
+        path: 'accounts', component: UserListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'profile', component: ProfileComponent,
+        path: 'profile', component: ProfileComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'commission', component: CommissionListComponent,
+        path: 'commission', component: CommissionListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'notification', component: NotificationListComponent,
+        path: 'notification', component: NotificationListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'dashboard', component: AdminDashboardComponent,
+        path: 'dashboard', component: AdminDashboardComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'departement', component: DepartementListComponent
+        path: 'departement', component: DepartementListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'absence', component: AbsenceListComponent,
+        path: 'absence', component: AbsenceListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'conge', component: CongeListComponent,
+        path: 'conge', component: CongeListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'horaire', component: HoraireListComponent,
+        path: 'horaire', component: HoraireListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'presence', component: PresenceListComponent,
+        path: 'presence', component: PresenceListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
       {
-        path: 'reunion', component: ReunionListComponent,
+        path: 'reunion', component: ReunionListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
 
-      {path: 'demande-absence', component: DemandeAbsenceListAdminComponent,},
-      {path: 'demande-conge', component: DemandeCongeListAdminComponent},
-      {path: 'demande-document', component: DemandeDocumentListAdminComponent},
       {
-        path: 'rapport', component: SuiviMensuelListComponent,
+        path: 'demande-absence', component: DemandeAbsenceListAdminComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
+      },
+      {
+        path: 'demande-conge', component: DemandeCongeListAdminComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
+      },
+      {
+        path: 'demande-document', component: DemandeDocumentListAdminComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
+      },
+      {
+        path: 'rapport', component: SuiviMensuelListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'ADMIN',
+        }
       },
     ],
   },
@@ -105,11 +164,18 @@ export const routes: Routes = [
     path: 'app-user', component: UserLayoutComponent,
     children: [
       {
-        path: 'profile', component: ProfileUserComponent,
+
+        path: 'profile', component: ProfileUserComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
 
       },
       {
-        path: 'user', component: UserViewComponent
+        path: 'user', component: UserViewComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
         path: 'dashboard-user', component: UserDashboardComponent, canActivate: [authGuard],
@@ -118,96 +184,59 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'horaire', component: HoraireListComponent,
-      },
-      {
-        path: 'presence', component: PresenceListComponent,
-      },
-      {
-        path: 'reunion', component: ReunionListComponent,
-      },
-      {path: 'demande-absence', component: DemandeAbsenceListComponent},
-      {path: 'demande-conge', component: DemandeCongeListComponent},
-      {path: 'demande-document', component: DemandeDocumentListComponent}
-    ],
-
-
-
-
-  },
-]
-/*
-export const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'reset-request', component: PasswordResetRequestComponent},
-  {path: 'password-change', component: PasswordChangeComponent},
-  {path: 'admin/register', component: RegisterUserComponent},
-  {
-    path: 'app', component: AppLayoutComponent,
-    children: [
-      {
-        path: 'employe', component: EmployeListComponent, canActivate: [authGuard],
+        path: 'horaire', component: HoraireListComponent, canActivate: [authGuard],
         data: {
           roles: 'USER',
         }
       },
       {
-        path: 'dashboard', component: AdminDashboardComponent, canActivate: [authGuard],
-        data: {
-          roles: 'ADMIN',
-        }
-      },
-      {
-        path: 'dashboard-user', component: UserDashboardComponent},
-      {
-        path: 'departement', component: DepartementListComponent, canActivate: [authGuard],
+        path: 'commission', component: CommissionListUserComponent, canActivate: [authGuard],
         data: {
           roles: 'USER',
         }
       },
       {
-        path: 'absence', component: AbsenceListComponent,
+        path: 'absence', component: AbsenceListUserComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
-        path: 'conge', component: CongeListComponent,
+        path: 'conge', component: CongeListUserComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
-        path: 'horaire', component: HoraireListComponent,
+        path: 'presence', component: PresenceListUserComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
-        path: 'presence', component: PresenceListComponent,
+        path: 'reunion', component: ListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
       {
-        path: 'reunion', component: ReunionListComponent,
+        path: 'demande-absence', component: DemandeAbsenceListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       },
-    ],
-  },
-  {
-    path: 'app-user', component: AppLayoutUserComponent,
-    children: [{path: 'employe', component: EmployeListComponent, canActivate: [authGuard],
-      data: {
-        roles: 'USER',
+      {
+        path: 'demande-conge', component: DemandeCongeListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
+      },
+      {
+        path: 'demande-document', component: DemandeDocumentListComponent, canActivate: [authGuard],
+        data: {
+          roles: 'USER',
+        }
       }
-    },
-      {
-        path: 'dashboard', component: AdminDashboardComponent, canActivate: [authGuard],
-        data: {
-          roles: 'ADMIN',
-        }
-      },
-      {
-        path: 'dashboard-user', component: UserDashboardComponent},
-      {
-        path: 'horaire', component: HoraireListComponent,
-      },
-      {
-        path: 'presence', component: PresenceListComponent,
-      },
-      {
-        path: 'reunion', component: ReunionListComponent,
-      },
     ],
-  },
+  }
 ]
- */
