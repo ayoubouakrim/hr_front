@@ -13,7 +13,6 @@ import {PresenceListComponent} from "./components/admin/view/presence/presence/l
 import {ReunionListComponent} from "./components/admin/view/reunion/list/reunion-list.component";
 
 import {UserDashboardComponent} from "./components/user/view/user-dashboard/user-dashboard.component";
-import {UserProfileComponent} from "./components/user/view/user-profile/user-profile.component";
 import {
   DemandeAbsenceListComponent
 } from "./components/user/view/demande/demande-absence/demande-absence-list/demande-absence-list.component";
@@ -73,11 +72,7 @@ export const routes: Routes = [
         path: 'notification', component: NotificationListComponent,
       },
       {
-        path: 'dashboard', component: AdminDashboardComponent,canActivate: [authGuard],
-        data: {
-          roles: ['ADMIN'],
-      }
-
+        path: 'dashboard', component: AdminDashboardComponent,
       },
       {
         path: 'departement', component: DepartementListComponent

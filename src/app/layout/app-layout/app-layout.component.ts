@@ -35,11 +35,15 @@ export class AppLayoutComponent implements OnInit {
   notfs = new Array<NotificationDto>;
 
   constructor(private layoutService: LayoutService, private notificationService: NotificationAdminService, private employeService: EmployeService) {
-
+    this.findProfile(this.matricule as string)
+    console.log("fffff"+this.imgPath)
+    this.notificationService.findNotifications(this.matricule as string).subscribe( (data) => this.notfs = data)
+    console.log(this.notifications)
   }
 
   ngOnInit(): void {
     this.findProfile(this.matricule as string)
+    console.log("fffff"+this.imgPath)
     this.notificationService.findNotifications(this.matricule as string).subscribe( (data) => this.notfs = data)
     console.log(this.notifications)
   }
@@ -59,7 +63,7 @@ export class AppLayoutComponent implements OnInit {
     this.employeService.findProfile(matricule).subscribe(res => {
       this.employe = res;
       this.imgPath = res.imagePath as string;
-      console.log(this.employe);
+      console.log("layout"+this.employe);
     });
   }
 

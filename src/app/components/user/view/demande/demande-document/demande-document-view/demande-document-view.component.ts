@@ -37,9 +37,7 @@ export class DemandeDocumentViewComponent {
     this.typeDocumentService.items = value;
   }
 
-  showDialog(): void {
-    this.service.showDialog();
-  }
+
 
   get item(): DemandeDocumentDto{
     return this.service.item;

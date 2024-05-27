@@ -22,6 +22,7 @@ import {HttpErrorResponse} from "@angular/common/http";
         PaginatorModule,
         SharedModule
     ],
+  providers: [MessageService],
   templateUrl: './demande-conge-edit.component.html',
   styleUrl: './demande-conge-edit.component.css'
 })

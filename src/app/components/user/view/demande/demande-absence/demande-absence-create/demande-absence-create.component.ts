@@ -9,6 +9,8 @@ import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-
 import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.model";
 import {TypeAbsenceService} from "../../../../../../shared/service/user/conge/type-absence.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {EmployeUserService} from "../../../../../../shared/service/user/employe/employe-user.service";
+import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
 
 @Component({
   selector: 'app-demande-absence-create',
@@ -21,37 +23,44 @@ import {HttpErrorResponse} from "@angular/common/http";
     SharedModule,
     FormsModule
   ],
+  providers: [MessageService],
   templateUrl: './demande-absence-create.component.html',
   styleUrl: './demande-absence-create.component.css'
 })
 export class DemandeAbsenceCreateComponent implements OnInit{
 
+  private employe: EmployeDto = new EmployeDto();
+  protected matricule = localStorage.getItem('matricule');
 
-  matricule:string = "";
-
-  constructor(private service : DemandeAbsenceUserService, private typeAbsenceService : TypeAbsenceService, private messageService: MessageService) {
+  constructor(private service : DemandeAbsenceUserService, private typeAbsenceService : TypeAbsenceService, private messageService: MessageService, private employeService: EmployeUserService) {
 
   }
 
   ngOnInit(): void {
     this.typeAbsence = new TypeAbsenceDto();
     this.typeAbsenceService.findAll().subscribe((data) => this.typeAbsences = data);
+    this.findProfile(this.matricule as string)
   }
 
+  public findProfile(matricule: String){
+    this.employeService.findProfile(matricule).subscribe(res => {
+      this.employe = res
+      console.log(this.item);
+    });
+  }
   hideCreateDialog() {
     this.createDialog = false;
   }
 
   public save(item : DemandeAbsenceDto): void {
-    this.matricule = localStorage.getItem('matricule') as string;
-    item.employe.matricule = this.matricule;
+    item.employe = this.employe;
     this.service.save(item).subscribe(data => {
       if (data != null) {
-        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',
           detail:'le Congé a été ajouté avec succès'});
+        this.items.push(data);
       } else {
         this.messageService.add({
           severity:'error',
@@ -65,6 +74,7 @@ export class DemandeAbsenceCreateComponent implements OnInit{
         detail: `Une erreur est survenue`
       });
     });
+    this.hideCreateDialog()
   }
 
   get item(): DemandeAbsenceDto{

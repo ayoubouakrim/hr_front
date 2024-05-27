@@ -25,6 +25,7 @@ import {HttpErrorResponse} from "@angular/common/http";
     FormsModule,
     DatePipe
   ],
+  providers: [MessageService],
   templateUrl: './demande-absence-edit.component.html',
   styleUrl: './demande-absence-edit.component.css'
 })

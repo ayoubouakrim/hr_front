@@ -38,7 +38,7 @@ import {UserService} from "../../../../../../shared/security/shared/service/user
 })
 export class EmployeCreateComponent implements OnInit{
 
-  private imgPath = "assets/empImages/default-avatar.jpg";
+  protected imgPath = "assets/empImages/default-avatar.jpg";
   ngOnInit(): void {
     this.gender = new GenderDto();
     this.genderService.findAll().subscribe((data) => this.genders = data);
@@ -75,6 +75,7 @@ export class EmployeCreateComponent implements OnInit{
     console.log(this.item)
     this.service.save().subscribe(data => {
       if (data != null) {
+        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',

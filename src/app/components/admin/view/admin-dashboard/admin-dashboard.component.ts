@@ -9,6 +9,13 @@ import {EmployeDto} from "../../../../shared/model/employe/employe.model";
 import {DepartementDto} from "../../../../shared/model/departement/departement.model";
 import {CongeDto} from "../../../../shared/model/conge/conge.model";
 import {AuthenticationService} from "../../../../shared/security/shared/service/authentication.service";
+import {DonutChartComponent} from "./donut-chart/donut-chart.component";
+import {User} from "../../../../shared/security/shared/model/user.model";
+import {UserService} from "../../../../shared/security/shared/service/user.service";
+import {ButtonModule} from "primeng/button";
+import {DialogModule} from "primeng/dialog";
+import {PaginatorModule} from "primeng/paginator";
+import {AdminEditComponent} from "./admin-edit/admin-edit.component";
 
 
 @Component({
@@ -17,16 +24,22 @@ import {AuthenticationService} from "../../../../shared/security/shared/service/
   imports: [
     PieChartComponent,
     TableModule,
-    EmployeListComponent
+    EmployeListComponent,
+    DonutChartComponent,
+    ButtonModule,
+    DialogModule,
+    PaginatorModule,
+    AdminEditComponent
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent implements OnInit {
-
+  user: User = new User();
+  employee: EmployeDto = new EmployeDto();
   currentDate: Date = new Date();
 
-  constructor(private employeService: EmployeService, private congeService: CongeAdminService, private departementService: DepartementService,private authService: AuthenticationService) {
+  constructor(private employeService: EmployeService, private congeService: CongeAdminService, private departementService: DepartementService,private authService: AuthenticationService, private userService: UserService) {
     this.employe = new EmployeDto();
     this.employeService.findAll().subscribe((data) => this.employes = data.filter(item => !item.archive));
     this.departement = new DepartementDto();
@@ -51,10 +64,32 @@ export class AdminDashboardComponent implements OnInit {
 
 
   }
-
+  matricule = localStorage.getItem('matricule');
   ngOnInit(): void {
     this.getTotalSalaire();
     this.authService.findAdmin();
+    this.findProfile(this.matricule as string);
+    this.findUser();
+  }
+
+  public findProfile(matricule: String){
+    this.employeService.findProfile(matricule).subscribe(res => {
+      this.employee = res
+      console.log(this.employee);
+    });
+  }
+  public findUser() {
+    const username = localStorage.getItem('username') as string;
+    if (username) {
+      this.userService.findByUsername(username).subscribe({
+        next: (response) => {
+          this.user = response;
+        },
+        error: (error) => {
+          console.error('find failed:', error);
+        }
+      });
+    }
   }
 
 
@@ -65,6 +100,27 @@ export class AdminDashboardComponent implements OnInit {
       this.totalsalaire = data;
     });
     console.log(this._totalsalaire)
+  }
+
+  public edit() {
+    this.item = this.user;
+    this.editDialog = true;
+  }
+
+  get item(): User {
+    return this.userService.item;
+  }
+
+  set item(value: User) {
+    this.userService.item = value;
+  }
+
+  get editDialog(): boolean {
+    return this.userService.editDialog;
+  }
+
+  set editDialog(value: boolean) {
+    this.userService.editDialog = value;
   }
 
   get totalsalaire(): number {

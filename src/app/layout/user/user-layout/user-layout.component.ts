@@ -1,14 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {DialogModule} from "primeng/dialog";
-import {AdminDashboardComponent} from "../../../components/admin/view/admin-dashboard/admin-dashboard.component";
 import {AppSidebarComponent} from "../../app-sidebar/app-sidebar.component";
 
 import {NotificationDto} from "../../../shared/model/notification/notification.model";
 import {LayoutService} from "../../../shared/service/layout/layout.service";
-import {NotificationAdminService} from "../../../shared/service/admin/notification/notification.service";
-import {EmployeService} from "../../../shared/service/admin/employe/employe.service";
 import {EmployeDto} from "../../../shared/model/employe/employe.model";
 import {NotificationUserService} from "../../../shared/service/user/notification/notification-user.service";
 import {EmployeUserService} from "../../../shared/service/user/employe/employe-user.service";
@@ -21,7 +18,6 @@ import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
   selector: 'app-layout',
   standalone: true,
   imports: [
-    AdminDashboardComponent,
     AppSidebarComponent,
     RouterOutlet,
     RouterLink,
@@ -33,7 +29,7 @@ import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css'
 })
-export class UserLayoutComponent {
+export class UserLayoutComponent implements OnInit{
 
   matricule = localStorage.getItem('matricule');
   imgPath = "";

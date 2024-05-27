@@ -5,9 +5,11 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {CommissionAdminService} from "../../../../../../shared/service/admin/employe/commission.service";
 import {CommissionDto} from "../../../../../../shared/model/employe/commission.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-commission-create',
@@ -18,13 +20,15 @@ import {CommissionDto} from "../../../../../../shared/model/employe/commission.m
     DropdownModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './commission-create.component.html',
   styleUrl: './commission-create.component.css'
 })
 export class CommissionCreateComponent {
-  constructor(private service: CommissionAdminService, private employeService: EmployeService) {
+  constructor(private service: CommissionAdminService, private employeService: EmployeService, private messageService: MessageService) {
     this.employe = new EmployeDto()
     this.employeService.findAll().subscribe((data) => this.employes = data);
 
@@ -33,11 +37,26 @@ export class CommissionCreateComponent {
   public save(): void {
     this.service.save().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.items.push(data);
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'la commission a été ajouté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'la commission n\'a pas été ajouté'});
       }
+
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.createDialog = false;
   }
   get item(): CommissionDto {
     return this.service.item;

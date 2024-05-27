@@ -12,6 +12,7 @@ import {DepartementDto} from "../../../../../../shared/model/departement/departe
 import {GenderService} from "../../../../../../shared/service/admin/employe/gender.service";
 import {PostService} from "../../../../../../shared/service/admin/employe/post.service";
 import {DepartementService} from "../../../../../../shared/service/admin/departement/departement.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-employe-view',
@@ -21,7 +22,8 @@ import {DepartementService} from "../../../../../../shared/service/admin/departe
         DialogModule,
         DropdownModule,
         PaginatorModule,
-        SharedModule
+        SharedModule,
+        DatePipe
     ],
   templateUrl: './employe-view.component.html',
   styleUrl: './employe-view.component.css'

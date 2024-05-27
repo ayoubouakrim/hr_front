@@ -9,6 +9,7 @@ import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.mode
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
+import {NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-demande-conge-list',
@@ -18,6 +19,7 @@ import {EtatDemandeService} from "../../../../../../shared/service/admin/demande
     SharedModule,
     TableModule,
     DemandeCongeViewComponent,
+    NgStyle,
   ],
   templateUrl: './demande-conge-list.component.html',
   styleUrl: './demande-conge-list.component.css'
@@ -39,6 +41,17 @@ export class DemandeCongeListAdminComponent implements OnInit{
       this.item = res;
       this.editDialog = true;
     });
+  }
+  public getColor(status: string): string {
+    if (status === 'c3') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'c1') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'c2') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
   }
 
   ngOnInit(): void {

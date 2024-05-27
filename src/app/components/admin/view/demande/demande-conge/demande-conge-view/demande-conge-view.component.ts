@@ -7,6 +7,7 @@ import {DemandeCongeDto} from "../../../../../../shared/model/demande/demande-co
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
+import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
 
 @Component({
   selector: 'app-demande-conge-view',
@@ -86,8 +87,9 @@ export class DemandeCongeViewComponent {
     this.etatDemandeService.items = value;
   }
 
-  accepter(item: DemandeCongeDto){
-    this.item.etatDemande.libelle="Accepte";
+  accepter(item:DemandeCongeDto){
+    this.item.etatDemande.code="c1";
+    this.item.etatDemande.libelle="Acceptée";
     this.service.update(item).subscribe(data => {
       if (data != null) {
         alert("OK");
@@ -96,7 +98,8 @@ export class DemandeCongeViewComponent {
       }
     });
   }
-  refuser(item: DemandeCongeDto){
+  refuser(item:DemandeCongeDto){
+    this.item.etatDemande.code="c2";
     this.item.etatDemande.libelle="refuse";
     this.service.update(item).subscribe(data => {
       if (data != null) {

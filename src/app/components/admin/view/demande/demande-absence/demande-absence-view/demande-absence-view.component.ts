@@ -83,9 +83,8 @@ export class DemandeAbsenceViewComponent {
   }
 
   accepter(item:DemandeAbsenceDto){
+    this.item.etatDemande.code="c1";
     this.item.etatDemande.libelle="Acceptée";
-    this.item.etatDemande.id=null;
-    this.item.etatDemande.code="";
     this.service.update(item).subscribe(data => {
       if (data != null) {
         alert("OK");
@@ -95,6 +94,7 @@ export class DemandeAbsenceViewComponent {
     });
   }
   refuser(item:DemandeAbsenceDto){
+    this.item.etatDemande.code="c2";
     this.item.etatDemande.libelle="refuse";
     this.service.update(item).subscribe(data => {
       if (data != null) {
