@@ -14,13 +14,13 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="6" >participants</label>
+        <label for="6" >Employés informés </label>
         <p-multiSelect
           id="6"
           [options]="employes"
           [(ngModel)]="selectedEmployees"
           optionLabel="nom"
-          placeholder="Select participants"
+          placeholder="Select les employés informés."
           [style]="{'width': '100%'}"/>
       </div>
     </div>
@@ -45,3 +45,4 @@
   </ng-template>
 
 </p-dialog>
+<p-toast></p-toast>

@@ -59,13 +59,13 @@ export class DemandeAbsenceCreateComponent implements OnInit{
         this.messageService.add({
           severity:'success',
           summary:'Succès',
-          detail:'le Congé a été ajouté avec succès'});
+          detail:'l\'absence a été ajouté avec succès'});
         this.items.push(data);
       } else {
         this.messageService.add({
           severity:'error',
           summary:'échec',
-          detail:'le conge n\'a pas été ajouté'});
+          detail:'l\'absence n\'a pas été ajouté'});
       }
     }, (error: HttpErrorResponse) => {
       this.messageService.add({
@@ -74,7 +74,7 @@ export class DemandeAbsenceCreateComponent implements OnInit{
         detail: `Une erreur est survenue`
       });
     });
-    this.hideCreateDialog()
+    this.hideCreateDialog();
   }
 
   get item(): DemandeAbsenceDto{
