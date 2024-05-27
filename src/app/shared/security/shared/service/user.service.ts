@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user.model";
+import {PasswordEmailChange} from "../model/password-email-change.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class UserService {
   }
   public findAll() {
     return this.http.get<Array<User>>(this.url );
+  }
+
+  public updatePassword(passwordAndEmailChange : PasswordEmailChange){
+    return this.http.put(this.url + "/password/update", passwordAndEmailChange);
   }
 
   get item(): User {

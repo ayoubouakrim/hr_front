@@ -12,7 +12,7 @@
       <span class="ms-3 d-md-none">GFG Portal</span>
       <div class="ms-auto">
         <a href="#" class="sidebar-link a" (click)="showNotifi($event)">
-          <i class="fa fa-bell"></i>
+          <i class="fa fa-bell"><span class="notification-badge" *ngIf="arrayOfNotifications.length > 0">{{ arrayOfNotifications.length }}</span></i>
         </a>
         <a class="a" routerLink="/app-user/profile/">
           <img

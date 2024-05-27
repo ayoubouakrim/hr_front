@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HoraireDto} from "../../../model/presence/horaire.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {AbsenceDto} from "../../../model/conge/absence.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,25 +12,7 @@ export class HoraireUserService {
   private _items: Array<HoraireDto> | undefined;
   private url = 'http://localhost:8089/api/v1/user/horaire';
 
-  private _editDialog: boolean = false;
-  private _createDialog: boolean = false;
   private _viewDialog: boolean = false;
-
-  get editDialog(): boolean {
-    return this._editDialog;
-  }
-
-  set editDialog(value: boolean) {
-    this._editDialog = value;
-  }
-
-  get createDialog(): boolean {
-    return this._createDialog;
-  }
-
-  set createDialog(value: boolean) {
-    this._createDialog = value;
-  }
 
   get viewDialog(): boolean {
     return this._viewDialog;
@@ -42,21 +25,14 @@ export class HoraireUserService {
   constructor(private http: HttpClient) {
 
   }
-  public save(): Observable<HoraireDto> {
-    return this.http.post<HoraireDto>(this.url + "/add", this.item);
-  }
 
-  public update(): Observable<HoraireDto> {
-    return this.http.put<HoraireDto>(this.url + "/update", this.item);
-  }
-  public findAll() {
-    return this.http.get<Array<HoraireDto>>(this.url + "/all");
-  }
-  public delete(dto: HoraireDto) {
-    return this.http.delete<number>(this.url + '/code/' + dto.code);
-  }
   public findByCode(dto: HoraireDto) {
     return this.http.get<HoraireDto>(this.url + '/code/' + dto.code);
+  }
+
+  public findByEmployeMatricule(){
+    const matricule = localStorage.getItem('matricule') as string;
+    return this.http.get<Array<HoraireDto>>(this.url + '/employe/matricule/' + matricule);
   }
   get item(): HoraireDto {
     if (this._item == null) {

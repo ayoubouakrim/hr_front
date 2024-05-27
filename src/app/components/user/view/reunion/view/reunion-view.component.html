@@ -1,0 +1,45 @@
+<p-dialog header="Réunion" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="1">code</label>
+        <input class="form-control my-2" id="1" type="text" [disabled]="true" [(ngModel)]="item.code">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="2">title</label>
+        <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.title">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">debut</label>
+        <input class="form-control my-2" id="3" type="text" [disabled]="true" [ngModel]="item.heureDebut">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">fin</label>
+        <input class="form-control my-2" id="4" type="text" [disabled]="true" [ngModel]="item.heureFin">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="5">date</label>
+        <input class="form-control my-2" id="5" type="text" [disabled]="true" [ngModel]="item.date | date:'yyyy-MM-dd'">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="7">objectif</label>
+        <input class="form-control my-2" id="7" type="text" [disabled]="true" [(ngModel)]="item.objectif">
+      </div>
+    </div>
+
+  </div>
+
+</p-dialog>
+

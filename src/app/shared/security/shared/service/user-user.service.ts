@@ -18,8 +18,12 @@ export class UserUserService {
   constructor(private http: HttpClient) {
   }
 
-  public updatePasswordAndEmail(passwordAndEmailChange : PasswordEmailChange) {
+  public updatePasswordAndEmail() {
     return this.http.put(this.url + "/update", this.item);
+}
+
+public updatePassword(passwordAndEmailChange : PasswordEmailChange){
+  return this.http.put(this.url + "/password/update", passwordAndEmailChange);
 }
 
 public findByUsername(username : string) {

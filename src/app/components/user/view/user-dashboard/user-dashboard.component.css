@@ -1,14 +1,14 @@
 .btn-classe {
-  background: #e8b68c;
+  background: #58878c;
   border: none;
   border-radius: 5px;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .btn-classe:hover {
-  background: #bd400a;
+  background: #457175;
 }
 
 .class1 {
@@ -32,8 +32,8 @@
 }
 
 .cardView {
-  background: linear-gradient(to right, #f5893b, #f62828);
-  color: white;
+  background: linear-gradient(to right, #b4b3b3, #e3e0e0);
+  color: #4d4141;
 }
 
 .custom-icon {
@@ -54,7 +54,7 @@
 
 .btnClass2 {
   font-size: 20px;
-  margin-top: -90%;
+  margin-top: -113%;
   margin-left: 80%;
   color: #000000;
 }
@@ -65,12 +65,12 @@
 
 .btnClassbtn{
   font-size: 20px;
-  margin-top: -98%;
+  margin-top: -113%;
   margin-left: 80%;
   color: #000000;
 }
 
-.btnClassbtn{
+.btnClassbtn:hover{
   color: #605f5f;
 }
 
@@ -83,7 +83,7 @@
 .btnClass3{
   font-size: 20px;
   margin-top: -17%;
-  margin-left: 20%;
+  margin-left: 32%;
   color: #000000;
 }
 
@@ -111,12 +111,12 @@
   margin-left: 10%;
   height:60%;
   display: flex;
-  background-color: #fa8426;
+  background-color: #58878c;
   color: white;
 }
 
 :hover.btn-classe1{
-  background-color: #fc9849;
+  background-color: #457175;
   color: white;
 }
 
@@ -322,7 +322,7 @@
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
-  color: var(--text-color);
+  color: #999a74;
   background-color: var(--surface-hover);
 }
 .i-classe{
@@ -333,6 +333,6 @@
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
-  color: var(--text-color);
+  color: #999a74;
   background-color: var(--surface-hover);
 }

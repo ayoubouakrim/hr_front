@@ -11,25 +11,7 @@ export class PresenceUserService {
   private _items: Array<PresenceDto> | undefined;
   private url = 'http://localhost:8089/api/v1/user/presence';
 
-  private _editDialog: boolean = false;
-  private _createDialog: boolean = false;
   private _viewDialog: boolean = false;
-
-  get editDialog(): boolean {
-    return this._editDialog;
-  }
-
-  set editDialog(value: boolean) {
-    this._editDialog = value;
-  }
-
-  get createDialog(): boolean {
-    return this._createDialog;
-  }
-
-  set createDialog(value: boolean) {
-    this._createDialog = value;
-  }
 
   get viewDialog(): boolean {
     return this._viewDialog;
@@ -42,6 +24,7 @@ export class PresenceUserService {
   constructor(private http: HttpClient) {
 
   }
+
   public save(): Observable<PresenceDto> {
     return this.http.post<PresenceDto>(this.url + "/add", this.item);
   }
@@ -49,18 +32,18 @@ export class PresenceUserService {
   public update(): Observable<PresenceDto> {
     return this.http.put<PresenceDto>(this.url + "/update", this.item);
   }
-  public findAll() {
-    return this.http.get<Array<PresenceDto>>(this.url + "/all");
-  }
-  public delete(dto: PresenceDto) {
-    return this.http.delete<number>(this.url + '/code/' + dto.code);
-  }
-  public findByCode(dto: PresenceDto) {
-    return this.http.get<PresenceDto>(this.url + '/code/' + dto.code);
+
+  public findById(dto: PresenceDto) {
+    return this.http.get<PresenceDto>(this.url + '/find/id/' + dto.id);
   }
 
   public findByEmployeMatriculeAndDatee( matricule : string, datee : string){
     return this.http.get<PresenceDto>(this.url + '/matricule/' + matricule +'/date/'+ datee);
+  }
+
+  public findByEmployeMatricule(){
+    const matricule = localStorage.getItem('matricule') as string;
+    return this.http.get<Array<PresenceDto>>(this.url + '/employe/matricule/' + matricule);
   }
 
   get item(): PresenceDto {

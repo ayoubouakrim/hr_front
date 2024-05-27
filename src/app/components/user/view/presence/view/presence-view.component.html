@@ -1,0 +1,30 @@
+<p-dialog header="Presence" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="7">nom</label>
+        <input class="form-control my-2" id="7" type="text" [disabled]="true" [ngModel]="item.employe.nom+ ' ' +item.employe.prenom">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="3">heure d'arrivée</label>
+        <input class="form-control my-2" id="3" type="text" [disabled]="true" [ngModel]="item.heureArrivee">
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">heure de départ</label>
+        <input class="form-control my-2" id="4" type="text" [disabled]="true" [ngModel]="item.heureDepart">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="5">date</label>
+        <input class="form-control my-2" id="5" type="text" [disabled]="true" [(ngModel)]="item.datee">
+      </div>
+    </div>
+  </div>
+</p-dialog>

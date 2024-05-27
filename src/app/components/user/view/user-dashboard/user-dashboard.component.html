@@ -1,30 +1,17 @@
 <div class="container-fluid">
-  <!--<div class="row my-3" [ngStyle]="{ 'display': isButtonClicked ? 'none' : 'block' }">
-    <div class="col-sm-12 mb-3">
-      <div class="card text-center card-annonce">
-        <div class="card-body">
-          <i class="bi bi-question-circle custom-icon"></i>
-          <b class="bnotClass">{{this.notifications[currentNotificationIndex].objectif}}</b>
-        </div>
-        <button type="button" class="btn btn-link btnClass1" (click)="onClicked()">
-          <i class="bi bi-x"></i>
-        </button>
-      </div>
-    </div>
-  </div>-->
   <div class="row my-3 d-flex align-items-stretch">
     <div class="col-sm-6 mb-3">
       <div class="card cardView h-100">
         <div class="card-body">
           <div class="pre-div">
-            <h3 class="card-title">Bonjour, {{this.prenom}}</h3>
-            <h5 *ngIf="nbReunions !== 0" class="card-text">Vous avez <u class="underline-text">{{this.nbReunions}} reunions</u> Aujourd'hui,</h5>
+            <h3 class="card-title">Bonjour, {{employe.prenom}}</h3>
+            <h5 *ngIf="reunions.length !== 0" class="card-text">Vous avez <u class="underline-text">{{ reunions.length === 1 ? 'une' : (reunions.length <= 10 ? convertirEnMots(reunions.length) : reunions.length) }}</u> réunion{{ reunions.length <= 1 ? '' : 's' }} aujourd'hui,</h5>
             <button type="button" data-mdb-button-init data-mdb-ripple-init
                     class="btn btn-classe btn-lg btn-block btn-primary btn-sm" (click)="showProfil()">Voir profile
             </button>
           </div>
           <div class="circle-image">
-            <img src="{{this.path}}" alt="Image">
+            <img src="{{employe.imagePath}}" alt="Image">
           </div>
         </div>
       </div>
@@ -47,13 +34,13 @@
             </div>
             <div class="row mx-3">
               <div class="col-sm-4">
-                <p>Heure Debut<br>{{parseDate(this.horaire.debut)}}</p>
+                <p>Heure Debut<br>{{parseDate(horaire.debut)}}</p>
               </div>
               <div class="col-sm-4">
-                <p>Heure Fin<br>{{parseDate(this.horaire.fin)}}</p>
+                <p>Heure Fin<br>{{parseDate(horaire.fin)}}</p>
               </div>
               <div class="col-sm-4">
-                <p>Pause:<br>{{this.horaire.pause}} Heure</p>
+                <p>Pause:<br>{{horaire.pause}} Heure</p>
               </div>
             </div>
           </div>
@@ -96,21 +83,18 @@
         <div class="mt-2 mp-n1 mx-3">
           <h5>Présence et congés</h5>
         </div>
-        <select class="form-select select-classe" aria-label="Today">
-          <option selected>2024</option>
-        </select>
         <div class="card-body">
-          <div class="mx-5">
-            <p class="card-text"><span style="color:#fc6132">3</span><br> Total<br> Congés</p>
+          <div class="mx-4">
+            <p class="card-text"><span style="color:#fc6132">{{totaleCongeDispo}}</span><br> Congés<br> disponibles</p>
             <p class="card-text"><span style="color:#ae08f6">3</span><br> En attente<br> d'approbation</p>
           </div>
-          <div class="mx-5">
+          <div class="mx-4">
             <p class="card-text"><span style="color:#e84646">3</span><br> Congés<br> pris</p>
             <p class="card-text"><span style="color:#657cef">3</span><br> Jours<br> travaillés</p>
           </div>
-          <div class="mx-5">
+          <div class="mx-4">
             <p class="card-text"><span style="color:#02801f">3</span><br> Congés<br> absents</p>
-            <p class="card-text"><span style="color:#e00517">3</span><br> Perte de<br> salaire</p>
+            <p class="card-text"><span style="color:#e00517">3</span><br> <br> pris</p>
           </div>
         </div>
         <div class="card-footer" style="height:50px">
@@ -121,7 +105,4 @@
     </div>
   </div>
 </div>
-
-
-<!--(click)="viewProfil()"-->
 

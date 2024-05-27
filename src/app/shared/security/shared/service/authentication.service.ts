@@ -13,7 +13,7 @@ export class AuthenticationService {
   private matricule: string = "";
 
 
-  constructor(private http: HttpClient, private employeUserService: EmployeUserService, private employeService: EmployeService) {
+  constructor(private http: HttpClient, private employeService: EmployeService) {
   }
 
   get loginRequest(): LoginRequest {
@@ -35,21 +35,9 @@ export class AuthenticationService {
     return !!localStorage.getItem('token');
   }
 
-  findEmploye() {
-    const username = localStorage.getItem('username') as string;
-    const subscription = this.employeUserService.findByUserUsername(username).subscribe({
-      next: (res) => {
-        this.matricule = res.matricule as string;
-        localStorage.setItem('matricule', this.matricule);
-      },
-      error: (error) => {
-        console.error("Erreur lors de la recherche de l'employé : ", error);
-      }
-    });
-  }
   findAdmin() {
     const username = localStorage.getItem('username') as string;
-    const subscription = this.employeService.findByUserUsername(username).subscribe({
+    this.employeService.findByUserUsername(username).subscribe({
       next: (res) => {
         this.matricule = res.matricule as string;
         localStorage.setItem('matricule', this.matricule);

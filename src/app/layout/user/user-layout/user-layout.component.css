@@ -60,3 +60,16 @@ html, body {
 .text-1 {
   color: #f1764d;
 }
+
+.notification-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 0.8em;
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.8rem;
+  background-color: yellow;
+  color: black;
+}

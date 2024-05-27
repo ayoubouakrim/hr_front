@@ -12,34 +12,7 @@ export class NotificationUserService {
   private _items: Array<NotificationDto> | undefined;
   private url = 'http://localhost:8089/api/v1/user/notification';
 
-  private _editDialog: boolean = false;
-  private _createDialog: boolean = false;
   private _viewDialog: boolean = false;
-  private _extractedEmployees: EmployeDto[] = [];
-
-
-  get extractedEmployees(): EmployeDto[] {
-    return this._extractedEmployees;
-  }
-
-  set extractedEmployees(value: EmployeDto[]) {
-    this._extractedEmployees = value;
-  }
-  get editDialog(): boolean {
-    return this._editDialog;
-  }
-
-  set editDialog(value: boolean) {
-    this._editDialog = value;
-  }
-
-  get createDialog(): boolean {
-    return this._createDialog;
-  }
-
-  set createDialog(value: boolean) {
-    this._createDialog = value;
-  }
 
   get viewDialog(): boolean {
     return this._viewDialog;
@@ -52,28 +25,16 @@ export class NotificationUserService {
   constructor(private http: HttpClient) {
 
   }
-  public save(): Observable<NotificationDto> {
-    return this.http.post<NotificationDto>(this.url + "/add", this.item);
-  }
 
-  public update(dto :NotificationDto): Observable<NotificationDto> {
+  public updateChecked(dto :NotificationDto): Observable<NotificationDto> {
     return this.http.put<NotificationDto>(this.url + "/update", dto);
-  }
-  public findAll() {
-    return this.http.get<Array<NotificationDto>>(this.url + "/all");
-  }
-  public delete(dto: NotificationDto) {
-    return this.http.delete<number>(this.url + '/code/' + dto.code);
   }
   public findByCode(dto: NotificationDto) {
     return this.http.get<NotificationDto>(this.url + '/code/' + dto.code);
   }
-  public updatePar(dto: NotificationDto): Observable<EmployeDto> {
-    return this.http.put<EmployeDto>(this.url + '/update', dto);
-  }
 
-  public findByMatriculeAndIsCheked(matricule : string,isChecked : boolean){
-    return this.http.get<Array<NotificationDto>>(this.url + "/matricule/"+matricule+"/isChecked/"+isChecked);
+  public findByMatriculeAndCheked(matricule : string,checked : boolean){
+    return this.http.get<Array<NotificationDto>>(this.url + "/matricule/"+matricule+"/checked/"+checked);
   }
 
   get item(): NotificationDto {

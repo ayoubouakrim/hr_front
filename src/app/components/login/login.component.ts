@@ -5,6 +5,8 @@ import {AuthenticationService} from "../../shared/security/shared/service/authen
 import {TokenService} from "../../shared/security/shared/service/token.service";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {EmployeUserService} from "../../shared/service/user/employe/employe-user.service";
+import {EmployeDto} from "../../shared/model/employe/employe.model";
 
 @Component({
   selector: 'app-login',
@@ -22,11 +24,13 @@ export class LoginComponent implements OnInit {
   isUsernameFocused: boolean = false;
   isPasswordFocused: boolean = false;
   isChecked: boolean = false;
+  username : string = "";
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private employeService: EmployeUserService,
   ) {
   }
 
@@ -38,8 +42,8 @@ export class LoginComponent implements OnInit {
         this.tokenService.token = res.body?.token as string;
         if (res.body?.token != null) {
           if (res.body?.username != null) {
-            const user = res.body?.username;
-            localStorage.setItem('username',user)
+            this.username = res.body?.username;
+            localStorage.setItem('username',this.username);
           }
         }
         if (this.tokenService.userRoles.includes("ADMIN")) {
@@ -81,6 +85,10 @@ export class LoginComponent implements OnInit {
 
   set loginRequest(value: LoginRequest) {
     this.authService.loginRequest = value;
+  }
+
+  set employe(value: EmployeDto) {
+    this.employeService.item = value;
   }
 }
 

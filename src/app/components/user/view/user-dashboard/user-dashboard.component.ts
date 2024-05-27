@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PieChartComponent} from "../../../admin/view/admin-dashboard/pie-chart/pie-chart.component";
-import {DatePipe, NgStyle, Time} from "@angular/common";
-import {AuthenticationService} from "../../../../shared/security/shared/service/authentication.service";
+import {CommonModule, DatePipe,  NgStyle} from "@angular/common";
 import {PresenceUserService} from "../../../../shared/service/user/presence/presence-user.service";
 import {PresenceDto} from "../../../../shared/model/presence/presence.model";
 import {format} from 'date-fns';
@@ -14,96 +13,81 @@ import {NotificationUserService} from "../../../../shared/service/user/notificat
 import {NotificationDto} from "../../../../shared/model/notification/notification.model";
 import {ReunionUserService} from "../../../../shared/service/user/reunion/reunion-user.service";
 import {ReunionDto} from "../../../../shared/model/reunion/reunion.model";
+import {EmployeDto} from "../../../../shared/model/employe/employe.model";
+import {CongeUserService} from "../../../../shared/service/user/conge/conge-user.service";
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
   imports: [
     PieChartComponent,
+    CommonModule,
     NgStyle,
     DatePipe
   ],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
-export class UserDashboardComponent implements OnInit {
-  isButtonClicked: boolean = false;
+export class UserDashboardComponent implements OnInit{
   datee: Date = new Date();
   debut: Date = new Date();
   fin: Date = new Date();
-  prenom: string = "";
-  path: string = "";
-  nbReunions: number = 0;
-  public notifications: Array<NotificationDto>;
-  currentNotificationIndex: number = 0;
+  totaleCongeDispo : number = 0;
 
-  constructor(private authService: AuthenticationService, private presenceUserService: PresenceUserService,
+  constructor(private presenceUserService: PresenceUserService,
               private employeService: EmployeUserService, private horaireService: HoraireUserService,
               private layoutService: LayoutService, private router: Router, private notificationService: NotificationUserService,
-              private reunionService: ReunionUserService) {
-    this.notifications = new Array<NotificationDto>();
-  }
-
-  onClicked() {
-    if (this.notifications && this.notifications.length > 0 && this.currentNotificationIndex < this.notifications.length) {
-      this.notifications[this.currentNotificationIndex].isChecked = true;
-      this.notificationService.update(this.notifications[this.currentNotificationIndex]).subscribe({
-        next: (response) => {
-          console.error('Save successful:', response);
-        },
-        error: (error) => {
-          console.error('Update failed:', error);
-        }
-      });
-      this.currentNotificationIndex++;
-      if (this.currentNotificationIndex >= this.notifications.length) {
-        this.isButtonClicked = !this.isButtonClicked;
-      }
-    }
+              private reunionService: ReunionUserService, private congeService :CongeUserService) {
   }
 
   ngOnInit() {
-    this.authService.findEmploye();
-    const matricule = localStorage.getItem('matricule') as string;
-    this.reunionService.findByEmployesMatricule(matricule).subscribe({
-      next: (response) => {
-        this.reunions = response;
-      },
-      error: (error) => {
-        console.error('find failed:', error);
-      }
-    });
-    if(this.nbReunions) {
-      this.nbReunions = this.reunions.length;
+    let username = localStorage.getItem('username')
+    if(username) {
+      this.employeService.findByUserUsername(username).subscribe({
+        next: (res) => {
+          this.employe = res;
+          this.horaire = res.horaire;
+          let matricule = res.matricule as string;
+          localStorage.setItem('matricule', matricule);
+          if(matricule) {
+            this.reunionService.findByEmployesMatricule(matricule).subscribe({
+              next: (response) => {
+                this.reunions = response;
+              },
+              error: (error) => {
+                console.error('find failed:', error);
+              }
+            });
+            this.notificationService.findByMatriculeAndCheked(matricule, false).subscribe({
+              next: (response) => {
+                this.notifications = response;
+              },
+              error: (error) => {
+                console.error('find failed:', error);
+              }
+            });
+            this.caculeCongeDispo();
+          }
+        },
+        error: (error) => {
+          console.error("Erreur lors de la recherche de l'employé : ", error);
+        }
+      });
     }
-    this.employeService.findByMatricule(matricule).subscribe({
-      next: (response) => {
-        this.prenom = response.prenom as string;
-        this.path = response.imagePath as string;
-        this.horaire = response.horaire;
-      },
-      error: (error) => {
-        console.error('find failed:', error);
-      }
-    });
-    this.notificationService.findByMatriculeAndIsCheked(matricule, false).subscribe({
-      next: (response) => {
-        this.notifications = response;
-      },
-      error: (error) => {
-        console.error('find failed:', error);
-      }
-    });
   }
 
   parseDate(dateArray: number[] | any): string {
-    if (!dateArray || !Array.isArray(dateArray) || dateArray.length !== 3) {
-      //console.error('Invalid date array:', dateArray);
-      return '';
+    if(dateArray) {
+      if (dateArray || Array.isArray(dateArray) || dateArray.length == 3) {
+        const [hours, minutes, seconds] = dateArray;
+        const formattedDate = `${hours}:${minutes}:${seconds}`;
+        return formattedDate;
+      }else{
+        return "";
+      }
+    }else{
+      return "";
     }
-    const [hours, minutes, seconds] = dateArray;
-    const formattedDate = `${hours}:${minutes}:${seconds}`;
-    return formattedDate;
   }
 
   showProfil() {
@@ -133,7 +117,7 @@ export class UserDashboardComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.error('find failed:', error);
+        console.error('Save failed:', error);
       }
     });
   }
@@ -155,6 +139,62 @@ export class UserDashboardComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+      }
+    });
+  }
+
+  convertirEnMots(nombre: number): string {
+    if (nombre === 0) {
+      return 'zéro';
+    }
+    const unites = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
+    const dixAvingt = ['dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf'];
+    const dizaines = ['', '', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante-dix', 'quatre-vingt', 'quatre-vingt-dix'];
+    const grandesUnites = ['', 'mille', 'million', 'milliard', 'billion', 'billiard', 'trillion', 'trilliard', 'quadrillion', 'quadrilliard'];
+    const mots: string[] = [];
+    let i = 0;
+    while (nombre > 0) {
+      const troisChiffres = nombre % 1000;
+      if (troisChiffres !== 0) {
+        const motsTroisChiffres = [];
+        const centaines = Math.floor(troisChiffres / 100);
+        const resteCentaines = troisChiffres % 100;
+        if (centaines > 1) {
+          motsTroisChiffres.push(unites[centaines] + ' cents');
+        } else if (centaines === 1) {
+          motsTroisChiffres.push('cent');
+        }
+        if (resteCentaines >= 10 && resteCentaines < 20) {
+          motsTroisChiffres.push(dixAvingt[resteCentaines - 10]);
+        } else {
+          const dizaine = Math.floor(resteCentaines / 10);
+          const unite = resteCentaines % 10;
+          if (dizaine > 0) {
+            motsTroisChiffres.push(dizaines[dizaine]);
+          }
+          if (unite > 0) {
+            motsTroisChiffres.push(unites[unite]);
+          }
+        }
+        const uniteGrande = grandesUnites[i];
+        if (uniteGrande) {
+          motsTroisChiffres.push(uniteGrande);
+        }
+        mots.unshift(motsTroisChiffres.join(' '));
+      }
+      nombre = Math.floor(nombre / 1000);
+      i++;
+    }
+    return mots.join(' ');
+  }
+
+  caculeCongeDispo(){
+    this.congeService.caculeCongeDispo().subscribe({
+      next: (response) => {
+        this.totaleCongeDispo = Math.floor(response);
+      },
+      error: (error) => {
+        console.error('find failed:', error);
       }
     });
   }
@@ -181,5 +221,17 @@ export class UserDashboardComponent implements OnInit {
 
   set reunions(value: Array<ReunionDto>) {
     this.reunionService.items = value;
+  }
+
+  get employe(): EmployeDto {
+    return this.employeService.item;
+  }
+
+  set employe(value: EmployeDto) {
+    this.employeService.item = value;
+  }
+
+  set notifications(value: Array<NotificationDto>) {
+    this.notificationService.items = value;
   }
 }

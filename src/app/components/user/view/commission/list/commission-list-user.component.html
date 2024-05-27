@@ -1,0 +1,58 @@
+<div class="card my-3">
+  <div class="card-body d-flex justify-content-between align-items-center">
+    <div>
+
+      <h5 class="card-title">Commission</h5>
+      <p class="card-text">dashboard > commission</p>
+    </div>
+  </div>
+</div>
+
+<p-table [value]="items" [tableStyle]="{'min-width': '1rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="code">code
+        <p-sortIcon field="code"></p-sortIcon>
+      </th>
+      <th pSortableColumn="employe">nom
+        <p-sortIcon field="employe"></p-sortIcon>
+      </th>
+      <th pSortableColumn="objectif">objectif
+        <p-sortIcon field="objectif"></p-sortIcon>
+      </th>
+      <th pSortableColumn="mountant">mountant
+        <p-sortIcon field="mountant"></p-sortIcon>
+      </th>
+      <th pSortableColumn="mois">mois
+        <p-sortIcon field="mois"></p-sortIcon>
+      </th>
+      <th pSortableColumn="annee">annee
+        <p-sortIcon field="annee"></p-sortIcon>
+      </th>
+
+      <th pSortableColumn="action" style="width : 20%">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.code }}</td>
+      <td>{{ item.employe?.nom }}</td>
+      <td>{{ item.objectif }}</td>
+      <td>{{ item.montant }} Dh</td>
+      <td>{{ item.mois }}</td>
+      <td>{{ item.annee }}</td>
+
+      <td>
+        <div class="btn-group" role="group"
+             aria-label="Basic outlined example">
+          <button type="button"
+                  class="btn btn-sm btn-outline-secondary" (click)="view(item)">
+            <i class="fa fa-circle-info"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<app-commission-view></app-commission-view>
+

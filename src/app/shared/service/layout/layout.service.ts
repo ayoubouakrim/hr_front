@@ -11,6 +11,7 @@ export class LayoutService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('matricule');
+    localStorage.removeItem('datee');
     localStorage.removeItem('username');
     window.location.reload();
   }

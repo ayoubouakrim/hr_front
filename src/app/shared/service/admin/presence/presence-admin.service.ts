@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class PresenceAdminService {
   private _item: PresenceDto | undefined;
   private _items: Array<PresenceDto> | undefined;
-  private url = 'http://localhost:8089/api/v1/presence';
+  private url = 'http://localhost:8089/api/v1/admin/presence';
 
   private _editDialog: boolean = false;
   private _createDialog: boolean = false;

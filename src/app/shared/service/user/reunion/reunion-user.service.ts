@@ -42,7 +42,7 @@ export class ReunionUserService {
 
   }
   public findByCode(code: String) {
-    return this.http.get<ReunionDto>(this.url + '/code/' + code);
+    return this.http.get<ReunionDto>(this.url + '/find/code/' + code);
   }
 
   public findByEmployesMatricule(matricule : string){
