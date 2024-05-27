@@ -34,6 +34,7 @@ export class AdminEditComponent {
   }
 
   public update(): void {
+    this.item.password = this.passwordSaisie;
     this.userService.update().subscribe(data => {
       if (data != null) {
         this.messageService.add({
