@@ -12,29 +12,26 @@
         <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.libelle">
       </div>
     </div>
-    <div class="col-md-6">
+  </div>
+  <div class="row my-3">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="3">date creation</label>
         <input class="form-control my-2" id="3" type="text" [(ngModel)]="item.dateCreation">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="4">nombre de employes</label>
         <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.nbrEmploye">
       </div>
     </div>
-  </div>
-  <div class="row my-3">
-    <div class="col-md-12">
+
+
+    <div class="col-md-4">
       <div class="form-group">
-        <label for="5" class="dropdown-label">Employe</label>
-        <div class="dropdown-container">
-          <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="item.chef" id="5" [filter]="true" filterMatchMode="contains"
-                      [showClear]="true" optionLabel="nom" placeholder="chef" class="custom-dropdown"
-                      [style]="{'width': '100%', 'max-height': '200px', 'overflow-y': 'auto'}">
-          </p-dropdown>
-        </div>
+        <label for="5">chef</label>
+        <input class="form-control my-2" id="5" type="text" [(ngModel)]="item.chef">
       </div>
     </div>
 

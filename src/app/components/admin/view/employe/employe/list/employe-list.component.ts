@@ -56,7 +56,6 @@ export class EmployeListComponent implements OnInit{
           this.ListData[k].prenom,
           this.ListData[k].nom,
           this.ListData[k].adresse,
-          this.ListData[k].telephone,
           this.ListData[k].salaire,
           this.ListData[k].postDto?.libelle,
           this.ListData[k].departementDto?.libelle
@@ -69,7 +68,7 @@ export class EmployeListComponent implements OnInit{
     const doc = new jsPDF();
 
     autoTable(doc, {
-      head: [['ID', 'Matricule', 'Cin', 'Prenom', 'Nom','Adress','Telephone', 'Salaire', 'Poste','Departement']] ,
+      head: [['ID', 'Matricule', 'Cin', 'Prenom', 'Nom','Adress', 'Salaire', 'Poste','Departement']] ,
       body: this.rows,
     })
 

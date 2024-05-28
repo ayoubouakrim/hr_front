@@ -25,8 +25,8 @@
       <td>{{item.code}}</td>
       <td>{{item.raison}}</td>
       <td>{{item.employe.nom}}</td>
-      <td>{{ item.dateDebut}}</td>
-      <td>{{item.dateFin}}</td>
+      <td>{{ item.dateDebut | date:'yyyy-MM-dd'}}</td>
+      <td>{{item.dateFin | date:'yyyy-MM-dd'}}</td>
       <td>{{item.typeAbsence.libelle}}</td>
       <td>
         <span [ngStyle]="{'background-color': getColor(item.etatDemande.code)}" class="role-span">{{ item.etatDemande?.libelle }}</span>

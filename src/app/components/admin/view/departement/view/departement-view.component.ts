@@ -3,6 +3,7 @@ import {DialogModule} from "primeng/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DepartementService} from "../../../../../shared/service/admin/departement/departement.service";
 import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-departement-view',
@@ -10,7 +11,8 @@ import {DepartementDto} from "../../../../../shared/model/departement/departemen
   imports: [
     DialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   templateUrl: './departement-view.component.html',
   styleUrl: './departement-view.component.css'

@@ -11,6 +11,7 @@ import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ToastModule} from "primeng/toast";
 import {MessagesModule} from "primeng/messages";
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -24,6 +25,7 @@ import {MessagesModule} from "primeng/messages";
     SharedModule,
     MessagesModule,
     ToastModule,
+    DatePipe,
   ],
   providers: [MessageService],
   templateUrl: './departement-edit.component.html',

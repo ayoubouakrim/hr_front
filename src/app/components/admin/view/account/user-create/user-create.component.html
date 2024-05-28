@@ -1,4 +1,4 @@
-<p-dialog header="Departement" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Ajouter un utilisateur" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="1">username</label>
+        <label for="1">nom d'utilisateur</label>
         <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.username">
       </div>
     </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="4">Password</label>
+        <label for="4">mot de passe</label>
         <input class="form-control my-2" id="4" type="password" [(ngModel)]="item.password">
       </div>
     </div>
@@ -36,9 +36,10 @@
 
   <ng-template pTemplate="footer" >
     <div class="p-flexbox">
-      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
-      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+      <p-button class="mx-2" label="Enregistrer" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="Annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
     </div>
   </ng-template>
 
 </p-dialog>
+<p-toast></p-toast>

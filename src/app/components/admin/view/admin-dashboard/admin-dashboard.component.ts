@@ -39,7 +39,7 @@ export class AdminDashboardComponent implements OnInit {
   employee: EmployeDto = new EmployeDto();
   currentDate: Date = new Date();
 
-  constructor(private employeService: EmployeService, private congeService: CongeAdminService, private departementService: DepartementService,private authService: AuthenticationService, private userService: UserService) {
+  constructor(private employeService: EmployeService, private congeService: CongeAdminService, private departementService: DepartementService, private authService: AuthenticationService, private userService: UserService) {
     this.employe = new EmployeDto();
     this.employeService.findAll().subscribe((data) => this.employes = data.filter(item => !item.archive));
     this.departement = new DepartementDto();
@@ -57,29 +57,47 @@ export class AdminDashboardComponent implements OnInit {
       // Log inside the subscription block to ensure data availability
       console.log("Filtered Conges:", this.conges);
     });
-
-// This console.log will execute before the subscription block finishes
-// and may show 'undefined' because the data hasn't been fetched yet
     console.log("Outside Subscription:", this.conges);
+    this.getTotalSalaire();
+
 
 
   }
+
   matricule = localStorage.getItem('matricule');
+
   ngOnInit(): void {
     this.getTotalSalaire();
-    this.authService.findAdmin();
-    this.findProfile(this.matricule as string);
-    this.findUser();
+    this.findAdmin();
+
   }
 
-  public findProfile(matricule: String){
+  public findAdmin() {
+    const username = localStorage.getItem('username') as string;
+    this.findUser(username);
+    this.employeService.findByUserUsername(username).subscribe({
+      next: (res) => {
+        this.matricule = res.matricule as string;
+        localStorage.setItem('matricule', this.matricule);
+
+        this.findProfile(this.matricule as string); //fonction
+
+      },
+      error: (error) => {
+        console.error("Erreur lors de la recherche de l'employé : ", error);
+      }
+    });
+  }
+
+  public findProfile(matricule: String) {
     this.employeService.findProfile(matricule).subscribe(res => {
       this.employee = res
       console.log(this.employee);
     });
   }
-  public findUser() {
-    const username = localStorage.getItem('username') as string;
+
+  public findUser(username: string) {
+
     if (username) {
       this.userService.findByUsername(username).subscribe({
         next: (response) => {

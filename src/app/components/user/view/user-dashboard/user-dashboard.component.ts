@@ -79,8 +79,11 @@ export class UserDashboardComponent implements OnInit{
   parseDate(dateArray: number[] | any): string {
     if(dateArray) {
       if (dateArray || Array.isArray(dateArray) || dateArray.length == 3) {
-        const [hours, minutes, seconds] = dateArray;
-        const formattedDate = `${hours}:${minutes}:${seconds}`;
+        const [hours = 0, minutes = 0, seconds = 0] = dateArray;
+        const formattedHours = this.padWithZero(hours);
+        const formattedMinutes = this.padWithZero(minutes);
+        const formattedSeconds = this.padWithZero(seconds);
+        const formattedDate = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
         return formattedDate;
       }else{
         return "";
@@ -89,6 +92,11 @@ export class UserDashboardComponent implements OnInit{
       return "";
     }
   }
+
+  padWithZero(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
+  }
+
 
   showProfil() {
     this.layoutService.showProfil()
@@ -233,5 +241,13 @@ export class UserDashboardComponent implements OnInit{
 
   set notifications(value: Array<NotificationDto>) {
     this.notificationService.items = value;
+  }
+
+
+  downloadFile(fileName: string) {
+    const link = document.createElement('a');
+    link.href = `assets/${fileName}`; // Adjust the path as needed
+    link.download = fileName;
+    link.click();
   }
 }

@@ -8,21 +8,30 @@ import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demand
 import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
 import {DemandeAbsenceDto} from "../../../../../../shared/model/demande/demande-absence.model";
+import {DatePipe} from "@angular/common";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessageService} from "primeng/api";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-demande-conge-view',
   standalone: true,
     imports: [
         DialogModule,
-        PaginatorModule
+        PaginatorModule,
+        DatePipe,
+      MessagesModule,
+      ToastModule,
     ],
+  providers: [MessageService],
   templateUrl: './demande-conge-view.component.html',
   styleUrl: './demande-conge-view.component.css'
 })
 export class DemandeCongeViewComponent {
 
   constructor(private service : DemandeCongeAdminService, private typeCongeService : TypeCongeService
-    , private etatDemandeService : EtatDemandeService ) {
+    , private etatDemandeService : EtatDemandeService, private messageService: MessageService) {
   }
 
   get typeConge(): TypeCongeDto {
@@ -92,21 +101,48 @@ export class DemandeCongeViewComponent {
     this.item.etatDemande.libelle="Acceptée";
     this.service.update(item).subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'le demande a été accepté avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'Une erreur est survenue'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.viewDialog = false;
   }
   refuser(item:DemandeCongeDto){
     this.item.etatDemande.code="c2";
     this.item.etatDemande.libelle="refuse";
     this.service.update(item).subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.items.push(data);
+        this.messageService.add({
+          severity:'error',
+          summary:'Refusé',
+          detail:'le demande a été réfusé avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'Une erreur est survenue'});
       }
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.viewDialog = false;
   }
 }
