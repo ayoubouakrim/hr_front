@@ -9,9 +9,6 @@ import {EmployeService} from "../../shared/service/admin/employe/employe.service
 import {EmployeDto} from "../../shared/model/employe/employe.model";
 import {NotificationDto} from "../../shared/model/notification/notification.model";
 import {DatePipe} from "@angular/common";
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import * as jspdf from "jspdf";
 
 
 @Component({

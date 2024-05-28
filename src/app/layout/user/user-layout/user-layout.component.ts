@@ -1,11 +1,8 @@
-
 import {Component, OnInit} from '@angular/core';
-
 
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {DialogModule} from "primeng/dialog";
 import {AppSidebarComponent} from "../../app-sidebar/app-sidebar.component";
-
 import {NotificationDto} from "../../../shared/model/notification/notification.model";
 import {LayoutService} from "../../../shared/service/layout/layout.service";
 import {EmployeDto} from "../../../shared/model/employe/employe.model";
@@ -14,7 +11,6 @@ import {EmployeUserService} from "../../../shared/service/user/employe/employe-u
 import {DatePipe} from "@angular/common";
 import {UserSidebarComponent} from "../user-sidebar/user-sidebar.component";
 import {CommonModule} from "@angular/common";
-
 
 @Component({
   selector: 'app-layout',
@@ -33,33 +29,33 @@ import {CommonModule} from "@angular/common";
   styleUrl: './user-layout.component.css'
 })
 export class UserLayoutComponent implements OnInit{
-
-  matricule = localStorage.getItem('matricule');
   imgPath = "";
-  notfs = new Array<NotificationDto>;
-
   constructor(private layoutService: LayoutService, private notificationService: NotificationUserService, private employeService: EmployeUserService) {
 
   }
 
   ngOnInit(): void {
-    this.findProfile(this.matricule as string)
-    this.notificationService.findNotifications(this.matricule as string).subscribe( (data) => this.notfs = data)
-    console.log(this.notifications)
+    let username = localStorage.getItem('username')
+    if (username) {
+      this.employeService.findByUserUsername(username).subscribe({
+        next: (res) => {
+          let matricule = res.matricule as string;
+          this.findProfile(matricule)
+          this.notificationService.findNotifications(matricule).subscribe((data) => this.notifications = data)
+          console.log(this.notifications)
+        },
+        error: (error) => {
+          console.error("Erreur lors de la recherche de l'employé : ", error);
+        }
+      });
+    }
   }
 
   visible: boolean = false;
 
-
-
   public logout() {
     this.layoutService.logout();
   }
-
-
-
-
-
 
   public showNotifi(event: Event){
 
@@ -92,24 +88,21 @@ export class UserLayoutComponent implements OnInit{
 
 
   get arrayOfNotifications(): Array<NotificationDto> {
-    return this.notificationService.items;
+    return this.notificationService.notifications;
   }
 
   set arrayOfNotifications(value: Array<NotificationDto>) {
-    this.notificationService.items = value;
+    this.notificationService.notifications = value;
   }
 
 
 
   parseDate(dateArray: number[] | any): string {
-    // Check if dateArray is an array and has 6 elements
     if (!Array.isArray(dateArray) || dateArray.length !== 6) {
       console.error('Invalid date array:', dateArray);
       return '';
     }
-    // Destructure date components
     const [year, month, day, hours, minutes, seconds] = dateArray;
-    // Construct a new date string in a format that Angular's date pipe can understand
     const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return formattedDate;
   }
@@ -146,11 +139,4 @@ export class UserLayoutComponent implements OnInit{
   set notifications(value: Array<NotificationDto>) {
     this.notificationService.items = value;
   }
-
-
-
-
-
-
-
 }

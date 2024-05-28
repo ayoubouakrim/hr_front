@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PieChartComponent} from "../../../admin/view/admin-dashboard/pie-chart/pie-chart.component";
-import {CommonModule, DatePipe,  NgStyle} from "@angular/common";
+import {CommonModule, DatePipe, NgStyle} from "@angular/common";
 import {PresenceUserService} from "../../../../shared/service/user/presence/presence-user.service";
 import {PresenceDto} from "../../../../shared/model/presence/presence.model";
 import {format} from 'date-fns';
@@ -28,31 +28,39 @@ import {CongeUserService} from "../../../../shared/service/user/conge/conge-user
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
-export class UserDashboardComponent implements OnInit{
+export class UserDashboardComponent implements OnInit {
   datee: Date = new Date();
   debut: Date = new Date();
   fin: Date = new Date();
-  totaleCongeDispo : number = 0;
+  totaleCongeDispo: number = 0;
+  anneeActuelle: number = 0;
 
   constructor(private presenceUserService: PresenceUserService,
               private employeService: EmployeUserService, private horaireService: HoraireUserService,
               private layoutService: LayoutService, private router: Router, private notificationService: NotificationUserService,
-              private reunionService: ReunionUserService, private congeService :CongeUserService) {
+              private reunionService: ReunionUserService, private congeService: CongeUserService) {
   }
 
   ngOnInit() {
     let username = localStorage.getItem('username')
-    if(username) {
+    if (username) {
       this.employeService.findByUserUsername(username).subscribe({
         next: (res) => {
           this.employe = res;
           this.horaire = res.horaire;
           let matricule = res.matricule as string;
           localStorage.setItem('matricule', matricule);
-          if(matricule) {
+          if (matricule) {
             this.reunionService.findByEmployesMatricule(matricule).subscribe({
               next: (response) => {
-                this.reunions = response;
+                // Get the current date
+                const currentDate = new Date();
+                this.reunions = response.filter(reunion => {
+                  // Assuming reunion.date is the date attribute of each reunion object
+                  const reunionDate = new Date(reunion.date);
+                  return reunionDate.toDateString() === currentDate.toDateString();
+                });
+
               },
               error: (error) => {
                 console.error('find failed:', error);
@@ -60,7 +68,7 @@ export class UserDashboardComponent implements OnInit{
             });
             this.notificationService.findByMatriculeAndCheked(matricule, false).subscribe({
               next: (response) => {
-                this.notifications = response;
+                this.arrayOfNotifications = response;
               },
               error: (error) => {
                 console.error('find failed:', error);
@@ -74,6 +82,8 @@ export class UserDashboardComponent implements OnInit{
         }
       });
     }
+    const dateActuelle: Date = new Date();
+    this.anneeActuelle = dateActuelle.getFullYear();
   }
 
   parseDate(dateArray: number[] | any): string {
@@ -196,7 +206,7 @@ export class UserDashboardComponent implements OnInit{
     return mots.join(' ');
   }
 
-  caculeCongeDispo(){
+  caculeCongeDispo() {
     this.congeService.caculeCongeDispo().subscribe({
       next: (response) => {
         this.totaleCongeDispo = Math.floor(response);
@@ -239,8 +249,8 @@ export class UserDashboardComponent implements OnInit{
     this.employeService.item = value;
   }
 
-  set notifications(value: Array<NotificationDto>) {
-    this.notificationService.items = value;
+  set arrayOfNotifications(value: Array<NotificationDto>) {
+    this.notificationService.notifications = value;
   }
 
 
