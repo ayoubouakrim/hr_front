@@ -1,18 +1,24 @@
 <p-dialog header="Departement" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="1">code</label>
         <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="2">libelle</label>
         <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.libelle">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="4">CHEF</label>
+        <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.chef">
+      </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="3">date creation</label>
         <input class="form-control my-2" id="3" type="date" [(ngModel)]="item.dateCreation">

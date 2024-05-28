@@ -24,7 +24,26 @@ export class PresenceListComponent {
     this.findAll();
   }
 
+  parseDate(dateArray: number[] | any): string {
+    if(dateArray) {
+      if (dateArray || Array.isArray(dateArray) || dateArray.length == 3) {
+        const [hours = 0, minutes = 0, seconds = 0] = dateArray;
+        const formattedHours = this.padWithZero(hours);
+        const formattedMinutes = this.padWithZero(minutes);
+        const formattedSeconds = this.padWithZero(seconds);
+        const formattedDate = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        return formattedDate;
+      }else{
+        return "";
+      }
+    }else{
+      return "";
+    }
+  }
 
+  padWithZero(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
+  }
   public findAll(): void {
     this.service.findAll().subscribe(data => {
       this.items = data;

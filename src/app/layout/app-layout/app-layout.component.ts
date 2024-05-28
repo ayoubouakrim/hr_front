@@ -39,10 +39,20 @@ export class AppLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.findProfile(this.matricule as string)
-    console.log("fffff"+this.imgPath)
-    this.notificationService.findNotifications(this.matricule as string).subscribe( (data) => this.notfs = data)
-    console.log(this.notifications)
+    let username = localStorage.getItem('username')
+    if (username) {
+      this.employeService.findByUserUsername(username).subscribe({
+        next: (res) => {
+          let matricule = res.matricule as string;
+          this.findProfile(matricule)
+          this.notificationService.findNotifications(matricule).subscribe((data) => this.notifications = data)
+          console.log(this.notifications)
+        },
+        error: (error) => {
+          console.error("Erreur lors de la recherche de l'employé : ", error);
+        }
+      });
+    }
   }
 
   visible: boolean = false;

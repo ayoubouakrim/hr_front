@@ -9,7 +9,7 @@ import {TypeCongeDto} from "../../../../../../shared/model/conge/type-conge.mode
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {TypeCongeService} from "../../../../../../shared/service/admin/conge/type-conge.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
-import {NgStyle} from "@angular/common";
+import {DatePipe, NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-demande-conge-list',
@@ -20,6 +20,7 @@ import {NgStyle} from "@angular/common";
     TableModule,
     DemandeCongeViewComponent,
     NgStyle,
+    DatePipe,
   ],
   templateUrl: './demande-conge-list.component.html',
   styleUrl: './demande-conge-list.component.css'

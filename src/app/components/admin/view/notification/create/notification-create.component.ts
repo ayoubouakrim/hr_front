@@ -57,16 +57,17 @@ export class NotificationCreateComponent {
     console.log(this.item)
     this.service.save().subscribe(data => {
       if (data != null) {
+        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',
-          detail:'l\'absence a été ajouté avec succès'});
+          detail:'la notification a été ajouté avec succès'});
         this.items.push(data);
       } else {
         this.messageService.add({
           severity:'error',
           summary:'échec',
-          detail:'l\'absence n\'a pas été ajouté'});
+          detail:'la notification n\'a pas été ajouté'});
       }
     }, (error: HttpErrorResponse) => {
       this.messageService.add({

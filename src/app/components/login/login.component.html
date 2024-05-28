@@ -7,16 +7,17 @@
              class="img-fluid enlarged-image"  alt="Phone image">
       </div>
       <div class=" col-md-4 formColor">
+
         <form>
           <!-- Email input -->
           <div data-mdb-input-init class="form-outline mb-4">
-            <label class="form-label" for="form1Example13">Username</label>
+            <label class="form-label" for="form1Example13">Nom d'utilisateur</label>
             <input [(ngModel)]="loginRequest.username" type="text" placeholder="" name="username" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" id="form1Example13" class="form-control form-control-lg" />
           </div>
 
           <!-- Password input -->
           <div data-mdb-input-init class="form-outline mb-4">
-            <label class="form-label" for="form1Example23">Password</label>
+            <label class="form-label" for="form1Example23">Mot de passe</label>
             <input [(ngModel)]="loginRequest.password" type="password" placeholder="" name="password" id="form1Example23" class="form-control form-control-lg" required (focus)="isPasswordFocused = true" (blur)="isPasswordFocused = false"/>
           </div>
 
@@ -28,13 +29,18 @@
             <!-- Checkbox -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" [(ngModel)]="isChecked" name="rememberMe" id="form1Example3"/>
-              <label class="form-check-label" for="form1Example3"> Remember me </label>
+              <label class="form-check-label" for="form1Example3"> Se souvenir de moi
+
+
+
+
+              </label>
             </div>
-            <a routerLink="/reset-request">Forgot password?</a>
+            <a routerLink="/reset-request">Mot de passe oublié ?</a>
           </div>
 
           <!-- Submit button -->
-          <button (click)="login()" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block">Sign in</button>
+          <button (click)="login()" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block">connexion</button>
 
         </form>
       </div>

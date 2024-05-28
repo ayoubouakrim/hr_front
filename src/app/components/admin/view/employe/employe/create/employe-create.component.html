@@ -1,5 +1,5 @@
-<p-dialog header="Employe" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
-  <div class="row my-2">
+<p-dialog header="Ajouter employe" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+  <div class="row my-1">
     <div class="col-md-6">
       <div class="form-group">
         <label for="1">Matricule</label>
@@ -28,14 +28,14 @@
 
 
   </div>
-  <div class="row my-2">
-    <div class="col-md-6">
+  <div class="row my-1">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="4">Prénom</label>
         <input class="form-control my-2" id="4" type="text" [(ngModel)]="item.prenom">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <label for="11" class="dropdown-label">gender</label>
       <div class="dropdown-container">
         <p-dropdown appendTo="body" [options]="genders" [(ngModel)]="item.gender" id="5" [filter]="true" filterMatchMode="contains"
@@ -44,27 +44,28 @@
         </p-dropdown>
       </div>
     </div>
-  </div>
-  <div class="row my-2">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="9">Date Embauche</label>
         <input class="form-control my-2" id="9" type="date" [(ngModel)]="item.dateEmbauche">
       </div>
     </div>
-    <div class="col-md-6">
+  </div>
+  <div class="row my-1">
+
+    <div class="col-md-4">
       <div class="form-group">
         <label for="6">Address</label>
         <input class="form-control my-2" id="6" type="text" [(ngModel)]="item.adresse">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="7">Tel</label>
         <input class="form-control my-2" id="7" type="text" [(ngModel)]="item.telephone">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="8">Salaire</label>
         <input class="form-control my-2" id="8" type="number" [(ngModel)]="item.salaire">
@@ -119,8 +120,8 @@
   </div>
   <ng-template pTemplate="footer" >
     <div class="p-flexbox">
-      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
-      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+      <p-button class="mx-2" label="Enregistrer" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="Annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
     </div>
   </ng-template>
 

@@ -1,4 +1,4 @@
-<p-dialog header="Conge" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Ajouter une congé" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -8,19 +8,19 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="2">motif</label>
+        <label for="2">raison</label>
         <input class="form-control my-2" id="2" type="text" [(ngModel)]="item.motif">
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="3">date debut</label>
+        <label for="3">date début</label>
         <input class="form-control my-2" id="3" type="date" [(ngModel)]="item.dateDebut">
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <label for="4">Duree</label>
+        <label for="4">Durée</label>
         <input class="form-control my-2" id="4" type="number" [(ngModel)]="item.duree">
       </div>
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="6" class="dropdown-label">Employe</label>
+        <label for="6" class="dropdown-label">Employé</label>
         <div class="dropdown-container">
           <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="item.employe" id="6" [filter]="true" filterMatchMode="contains"
                       [showClear]="true" optionLabel="nom" placeholder="employe" class="custom-dropdown"
@@ -62,8 +62,8 @@
   </div>
   <ng-template pTemplate="footer" >
     <div class="p-flexbox">
-      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
-      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
+      <p-button class="mx-2" label="Enregistrer" (click)="save()" [rounded]="true" severity="warning" icon="pi pi-check" ></p-button>
+      <p-button label="Annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning" icon="pi pi-times" ></p-button>
     </div>
   </ng-template>
 

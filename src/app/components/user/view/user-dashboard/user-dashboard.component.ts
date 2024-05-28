@@ -107,6 +107,7 @@ export class UserDashboardComponent implements OnInit {
     return num < 10 ? '0' + num : num.toString();
   }
 
+
   showProfil() {
     this.layoutService.showProfil()
   }
@@ -250,5 +251,13 @@ export class UserDashboardComponent implements OnInit {
 
   set arrayOfNotifications(value: Array<NotificationDto>) {
     this.notificationService.notifications = value;
+  }
+
+
+  downloadFile(fileName: string) {
+    const link = document.createElement('a');
+    link.href = `assets/${fileName}`; // Adjust the path as needed
+    link.download = fileName;
+    link.click();
   }
 }

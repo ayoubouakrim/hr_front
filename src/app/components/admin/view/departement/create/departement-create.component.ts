@@ -37,6 +37,7 @@ export class DepartementCreateComponent {
   public save(): void {
     this.service.save().subscribe(data => {
       if (data != null) {
+        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',

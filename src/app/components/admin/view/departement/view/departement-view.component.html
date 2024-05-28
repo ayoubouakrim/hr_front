@@ -12,28 +12,30 @@
         <input class="form-control my-2" id="2" type="text" [disabled]="true" [(ngModel)]="item.libelle">
       </div>
     </div>
-    <div class="col-md-6">
+  </div>
+  <div class="row my-3">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="3">date creation</label>
-        <input class="form-control my-2" id="3" type="text" [disabled]="true" [(ngModel)]="item.dateCreation">
+        <input class="form-control my-2" id="3" type="text" [disabled]="true"
+               [ngModel]="item.dateCreation | date:'yyyy-MM-dd'">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="4">Nombre de employes</label>
         <input class="form-control my-2" id="4" type="text" [disabled]="true" [(ngModel)]="item.nbrEmploye">
       </div>
     </div>
-  </div>
-  <div class="row my-3">
-    <div class="col-md-12">
+
+    <div class="col-md-4">
       <div class="form-group">
         <label for="5">Chef</label>
         <input class="form-control my-2" id="5" type="text" [disabled]="true" [ngModel]="item.chef">
       </div>
     </div>
-
   </div>
+
 
 </p-dialog>
 

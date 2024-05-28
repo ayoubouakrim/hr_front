@@ -4,10 +4,13 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "primeng/api";
+import {MessageService, SharedModule} from "primeng/api";
 import {CommissionAdminService} from "../../../../../../shared/service/admin/employe/commission.service";
 import {EmployeService} from "../../../../../../shared/service/admin/employe/employe.service";
 import {CommissionDto} from "../../../../../../shared/model/employe/commission.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-commission-edit',
@@ -18,13 +21,16 @@ import {CommissionDto} from "../../../../../../shared/model/employe/commission.m
     DropdownModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MessagesModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './commission-edit.component.html',
   styleUrl: './commission-edit.component.css'
 })
 export class CommissionEditComponent implements OnInit{
-  constructor(private service: CommissionAdminService, private employeService: EmployeService) {
+  constructor(private service: CommissionAdminService, private employeService: EmployeService, private messageService: MessageService) {
   }
   ngOnInit(): void {
     this.employe = new EmployeDto();
@@ -34,11 +40,26 @@ export class CommissionEditComponent implements OnInit{
   public update(): void {
     this.service.update().subscribe(data => {
       if (data != null) {
-        alert("OK");
+        this.items.push(data);
+        this.messageService.add({
+          severity:'success',
+          summary:'Succès',
+          detail:'la commission a été édité avec succès'});
       } else {
-        alert("Error");
+        this.messageService.add({
+          severity:'error',
+          summary:'échec',
+          detail:'la commission n\'a pas été édité'});
       }
+
+    }, (error: HttpErrorResponse) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: `Une erreur est survenue`
+      });
     });
+    this.editDialog = false;
   }
 
   hideCreateDialog() {

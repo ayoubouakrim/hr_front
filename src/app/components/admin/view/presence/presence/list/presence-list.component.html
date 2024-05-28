@@ -24,8 +24,8 @@
     <tr>
       <td>{{item.code}}</td>
       <td>{{item.employe?.nom}}</td>
-      <td>{{item.heureArrivee}}</td>
-      <td>{{item.heureDepart}}</td>
+      <td>{{parseDate(item.heureArrivee)}}</td>
+      <td>{{parseDate(item.heureDepart)}}</td>
       <td>{{item.datee}}</td>
       <td>
         <div class="btn-group" role="group"

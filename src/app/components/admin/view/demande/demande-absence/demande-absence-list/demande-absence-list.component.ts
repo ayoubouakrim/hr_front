@@ -9,18 +9,19 @@ import {TypeAbsenceDto} from "../../../../../../shared/model/conge/type-absence.
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {TypeAbsenceService} from "../../../../../../shared/service/admin/conge/type-absence.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
-import {NgStyle} from "@angular/common";
+import {DatePipe, NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-demande-absence-list',
   standalone: true,
-  imports: [
-    ButtonModule,
-    SharedModule,
-    TableModule,
-    DemandeAbsenceViewComponent,
-    NgStyle,
-  ],
+    imports: [
+        ButtonModule,
+        SharedModule,
+        TableModule,
+        DemandeAbsenceViewComponent,
+        NgStyle,
+        DatePipe,
+    ],
   templateUrl: './demande-absence-list.component.html',
   styleUrl: './demande-absence-list.component.css'
 })
