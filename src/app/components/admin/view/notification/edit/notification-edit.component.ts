@@ -1,43 +1,50 @@
-import { Component } from '@angular/core';
-import {NotificationDto} from "../../../../../shared/model/notification/notification.model";
-import {NotificationAdminService} from "../../../../../shared/service/admin/notification/notification.service";
+import {Component, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
+import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
 import {MessageService, SharedModule} from "primeng/api";
-import {MultiSelectModule} from "primeng/multiselect";
-import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
 import {EmployeService} from "../../../../../shared/service/admin/employe/employe.service";
-import {NotificationEmployeDto} from "../../../../../shared/model/notification/notification-employe.model";
+import {NotificationDto} from "../../../../../shared/model/notification/notification.model";
+import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
 import {HttpErrorResponse} from "@angular/common/http";
-import {MessagesModule} from "primeng/messages";
 import {ToastModule} from "primeng/toast";
-
+import {MessagesModule} from "primeng/messages";
+import {DatePipe} from "@angular/common";
+import {NotificationAdminService} from "../../../../../shared/service/admin/notification/notification.service";
+import {NotificationEmployeDto} from "../../../../../shared/model/notification/notification-employe.model";
+import {MultiSelectModule} from "primeng/multiselect";
 
 
 @Component({
-  selector: 'app-notification-create',
+  selector: 'app-notification-edit',
   standalone: true,
   imports: [
     ButtonModule,
     DialogModule,
+    DropdownModule,
     PaginatorModule,
     SharedModule,
-    MultiSelectModule,
     MessagesModule,
     ToastModule,
+    DatePipe,
+    MultiSelectModule,
   ],
   providers: [MessageService],
-  templateUrl: './notification-create.component.html',
-  styleUrl: './notification-create.component.css'
+  templateUrl: './notification-edit.component.html',
+  styleUrl: './notification-edit.component.css'
 })
-export class NotificationCreateComponent {
-  selectedEmployees: EmployeDto[] = [];
-
+export class NotificationEditComponent implements OnInit {
   constructor(private service: NotificationAdminService, private employeService: EmployeService, private messageService: MessageService) {
-    this.employe = new EmployeDto()
-    this.employeService.findAll().subscribe((data) => this.employes = data);
+  }
 
+  selectedEmployees: EmployeDto[] =  this.item.notificationEmployes.map(
+    (notificationEmploye: NotificationEmployeDto) => notificationEmploye.employe
+  );
+
+  ngOnInit(): void {
+    this.employe = new EmployeDto();
+    this.employeService.findAll().subscribe((data) => this.employes = data);
   }
 
   public updateNotificationEmployes(selectedEmployees: EmployeDto[]) {
@@ -52,22 +59,20 @@ export class NotificationCreateComponent {
     this.item.notificationEmployes = notificationEmployes;
   }
 
-  public save(): void {
+  public update(): void {
     this.updateNotificationEmployes(this.selectedEmployees);
-    console.log(this.item)
-    this.service.save().subscribe(data => {
+    console.log(this.item.notificationEmployes);
+    this.service.update().subscribe(data => {
       if (data != null) {
-        this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',
-          detail:'la notification a été ajouté avec succès'});
-        this.items.push(data);
+          detail:'la notification a été édité avec succès'});
       } else {
         this.messageService.add({
           severity:'error',
           summary:'échec',
-          detail:'la notification n\'a pas été ajouté'});
+          detail:'la notification n\'a pas été édité'});
       }
     }, (error: HttpErrorResponse) => {
       this.messageService.add({
@@ -76,8 +81,13 @@ export class NotificationCreateComponent {
         detail: `Une erreur est survenue`
       });
     });
-    this.hideCreateDialog();
+    this.editDialog = false;
   }
+
+  hideCreateDialog() {
+    this.editDialog = false;
+  }
+
   get item(): NotificationDto {
     return this.service.item;
   }
@@ -94,17 +104,6 @@ export class NotificationCreateComponent {
     this.service.items = value;
   }
 
-  hideCreateDialog() {
-    this.createDialog = false;
-  }
-
-  get createDialog(): boolean {
-    return this.service.createDialog;
-  }
-
-  set createDialog(value: boolean) {
-    this.service.createDialog = value;
-  }
   get employe(): EmployeDto {
     return this.employeService.item;
   }
@@ -121,4 +120,13 @@ export class NotificationCreateComponent {
     this.employeService.items = value;
   }
 
+  get editDialog(): boolean {
+    return this.service.editDialog;
+  }
+
+  set editDialog(value: boolean) {
+    this.service.editDialog = value;
+  }
+
 }
+

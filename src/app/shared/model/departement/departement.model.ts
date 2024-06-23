@@ -7,6 +7,7 @@ export class DepartementDto {
   public dateCreation: Date | null;
   public chef: String;
   public nbrEmploye: number |null ;
+  public archive: boolean;
 
   constructor() {
     this.id = null;
@@ -15,5 +16,6 @@ export class DepartementDto {
     this.dateCreation = null;
     this.chef = '';
     this.nbrEmploye = null;
+    this.archive = false;
   }
 }

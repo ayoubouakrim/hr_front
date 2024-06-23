@@ -125,7 +125,7 @@ export class EmployeListComponent implements OnInit{
           this.item.archive = true;
 
           // Call the service to update the item
-          this.service.updatePar(this.item).subscribe(data => {
+          this.service.archiver(this.item).subscribe(data => {
             if (data != null) {
               const position = this.items.indexOf(dto);
               position > -1 ? this.items.splice(position, 1) : false;

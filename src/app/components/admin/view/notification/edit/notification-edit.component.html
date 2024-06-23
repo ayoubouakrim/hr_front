@@ -1,9 +1,9 @@
-<p-dialog header="Notification" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Employe" [(visible)]="editDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-4">
       <div class="form-group">
         <label for="1">code</label>
-        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code" disabled>
       </div>
     </div>
     <div class="col-md-4">
@@ -37,12 +37,13 @@
 
   <ng-template pTemplate="footer">
     <div class="p-flexbox">
-      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning"
+      <p-button class="mx-2" label="editer" (click)="update()" [rounded]="true" severity="warning"
                 icon="pi pi-check"></p-button>
-      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+      <p-button label="annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
                 icon="pi pi-times"></p-button>
     </div>
   </ng-template>
 
 </p-dialog>
 <p-toast></p-toast>
+

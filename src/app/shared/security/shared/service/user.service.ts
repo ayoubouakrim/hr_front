@@ -32,6 +32,9 @@ export class UserService {
   public update(): Observable<User> {
     return this.http.put<User>(this.url + "/update", this.item);
   }
+  public updatePasswordAndEmail(item : PasswordEmailChange) {
+    return this.http.put(this.url + "/update", item);
+  }
   public findAll() {
     return this.http.get<Array<User>>(this.url );
   }

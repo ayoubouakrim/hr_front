@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
-import {SharedModule} from "primeng/api";
+import {ConfirmationService, MessageService, SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {DepartementService} from "../../../../../shared/service/admin/departement/departement.service";
 import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
@@ -9,25 +9,31 @@ import {DepartementViewComponent} from "../view/departement-view.component";
 import {DepartementEditComponent} from "../edit/departement-edit.component";
 import {HoraireDto} from "../../../../../shared/model/presence/horaire.model";
 import {DatePipe} from "@angular/common";
+import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-departement-list',
   standalone: true,
-    imports: [
-        ButtonModule,
-        SharedModule,
-        TableModule,
-        DepartementCreateComponent,
-        DepartementViewComponent,
-        DepartementEditComponent,
-        DatePipe
-    ],
+  imports: [
+    ButtonModule,
+    SharedModule,
+    TableModule,
+    DepartementCreateComponent,
+    DepartementViewComponent,
+    DepartementEditComponent,
+    DatePipe,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  providers: [ConfirmationService, MessageService],
   templateUrl: './departement-list.component.html',
   styleUrl: './departement-list.component.css'
 })
 export class DepartementListComponent implements OnInit{
 
-  constructor(private service: DepartementService) {
+  constructor(private service: DepartementService, private confirmationService: ConfirmationService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -37,7 +43,7 @@ export class DepartementListComponent implements OnInit{
 
   public findAll(): void {
     this.service.findAll().subscribe(data => {
-      this.items = data;
+      this.items = data.filter(item => !item.archive);
     })
   }
 
@@ -73,15 +79,39 @@ export class DepartementListComponent implements OnInit{
       this.editDialog = true;
     });
   }
-  public  delete(dto: DepartementDto) {
-    this.service.delete(dto).subscribe(status => {
-      if (status > 0) {
-        const position = this.items.indexOf(dto);
-        position > -1 ? this.items.splice(position, 1) : false;
+  public archive(dto: DepartementDto): void {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous archiver cet élément ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        this.service.findByCode(dto).subscribe(res => {
+          this.item = res;
 
+          // Update the item with archive set to true
+          this.item.archive = true;
+
+          // Call the service to update the item
+          this.service.archiver(this.item).subscribe(data => {
+            if (data != null) {
+              const position = this.items.indexOf(dto);
+              position > -1 ? this.items.splice(position, 1) : false;
+              this.messageService.add({
+                severity:'success',
+                summary:'Succès',
+                detail:'archivé avec succès'});
+            } else {
+              alert("Error");
+            }
+          });
+        });
       }
-
     });
+
   }
 
   get editDialog(): boolean {

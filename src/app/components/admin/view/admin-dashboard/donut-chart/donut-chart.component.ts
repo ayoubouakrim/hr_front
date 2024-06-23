@@ -78,7 +78,6 @@ export class DonutChartComponent  implements OnInit{
       data: {// values on X-Axis
         labels: ['Conge', 'Absence','Document', ],
         datasets: [{
-          label: 'My First Dataset',
           data: [this.totalConge, this.totalAbsence, this.totalDocuments],
           backgroundColor: [
             '#4333A6',

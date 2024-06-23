@@ -11,6 +11,7 @@ import {DepartementViewComponent} from "../../departement/view/departement-view.
 import {NotificationCreateComponent} from "../create/notification-create.component";
 import {NotificationViewComponent} from "../view/notification-view.component";
 import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
+import {NotificationEditComponent} from "../edit/notification-edit.component";
 
 
 @Component({
@@ -25,7 +26,8 @@ import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
     DepartementViewComponent,
     NotificationCreateComponent,
     CommonModule,
-    NotificationViewComponent
+    NotificationViewComponent,
+    NotificationEditComponent
   ],
   templateUrl: './notification-list.component.html',
   styleUrl: './notification-list.component.css'

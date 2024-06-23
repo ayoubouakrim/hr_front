@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {DepartementDto} from "../../../model/departement/departement.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {EmployeDto} from "../../../model/employe/employe.model";
 
 
 @Injectable({
@@ -58,6 +59,9 @@ export class DepartementService {
   }
   public findByCode(dto: DepartementDto) {
     return this.http.get<DepartementDto>(this.url + '/code/' + dto.code);
+  }
+  public archiver(dto: DepartementDto): Observable<DepartementDto> {
+    return this.http.put<DepartementDto>(this.url + '/update', dto);
   }
   get item(): DepartementDto {
     if (this._item == null) {

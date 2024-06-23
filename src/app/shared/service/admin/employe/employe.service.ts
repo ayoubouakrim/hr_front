@@ -37,7 +37,7 @@ export class EmployeService{
   public update(): Observable<EmployeDto> {
     return this.http.put<EmployeDto>(this.url + '/update', this.item);
   }
-  public updatePar(dto: EmployeDto): Observable<EmployeDto> {
+  public archiver(dto: EmployeDto): Observable<EmployeDto> {
     return this.http.put<EmployeDto>(this.url + '/update', dto);
   }
   public totalSalaire(): Observable<number>{

@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         console.log(err);
         if (err.status === 401) {
           this.errorMsg = 'Username ou mot de passe incorrect.';
+          localStorage.removeItem('token');
         } else {
           this.errorMsg = 'Une erreur s\'est produite. Veuillez réessayer plus tard.';
         }
