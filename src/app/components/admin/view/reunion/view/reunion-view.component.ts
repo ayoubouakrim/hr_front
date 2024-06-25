@@ -7,6 +7,13 @@ import {EmployeService} from "../../../../../shared/service/admin/employe/employ
 import {EmployeDto} from "../../../../../shared/model/employe/employe.model";
 import {ListboxModule} from "primeng/listbox";
 import {DropdownModule} from "primeng/dropdown";
+import {ButtonModule} from "primeng/button";
+import {DepartementDto} from "../../../../../shared/model/departement/departement.model";
+import {ReunionEditComponent} from "../edit/reunion-edit.component";
+import {NotificationDto} from "../../../../../shared/model/notification/notification.model";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 @Component({
   selector: 'app-reunion-view',
   standalone: true,
@@ -15,16 +22,60 @@ import {DropdownModule} from "primeng/dropdown";
     ReactiveFormsModule,
     FormsModule,
     ListboxModule,
-    DropdownModule
+    DropdownModule,
+    ButtonModule,
+    ReunionEditComponent,
+    ToastModule,
+    ConfirmDialogModule
   ],
+  providers:[ConfirmationService, MessageService],
   templateUrl: './reunion-view.component.html',
   styleUrl: './reunion-view.component.css'
 })
 export class ReunionViewComponent {
-  constructor(private service: ReunionService, private employeService : EmployeService) {
+  constructor(private service: ReunionService, private employeService : EmployeService, private confirmationService: ConfirmationService, private messageService: MessageService) {
     this.employe = new EmployeDto()
     this.employeService.findAll().subscribe((data) => this.employes = data);
 
+  }
+
+
+  public edit(dto: ReunionDto) {
+    this.service.findByItemCode(dto).subscribe(res => {
+      this.item = res;
+      this.editDialog = true;
+    });
+  }
+
+  public delete(dto: ReunionDto) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous supprimer cet élément ?',
+      header: 'Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        this.service.delete(dto).subscribe(status => {
+          if (status > 0) {
+            const position = this.items.indexOf(dto);
+            position > -1 ? this.items.splice(position, 1) : false;
+            this.messageService.add({
+              severity:'success',
+              summary:'Succès',
+              detail:'supprime succeful'});
+          }
+
+        }, error => console.log(error));
+        this.viewDialog = false;
+      }
+    });
+
+  }
+
+  public hideEditDialog () {
+    this.editDialog = false;
   }
 
   get item(): ReunionDto {
@@ -51,6 +102,14 @@ export class ReunionViewComponent {
 
   set viewDialog(value: boolean) {
     this.service.viewDialog = value;
+  }
+
+  get editDialog(): boolean {
+    return this.service.editDialog;
+  }
+
+  set editDialog(value: boolean) {
+    this.service.editDialog = value;
   }
 
   get employe(): EmployeDto {

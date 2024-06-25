@@ -1,4 +1,4 @@
-<p-dialog header="Employe" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Reunion" [(visible)]="viewDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -47,9 +47,19 @@
         <input class="form-control my-2" id="7" type="text" [disabled]="true" [(ngModel)]="item.objectif">
       </div>
     </div>
-
   </div>
+  <ng-template pTemplate="footer">
+    <div class="p-flexbox">
+      <p-button class="mx-2" label="éditer" (click)="edit(item)" [rounded]="true" severity="success"
+                icon="pi pi-check"></p-button>
+      <p-button label="supprimer" (click)="delete(item)" [rounded]="true" severity="danger"
+                icon="pi pi-times"></p-button>
+    </div>
+  </ng-template>
 
 
 </p-dialog>
+<p-confirmDialog/>
+<p-toast/>
+<app-reunion-edit/>
 

@@ -1,9 +1,10 @@
-<p-dialog header="Reunion" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="Editer la reunion" [(visible)]="editDialog" [style]="{width: '70vw'}"
+          [maximizable]="true" position="topright">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
         <label for="1">code</label>
-        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code">
+        <input class="form-control my-2" id="1" type="text" [(ngModel)]="item.code" disabled>
       </div>
     </div>
     <div class="col-md-6">
@@ -55,9 +56,9 @@
 
   <ng-template pTemplate="footer">
     <div class="p-flexbox">
-      <p-button class="mx-2" label="enregistrer" (click)="save()" [rounded]="true" severity="warning"
+      <p-button class="mx-2" label="modifier" (click)="update()" [rounded]="true" severity="success"
                 icon="pi pi-check"></p-button>
-      <p-button label="annuler" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+      <p-button label="annuler" (click)="hideEditDialog()" [rounded]="true" severity="danger"
                 icon="pi pi-times"></p-button>
     </div>
   </ng-template>

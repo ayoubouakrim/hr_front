@@ -53,10 +53,14 @@ export class ReunionService {
     return this.http.get<Array<ReunionDto>>(this.url + "/all");
   }
   public delete(dto: ReunionDto) {
-    return this.http.delete<number>(this.url + '/code/' + dto.code);
+    return this.http.delete<number>(this.url + '/delete/code/' + dto.code);
   }
   public findByCode(code: String) {
     return this.http.get<ReunionDto>(this.url + '/code/' + code);
+  }
+
+  public findByItemCode(dto: ReunionDto) {
+    return this.http.get<ReunionDto>(this.url + '/code/' + dto.code);
   }
   get item(): ReunionDto {
     if (this._item == null) {

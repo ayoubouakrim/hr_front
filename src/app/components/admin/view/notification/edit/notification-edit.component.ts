@@ -38,9 +38,7 @@ export class NotificationEditComponent implements OnInit {
   constructor(private service: NotificationAdminService, private employeService: EmployeService, private messageService: MessageService) {
   }
 
-  selectedEmployees: EmployeDto[] =  this.item.notificationEmployes.map(
-    (notificationEmploye: NotificationEmployeDto) => notificationEmploye.employe
-  );
+  selectedEmployees: EmployeDto[] = [];
 
   ngOnInit(): void {
     this.employe = new EmployeDto();
