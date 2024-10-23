@@ -36,13 +36,14 @@
     </div>
     <div class="col-md-6">
       <div class="form-group mt-4">
-        <button type="button" (click)="accepter()" class="btn btn-success mx-3">
+        <button type="button" (click)="accepter(item)" class="btn btn-success mx-3">
           <i class="bi bi-check-circle-fill"></i> Accepter
         </button>
-        <button type="button" (click)="refuser()" class="btn btn-danger">
+        <button type="button" (click)="refuser(item)" class="btn btn-danger">
           <i class="bi bi-x-circle-fill"></i> Refuser
         </button>
       </div>
     </div>
   </div>
 </p-dialog>
+<p-toast/>

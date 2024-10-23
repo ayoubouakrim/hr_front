@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {DemandeDocumentDto} from "../../../model/demande/demande-document.model";
+import {DemandeCongeDto} from "../../../model/demande/demande-conge.model";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class DemandeDocumentAdminService {
   public delete(dto: DemandeDocumentDto) {
     return this.http.delete<number>(this.url + '/delete/code/' + dto.code);
   }
-  public update(): Observable<DemandeDocumentDto> {
-    return this.http.put<DemandeDocumentDto>(this.url + '/update', this.item);
+  public update(demande : DemandeDocumentDto): Observable<DemandeDocumentDto> {
+    return this.http.put<DemandeDocumentDto>(this.url + '/update', demande);
   }
   public findByEmployeMatricule(dto: DemandeDocumentDto) {
     return this.http.get<DemandeDocumentDto>(this.url + '/find/employe/matricule/' + dto.employe.matricule);

@@ -11,6 +11,7 @@ import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-docum
 import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande-document.model";
 import {TypeDocumentService} from "../../../../../../shared/service/user/demande/type-document.service";
 import {EtatDemandeService} from "../../../../../../shared/service/user/demande/etat-demande.service";
+import {NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-demande-document-list',
@@ -21,7 +22,8 @@ import {EtatDemandeService} from "../../../../../../shared/service/user/demande/
     TableModule,
     DemandeDocumentCreateComponent,
     DemandeDocumentViewComponent,
-    DemandeDocumentEditComponent
+    DemandeDocumentEditComponent,
+    NgStyle
   ],
   templateUrl: './demande-document-list.component.html',
   styleUrl: './demande-document-list.component.css'
@@ -45,15 +47,23 @@ export class DemandeDocumentListComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-    this.findAll();
+  public getColor(status: string): string {
+    if (status === 'c3') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'c1') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'c2') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
   }
 
-  public findAll(): void {
-    this.service.findAll().subscribe(data => {
-      this.items = data;
-    })
+  ngOnInit(): void {
+    this.service.findDemandes();
   }
+
+
 
   showDialog(): void {
     this.createDialog = true;

@@ -1,4 +1,4 @@
-<p-dialog header="demande de document" [(visible)]="visible" [style]="{width: '70vw'}" [maximizable]="true">
+<p-dialog header="demande de document" [(visible)]="createDialog" [style]="{width: '70vw'}" [maximizable]="true">
   <div class="row my-3">
     <div class="col-md-6">
       <div class="form-group">
@@ -14,12 +14,7 @@
     </div>
   </div>
   <div class="row my-3">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="3">Matricule</label>
-        <input class="form-control my-2" id="3" type="text" [(ngModel)]="item.employe.matricule">
-      </div>
-    </div>
+
     <div class="col-md-6">
       <div class="form-group">
         <label for="6" class="dropdown-label">Type de document</label>
@@ -35,11 +30,12 @@
   </div>
   <ng-template pTemplate="footer">
     <div class="p-flexbox">
-      <p-button class="mx-2" label="save" (click)="save()" [rounded]="true" severity="warning"
+      <p-button class="mx-2" label="enregistrer" (click)="save(item)" [rounded]="true" severity="success"
                 icon="pi pi-check"></p-button>
-      <p-button label="cancel" (click)="hideCreateDialog()" [rounded]="true" severity="warning"
+      <p-button label="annuler" (click)="hideCreateDialog()" [rounded]="true" severity="danger"
                 icon="pi pi-times"></p-button>
     </div>
   </ng-template>
 
 </p-dialog>
+<p-toast/>

@@ -11,6 +11,7 @@ import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-docum
 import {EtatDemandeDto} from "../../../../../../shared/model/demande/etat-demande.model";
 import {TypeDocumentService} from "../../../../../../shared/service/admin/demande/type-document.service";
 import {EtatDemandeService} from "../../../../../../shared/service/admin/demande/etat-demande.service";
+import {NgStyle} from "@angular/common";
 
 
 @Component({
@@ -20,7 +21,8 @@ import {EtatDemandeService} from "../../../../../../shared/service/admin/demande
     ButtonModule,
     SharedModule,
     TableModule,
-    DemandeDocumentViewComponent
+    DemandeDocumentViewComponent,
+    NgStyle
   ],
   templateUrl: './demande-document-list.component.html',
   styleUrl: './demande-document-list.component.css'
@@ -42,6 +44,17 @@ export class DemandeDocumentListAdminComponent implements OnInit{
       this.item = res;
       this.editDialog = true;
     });
+  }
+  public getColor(status: string): string {
+    if (status === 'c3') {
+      return '#c49236'; // Background color for Non commencé
+    } else if (status === 'c1') {
+      return '#239142'; // Background color for En cours
+    } else if (status === 'c2') {
+      return '#9d1414'; // Background color for Terminé
+    } else {
+      return 'lightgray'; // Default background color for other statuses
+    }
   }
 
   ngOnInit(): void {

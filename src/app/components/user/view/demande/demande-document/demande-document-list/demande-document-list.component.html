@@ -13,7 +13,6 @@
     <tr>
       <th pSortableColumn="code" >Code<p-sortIcon field="code"></p-sortIcon></th>
       <th pSortableColumn="raison" >Raison<p-sortIcon field="raison"></p-sortIcon></th>
-      <th pSortableColumn="matricule" >Nom<p-sortIcon field="matricule"></p-sortIcon></th>
       <th pSortableColumn="typeDocument" >Type de document<p-sortIcon field="typeDocument"></p-sortIcon></th>
       <th pSortableColumn="etatDemande" >Etat de demande<p-sortIcon field="etatDemande"></p-sortIcon></th>
       <th pSortableColumn="action" style="width : 20%">Action</th>
@@ -23,23 +22,16 @@
     <tr>
       <td>{{item.code}}</td>
       <td>{{item.raison}}</td>
-      <td>{{item.employe.nom}}</td>
       <td>{{item.typeDocument.libelle}}</td>
-      <td>{{item.etatDemande.libelle}}</td>
+      <td>
+        <span [ngStyle]="{'background-color': getColor(item.etatDemande.code)}" class="role-span">{{ item.etatDemande?.libelle }}</span>
+      </td>
       <td>
         <div class="btn-group" role="group"
              aria-label="Basic outlined example">
           <button type="button"
                   class="btn btn-sm btn-outline-secondary" (click)="view(item)">
             <i class="fa fa-circle-info"></i>
-          </button>
-          <button type="button"
-                  class="btn btn-sm btn-outline-primary" (click)="edit(item)">
-            <i class="fa fa-pen-to-square"></i>
-          </button>
-          <button type="button"
-                  class="btn btn-sm btn-outline-danger">
-            <i class="fa fa-trash"></i>
           </button>
         </div>
       </td>

@@ -9,51 +9,67 @@ import {TypeDocumentDto} from "../../../../../../shared/model/demande/type-docum
 import {DemandeDocumentDto} from "../../../../../../shared/model/demande/demande-document.model";
 import {TypeDocumentService} from "../../../../../../shared/service/user/demande/type-document.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {EmployeUserService} from "../../../../../../shared/service/user/employe/employe-user.service";
+import {EmployeDto} from "../../../../../../shared/model/employe/employe.model";
+import {ToastModule} from "primeng/toast";
 
 
 @Component({
   selector: 'app-demande-document-create',
   standalone: true,
-    imports: [
-        ButtonModule,
-        DialogModule,
-        DropdownModule,
-        PaginatorModule,
-        SharedModule
-    ],
+  imports: [
+    ButtonModule,
+    DialogModule,
+    DropdownModule,
+    PaginatorModule,
+    SharedModule,
+    ToastModule
+  ],
   providers: [MessageService],
   templateUrl: './demande-document-create.component.html',
   styleUrl: './demande-document-create.component.css'
 })
 export class DemandeDocumentCreateComponent implements OnInit{
 
-  visible: boolean = false;
 
-  constructor(private service : DemandeDocumentUserService, private typeDocumentService : TypeDocumentService, private messageService: MessageService) {
+  private employe: EmployeDto = new EmployeDto();
+  protected matricule = localStorage.getItem('matricule');
+
+  constructor(private service : DemandeDocumentUserService, private employeService: EmployeUserService,private typeDocumentService : TypeDocumentService, private messageService: MessageService) {
 
   }
 
   ngOnInit(): void {
     this.typeDocument = new TypeDocumentDto();
     this.typeDocumentService.findAll().subscribe((data) => this.typeDocuments = data);
-  }
-  hideCreateDialog() {
-    this.visible = false;
+    this.findProfile(this.matricule as string)
   }
 
-  public save(): void {
+  public findProfile(matricule: String){
+    this.employeService.findProfile(matricule).subscribe(res => {
+      this.employe = res
+      console.log(this.item);
+    });
+  }
+  hideCreateDialog() {
+    this.createDialog = false;
+  }
+
+  public save(item : DemandeDocumentDto): void {
+    item.employe = this.employe
     this.service.save().subscribe(data => {
       if (data != null) {
         this.items.push(data);
         this.messageService.add({
           severity:'success',
           summary:'Succès',
-          detail:'le Congé a été ajouté avec succès'});
+          detail:'le demande a été ajouté avec succès'});
+        this.hideCreateDialog();
       } else {
         this.messageService.add({
           severity:'error',
           summary:'échec',
-          detail:'le conge n\'a pas été ajouté'});
+          detail:'le demande n\'a pas été ajouté'});
       }
     }, (error: HttpErrorResponse) => {
       this.messageService.add({
@@ -64,6 +80,14 @@ export class DemandeDocumentCreateComponent implements OnInit{
     });
   }
 
+
+  get createDialog(): boolean {
+    return this.service.createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this.service.createDialog = value;
+  }
   get item(): DemandeDocumentDto{
     return this.service.item;
   }
